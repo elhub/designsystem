@@ -1,0 +1,118 @@
+:root {
+  /* Primary */
+  --eds-link-panel-primary-text-color: var(--eds-semantic-text-inverted);
+  --eds-link-panel-primary-text-color-hover: var(--eds-semantic-text-inverted);
+  --eds-link-panel-primary-text-color-active: var(--eds-semantic-text-inverted);
+  --eds-link-panel-primary-border-color: var(--eds-semantic-border);
+  --eds-link-panel-primary-border-color-hover: var(--eds-semantic-border-hover);
+  --eds-link-panel-primary-background-color: var(--eds-semantic-background-inverted);
+  --eds-link-panel-primary-background-color-hover: var(--eds-semantic-background-inverted);
+  --eds-link-panel-primary-background-color-active: var(--eds-semantic-background-inverted);
+
+  /* Secondary */
+  --eds-link-panel-secondary-text-color: var(--eds-semantic-text);
+  --eds-link-panel-secondary-text-color-hover: var(--eds-semantic-text);
+  --eds-link-panel-secondary-text-color-active: var(--eds-semantic-text);
+  --eds-link-panel-secondary-border-color: var(--eds-semantic-border);
+  --eds-link-panel-secondary-border-color-hover: var(--eds-semantic-border-hover);
+  --eds-link-panel-secondary-border-color-focus-active-hover: var(--eds-semantic-background-action-secondary-hover);
+  --eds-link-panel-secondary-background-color: var(--eds-semantic-background);
+  --eds-link-panel-secondary-background-color-hover: var(--eds-semantic-background-action-secondary-hover);
+  --eds-link-panel-secondary-background-color-active: var(--eds-semantic-background-action-secondary-active);
+
+  /* Tertiary */
+  --eds-link-panel-tertiary-text-color: var(--eds-semantic-text);
+  --eds-link-panel-tertiary-text-color-hover: var(--eds-semantic-text);
+  --eds-link-panel-tertiary-text-color-active: var(--eds-semantic-text-inverted);
+  --eds-link-panel-tertiary-border-color-focus: var(--eds-semantic-border-action-focus);
+  --eds-link-panel-tertiary-border-color-active: var(--eds-semantic-background-alternative);
+  --eds-link-panel-tertiary-border-color-hover: var(--eds-semantic-background-alternative);
+  --eds-link-panel-tertiary-background-color-hover: var(--eds-semantic-background);
+  --eds-link-panel-tertiary-background-color-active: var(--eds-semantic-background-alternative);
+}
+
+.eds-link-panel {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--eds-size-4);
+  border: 2px solid transparent;
+}
+
+.eds-link-panel:hover {
+  box-shadow: none;
+}
+
+.eds-link-panel:focus {
+  box-shadow: var(--eds-semantic-focus);
+  outline: none;
+}
+
+.eds-link-panel--spacing {
+  margin-bottom: var(--eds-size-4);
+}
+
+.eds-link-panel__chevron {
+  flex-shrink: 0;
+  font-size: var(--eds-size-6);
+  transition: transform 200ms;
+}
+
+.eds-link-panel:hover > .eds-link-panel__chevron,
+.eds-link-panel:focus-within > .eds-link-panel__chevron {
+  transform: translateX(2px);
+}
+
+
+.eds-link-panel__description {
+  margin-top: var(--eds-size-1);
+}
+
+.eds-link-panel--primary {
+  color: var(--eds-link-panel-primary-text-color);
+  background-color: var(--eds-link-panel-primary-background-color);
+  border-color: var(--eds-link-panel-primary-border-color);
+}
+
+.eds-link-panel--primary:hover {
+  color: var(--eds-link-panel-primary-text-color-hover);
+  background-color: var(--eds-link-panel-primary-background-color-hover);
+}
+
+.eds-link-panel--primary:hover .eds-link-panel__title {
+  color: var(--eds-link-panel-primary-text-color-hover);
+}
+
+.eds-link-panel--secondary {
+  color: var(--eds-link-panel-secondary-text-color);
+  background-color: var(--eds-link-panel-secondary-background-color);
+  border-color: var(--eds-link-panel-secondary-border-color);
+}
+
+.eds-link-panel--secondary:hover {
+  color: var(--eds-link-panel-secondary-text-color-hover);
+  background-color: var(--eds-link-panel-secondary-background-color-hover);
+  border-color: var(--eds-link-panel-secondary-border-color-hover);
+}
+
+.eds-link-panel--secondary:hover .eds-link-panel__title {
+  color: var(--eds-link-panel-secondary-text-color-hover);
+}
+
+.eds-link-panel--tertiary {
+  color: var(--eds-link-panel-tertiary-text-color);
+}
+
+.eds-link-panel--tertiary:hover {
+  background-color: var(--eds-link-panel-tertiary-background-color-hover);
+  border-color: var(--eds-link-panel-tertiary-border-color-hover);
+}
+
+.eds-link-panel--tertiary:hover .eds-link-panel__title {
+  color: var(--eds-link-panel-tertiary-text-color-hover);
+}
+
+.eds-link-panel:hover .eds-link-panel__title {
+  text-decoration: underline;
+}

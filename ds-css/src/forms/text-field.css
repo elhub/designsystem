@@ -1,0 +1,142 @@
+:root {
+    --eds-text-field-text-color: var(--eds-semantic-text);
+    --eds-text-field-text-color-disabled: var(--eds-semantic-text-disabled);
+    --eds-text-field-placeholder-color-text: var(--eds-semantic-text-disabled);
+    --eds-text-field-background-color: var(--eds-semantic-background);
+    --eds-text-field-background-color-disabled: var(--eds-semantic-background-action-secondary-disabled);
+    --eds-text-field-border-color: var(--eds-semantic-border);
+    --eds-text-field-border-color-hover: var(--eds-semantic-border-hover);
+    --eds-text-field-border-color-active: var(--eds-semantic-border-active);
+    --eds-text-field-border-color-error: var(--eds-semantic-border-error);
+    --eds-text-field-border-color-disabled: var(--eds-semantic-border-disabled);
+    --eds-text-field-shadow-color-error: var(--eds-semantic-border-error);
+}
+
+.eds-text-field__input-container {
+    position: relative;
+}
+
+.eds-text-field__input {
+    appearance: none;
+    background-color: var(--eds-text-field-background-color);
+    border-radius: var(--eds-border-radius-medium);
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-text-field-border-color);
+    width: 100%;
+    color: var(--eds-text-field-text-color);
+}
+
+.eds-text-field__input--small {
+    height: 1.75rem;
+    padding: var(--eds-size-3) var(--eds-size-3);
+}
+
+.eds-text-field__input--medium {
+    height: 2rem;
+    padding: var(--eds-size-3) var(--eds-size-3);
+}
+
+.eds-text-field__input--large {
+    height: 2.5rem;
+    padding: var(--eds-size-4) var(--eds-size-4);
+}
+
+
+.eds-text-field__input[size] {
+    width: auto;
+}
+
+.eds-text-field__unit + .eds-text-field__input {
+    padding-right: var(--eds-size-9);
+}
+
+.eds-text-field__toggle-password + .eds-text-field__input {
+    padding-right: var(--eds-size-8);
+}
+
+
+.eds-text-field__input::placeholder {
+    color: var(--eds-text-field-placeholder-color-text);
+}
+
+.eds-text-field__input:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-text-field-border-color-active);
+}
+
+.eds-text-field__input:hover:not(:disabled) {
+    box-shadow: inset 0 0 0 var(--eds-size-0-5) var(--eds-text-field-border-color-hover);
+}
+
+
+.eds-text-field__icon {
+    height: var(--eds-size-4);
+    position: absolute;
+    left: var(--eds-size-2-5);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.eds-text-field__input-container:has(.eds-text-field__icon) .eds-text-field__input {
+    padding-left: var(--eds-size-8);
+}
+
+
+.eds-text-field__unit {
+    position: absolute;
+    right: var(--eds-size-2-5);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--eds-text-field-text-color);
+}
+
+.eds-text-field__toggle-password {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    position: absolute;
+    right: var(--eds-size-1);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--eds-text-field-text-color);
+    cursor: pointer;
+}
+
+
+/**
+  Error handling
+*/
+.eds-text-field--error > .eds-text-field__input-container > .eds-text-field__input:not(:hover, :disabled) {
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-text-field-border-color-error);
+}
+
+.eds-text-field--error > .eds-text-field__input-container > .eds-text-field__input:hover:not(:disabled) {
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-text-field-border-color-error);
+}
+
+.eds-text-field--error > .eds-text-field__input-container
+> .eds-text-field__input:focus-visible:not(:hover, :disabled) {
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-text-field-border-color-error),
+    var(--eds-semantic-focus);
+}
+
+.eds-text-field:not(.eds-text-field--error) > .eds-text-field__input-container > .eds-text-field__input:hover:not(:disabled) {
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-text-field-border-color-hover);
+}
+
+.eds-text-field__input[readonly] {
+    background-color: var(--eds-text-field-background-color);
+    border-color: var(--eds-text-field-border-color);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/**
+  * Removes default search icon
+  */
+.eds-text-field__input[type="search"]::-webkit-search-decoration,
+.eds-text-field__input[type="search"]::-webkit-search-cancel-button,
+.eds-text-field__input[type="search"]::-webkit-search-results-button,
+.eds-text-field__input[type="search"]::-webkit-search-results-decoration {
+    appearance: none;
+}

@@ -1,0 +1,10 @@
+:root {
+    --eds-divider-color: var(--eds-semantic-border);
+    --eds-divider-height: var(--eds-size-0-25)
+}
+
+.eds-divider {
+    background-color: var(--eds-divider-color);
+    height: var(--eds-divider-height);
+    width: 100%;
+}

@@ -1,0 +1,64 @@
+:root {
+  --eds-link-text-color-focus: var(--eds-semantic-text-action);
+  --eds-link-text-color-visited: var(--eds-semantic-text-action-visited-link);
+  --eds-link-text-color-disabled: var(--eds-semantic-text-disabled);
+  --eds-link-text-color: var(--eds-semantic-text-action);
+  --eds-link-text-color-hover: var(--eds-semantic-text-action-hover);
+  --eds-link-text-color-active: var(--eds-semantic-text-action-selected);
+  --eds-link-border-radius: var(--eds-border-radius-medium);
+}
+
+.eds-link {
+  color: var(--eds-link-text-color);
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+  border-radius: var(--eds-link-border-radius);
+  gap: var(--eds-size-1);
+}
+
+.eds-link--spacing {
+  margin-bottom: var(--eds-size-4);
+}
+
+.eds-link:hover {
+  text-decoration: none;
+  color: var(--eds-link-text-color-hover);
+}
+
+.eds-link:visited {
+  color: var(--eds-link-text-color-visited);
+}
+
+.eds-link:active {
+  color: var(--eds-link-text-color-active);
+}
+
+.eds-link:focus-visible {
+  outline: none;
+  box-shadow: var(--eds-semantic-focus);
+  color: var(--eds-semantic-text-action);
+}
+
+.eds-link:focus:not(:focus-visible) {
+  box-shadow: none;
+  outline: 0;
+}
+
+.eds-link--alternative {
+  text-decoration: none;
+}
+
+.eds-link--disabled {
+  color: var(--eds-link-text-color-disabled);
+  pointer-events: none;
+}
+
+.eds-link--alternative:hover {
+  text-decoration: underline;
+}
+
+.eds-link svg {
+  flex-shrink: 0;
+}

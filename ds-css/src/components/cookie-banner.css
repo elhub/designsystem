@@ -1,0 +1,26 @@
+:root {
+    --eds-cookie-banner-background: var(--eds-semantic-background-success);
+    --eds-cookie-banner-border-radius: var(--eds-border-radius-medium);
+}
+
+.eds-cookie-banner {
+    border: var(--eds-size-0-25) solid var(--eds-semantic-border);
+    border-radius: var(--eds-cookie-banner-border-radius);
+    padding: var(--eds-size-4) var(--eds-size-6);
+    background: var(--eds-cookie-banner-background);
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-size-4);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: var(--eds-z-index-modal);
+    margin: var(--eds-size-4);
+}
+
+.eds-cookie-banner__actions {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: var(--eds-size-2);
+}

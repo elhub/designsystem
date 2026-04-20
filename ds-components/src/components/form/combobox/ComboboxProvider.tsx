@@ -1,0 +1,110 @@
+import React, { forwardRef, useId } from 'react'
+import Combobox from './Combobox'
+import { FilteredOptionsProvider } from './FilteredOptions/filteredOptionsContext'
+import { InputContextProvider } from './Input/inputContext'
+import { SelectedOptionsProvider } from './SelectedOptions/SelectedOptionsContext'
+import { mapToComboboxOptionArray } from './combobox-utils'
+import { CustomOptionsProvider } from './customOptionsContext'
+import { type ComboboxProps } from './types'
+
+/**
+ * A component that allows the user to search in a list of options
+ *
+ * Has options for allowing only one or multiple options to be selected,
+ * or adding new, user-submitted values.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/combobox)
+ *
+ * @example
+ * ```jsx
+ * const options = ["apple", "banana", "orange"];
+ *
+ * return (
+ *    <Combobox
+ *      label="Velg en verdi"
+ *      options={options}
+ *      id="my-combobox"
+ *      shouldAutoComplete
+ *    />
+ * )
+ * ```
+ */
+const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>((props, ref) => {
+  const {
+    allowNewValues = false,
+    children,
+    defaultValue,
+    error,
+    errorId,
+    filteredOptions: externalFilteredOptions,
+    id,
+    isListOpen,
+    isLoading = false,
+    noResultsLabel,
+    isMultiSelect,
+    onToggleSelected,
+    selectedOptions: externalSelectedOptions,
+    maxSelected,
+    maxShown,
+    options: externalOptions,
+    value,
+    onChange,
+    onClear,
+    shouldAutocomplete,
+    size,
+    ...rest
+  } = props
+
+  const _id = id ?? useId()
+  const options = mapToComboboxOptionArray(externalOptions) ?? []
+  const filteredOptions = mapToComboboxOptionArray(externalFilteredOptions)
+  const selectedOptions = mapToComboboxOptionArray(externalSelectedOptions)
+  return (
+    <InputContextProvider
+      value={{
+        defaultValue,
+        error,
+        errorId,
+        id: _id,
+        value,
+        onChange,
+        onClear,
+        shouldAutocomplete,
+        size
+      }}
+    >
+      <CustomOptionsProvider value={{ isMultiSelect }}>
+        <SelectedOptionsProvider
+          value={{
+            allowNewValues,
+            isMultiSelect,
+            selectedOptions,
+            maxSelected,
+            maxShown,
+            onToggleSelected,
+            options
+          }}
+        >
+          <FilteredOptionsProvider
+            value={{
+              allowNewValues,
+              filteredOptions,
+              noResultsLabel,
+              isListOpen,
+              isLoading,
+              options
+            }}
+          >
+            <Combobox ref={ref} {...rest}>
+              {children}
+            </Combobox>
+          </FilteredOptionsProvider>
+        </SelectedOptionsProvider>
+      </CustomOptionsProvider>
+    </InputContextProvider>
+  )
+})
+
+ComboboxProvider.displayName = 'ComboboxProvider'
+
+export default ComboboxProvider

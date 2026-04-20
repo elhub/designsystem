@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "module": "esnext",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "paths": {
+        "src/": ["*"]
+    }
+  },
+  "include": ["src/"]
+}

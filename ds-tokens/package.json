@@ -1,0 +1,49 @@
+{
+  "name": "@elhub/ds-tokens",
+  "version": "7.2.0",
+  "description": "Elhub design system tokens",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "directory": "ds-tokens"
+  },
+  "publishConfig": {
+    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/"
+  },
+  "main": "dist/tokens.css",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "rimraf dist && ts-node dist.ts",
+    "dist": "npm run build",
+    "lint": "eslint \"src/*.ts*\"",
+    "lint:fix": "eslint \"src/**ts*\" --fix",
+    "prettier": "prettier --config ../.prettierrc -c \"src/*.{ts,tsx}\"",
+    "prettier:fix": "prettier --config ../.prettierrc -w \"src/*.{ts,tsx}\"",
+    "release": "npm publish || exit 0",
+    "test": "",
+    "test:ci": "",
+    "typecheck": ""
+  },
+  "files": [
+    "dist/*"
+  ],
+  "dependencies": {
+    "style-dictionary": "^3.9.2"
+  },
+  "browserslist": {
+    "production": [
+      "last 2 chrome version",
+      "last 2 firefox version",
+      "last 2 safari version"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "overrides": {
+    "minimatch": "^10.2.1"
+  }
+}

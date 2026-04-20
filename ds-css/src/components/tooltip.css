@@ -1,0 +1,41 @@
+:root {
+  --eds-tooltip-background: var(--eds-semantic-background);
+  --eds-tooltip-arrow-background: var(--eds-semantic-border-alternative);
+  --eds-tooltip-border: var(--eds-semantic-border-alternative);
+  --eds-tooltip-color: var(--eds-semantic-text);
+  --eds-tooltip-max-width: 17.5rem;
+
+}
+
+.eds-tooltip {
+  max-width: var(--eds-tooltip-max-width);
+  z-index: var(--eds-z-index-tooltip);
+}
+
+.eds-tooltip-wrapper {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.eds-tooltip__inner {
+  position: relative;
+  background-color: var(--eds-tooltip-background);
+  color: var(--eds-tooltip-color);
+  border-radius: var(--eds-border-radius-medium);
+  border: var(--eds-size-0-25) solid var(--eds-tooltip-border);
+  padding: var(--eds-size-4);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.eds-tooltip__arrow {
+  height: 7px;
+  width: 7px;
+  transform: rotate(45deg);
+  z-index: -1;
+  background-color: var(--eds-tooltip-arrow-background);
+  position: absolute;
+}

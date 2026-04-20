@@ -1,0 +1,28 @@
+.eds-loader {
+  display: inline-block;
+  animation: loader-rotate 1s linear infinite;
+  will-change: transform;
+  transform-origin: 50% 50%; /* Ensure rotation is centered */
+}
+
+
+.eds-loader--large {
+  width: var(--eds-size-8);
+  height: var(--eds-size-8);
+}
+
+.eds-loader--medium {
+  width:var(--eds-size-5);
+  height: var(--eds-size-5);
+}
+
+.eds-loader--small {
+  width: var(--eds-size-4);
+  height: var(--eds-size-4);
+}
+
+@keyframes loader-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

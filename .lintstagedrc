@@ -1,0 +1,14 @@
+{
+  "*": ["secretlint"],
+  "**/*.{js,jsx,ts,tsx}": [
+    "eslint --fix --",
+    "prettier --write --",
+  ],
+  "**/*.{css,scss}": [
+    "prettier --write --",
+    "stylelint --config ds-css/.stylelintrc.js --fix --"
+  ],
+  "**/*.md": [
+    "prettier --write --"
+  ]
+}

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+@import url("baseline/baseline.css");
+
+/* tokens */
+@import url("@elhub/ds-tokens/dist/tokens.css");
+
+/* embedded fonts */
+@import url("fonts/fonts-embed.css");
+
+/* 3rd party here */
+@import url("react-datepicker/dist/react-datepicker.css");
+
+/* load typography first */
+@import url("components/typography.css");
+
+/* form elements second */
+@import url("forms/combobox.css");
+@import url("forms/counter.css");
+@import url("forms/select.css");
+@import url("forms/form.css");
+@import url("forms/radio-checkbox.css");
+@import url("forms/datepicker.css");
+@import url("forms/switch.css");
+@import url("forms/text-field.css");
+@import url("forms/textarea.css");
+@import url("forms/search.css");
+
+/* components */
+@import url("components/accordion.css");
+@import url("components/alert.css");
+@import url("components/badge.css");
+@import url("components/button.css");
+@import url("components/divider.css");
+@import url("components/card.css");
+@import url("components/cookie-banner.css");
+@import url("components/chips.css");
+@import url("components/dropdown.css");
+@import url("components/filter-panel.css");
+@import url("components/link.css");
+@import url("components/panel.css");
+@import url("components/loader.css");
+@import url("components/modal.css");
+@import url("components/navbar.css");
+@import url("components/pagination.css");
+@import url("components/popover.css");
+@import url("components/stepper.css");
+@import url("components/table.css");
+@import url("components/tabs.css");
+@import url("components/tag.css");
+@import url("components/tooltip.css");
+@import url("components/toggle-group.css");
+
+body {
+    font-family: roboto, sans-serif;
+    color: var(--eds-semantic-text);
+    background-color: var(--eds-semantic-background);
+}

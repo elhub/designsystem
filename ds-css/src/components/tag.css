@@ -1,0 +1,48 @@
+:root {
+  --eds-tag-border-color: var(--eds-semantic-border-disabled);
+  --eds-tag-color-info-background: var(--eds-semantic-background-information);
+  --eds-tag-color-info-border: var(--eds-semantic-border-information);
+  --eds-tag-color-warning-background: var(--eds-semantic-background-warning);
+  --eds-tag-color-warning-border: var(--eds-semantic-border-warning);
+  --eds-tag-color-success-background: var(--eds-semantic-background-success);
+  --eds-tag-color-success-border: var(--eds-semantic-border-success);
+  --eds-tag-color-error-background: var(--eds-semantic-background-error);
+  --eds-tag-color-error-border: var(--eds-semantic-border-error);
+}
+
+.eds-tag {
+  border: var(--eds-size-0-25) solid;
+  border-color: var(--eds-tag-border-color);
+  border-radius: var(--eds-border-radius-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem var(--eds-size-3);
+  min-height: 32px;
+}
+
+.eds-tag--small {
+  min-height: 24px;
+  padding-right: var(--eds-size-1);
+  padding-left: var(--eds-size-1);
+}
+
+.eds-tag--error {
+  background-color: var(--eds-tag-color-error-background);
+  border-color: var(--eds-tag-color-error-border);
+}
+
+.eds-tag--success {
+  background-color: var(--eds-tag-color-success-background);
+  border-color: var(--eds-tag-color-success-border);
+}
+
+.eds-tag--warning {
+  background-color: var(--eds-tag-color-warning-background);
+  border-color: var(--eds-tag-color-warning-border);
+}
+
+.eds-tag--info {
+  background-color: var(--eds-tag-color-info-background);
+  border-color: var(--eds-tag-color-info-border);
+}

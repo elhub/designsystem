@@ -1,0 +1,75 @@
+
+:root {
+    --eds-modal-content-background-color: var(--eds-semantic-background-page);
+    --eds-modal-box-shadow: 0px var(--eds-size-2) var(--eds-size-10) 0px var(--eds-semantic-background-overlay), 0px var(--eds-size-0-5) var(--eds-size-4) 0px var(--eds-semantic-background-overlay);
+    --eds-modal-min-width: 18rem;
+    --eds-modal-max-width: 76.5rem;
+}
+
+.ReactModal__Body--open { /* stylelint-disable-line */
+    overflow: hidden;
+}
+
+.eds-modal {
+    background-color: var(--eds-modal-content-background-color);
+    border-radius: var(--eds-border-radius-medium);
+    display: grid;
+    gap: var(--eds-size-6);
+    position: relative;
+    overflow: auto;
+    max-height: 85%;
+    box-shadow: var(--eds-modal-box-shadow);
+    min-width: var(--eds-modal-min-width);
+    max-width: var(--eds-modal-max-width);
+    padding: var(--eds-size-6);
+}
+
+.eds-modal .eds-box {
+    background-color: var(--eds-modal-content-background-color);
+}
+
+.eds-modal:focus,
+.eds-modal--focus {
+    outline: none;
+}
+
+.eds-modal__overlay {
+    position: fixed;
+    z-index: var(--eds-z-index-modal);
+    inset: 0;
+    background-color: var(--eds-semantic-background-overlay);
+    padding: var(--eds-size-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eds-modal__button--shake {
+    transform: rotate(0deg);
+    transition: transform 100ms cubic-bezier(0.82, 2, 1, 0.3);
+}
+
+/* prettier-ignore */
+.eds-modal__overlay:active > .eds-modal:not(:active) > .eds-modal__button--shake {
+    transform: rotate(10deg);
+    transition: transform 100ms cubic-bezier(0.82, -2, 1, 0.3);
+}
+
+.eds-modal__button {
+    position: absolute;
+    top: var(--eds-size-4);
+    right: var(--eds-size-4);
+    display: flex;
+    padding: var(--eds-size-2)
+}
+
+.eds-modal__button svg {
+    color: var(--eds-semantic-text);
+}
+
+.eds-modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--eds-size-2);
+}

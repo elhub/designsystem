@@ -1,0 +1,48 @@
+{
+  "name": "@elhub/ds-graph",
+  "version": "6.0.0",
+  "description": "Elhub design system graph",
+  "license": "(MIT AND Highcharts Commercial License)",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "directory": "ds-graph"
+  },
+  "publishConfig": {
+    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/"
+  },
+  "type": "module",
+  "module": "dist/ds-graph.js",
+  "main": "dist/ds-graph.js",
+  "types": "dist/ds-graph.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "rimraf ./dist && vite build",
+    "dist": "npm run build",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "lint:fix": "eslint \"src/**/*.ts*\" --fix",
+    "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{ts,tsx}\"",
+    "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{ts,tsx}\"",
+    "release": "npm publish || exit 0",
+    "test": "",
+    "test:ci": "",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@highcharts/react": "^4.2.1",
+    "@elhub/ds-tokens": "^7.0.0",
+    "deepmerge": "^4.3.1",
+    "highcharts": "^12.4.0"
+  },
+  "peerDependencies": {
+    "highcharts": "^12.4.0",
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
+  },
+  "overrides": {
+    "minimatch": "^10.2.1"
+  }
+}

@@ -1,0 +1,176 @@
+.eds-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.eds-search__wrapper-inner {
+    position: relative;
+    width: 100%;
+    height: var(--eds-size-10)
+}
+
+.eds-search__wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+
+.eds-search__input {
+    height: 100%;
+    padding: 0 var(--eds-size-5) 0 var(--eds-size-7);
+    border: 0;
+    box-shadow: none;
+}
+
+.eds-search__search-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--eds-semantic-text);
+}
+
+.eds-search__wrapper-inner:hover .eds-search__search-icon {
+    color: var(--eds-semantic-text-action-hover);
+}
+
+.eds-search__wrapper-inner:focus-within .eds-search__search-icon {
+    color: var(--eds-semantic-text-action);
+}
+
+
+.eds-search__button-clear {
+    position: absolute;
+    right: 0.75rem;
+    border-radius: var(--eds-border-radius-medium);
+    color: var(--eds-semantic-text);
+    height: 32px;
+    width: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    padding: 0;
+}
+
+
+.eds-button.eds-search__button-search {
+    width: var(--eds-size-7);
+    height: var(--eds-size-10);
+    flex-shrink: 0;
+    border-radius: var(--eds-border-radius-medium);
+    padding: 0;
+    background: none;
+}
+
+
+.eds-search__wrapper-inner:focus-within
++ .eds-search__button-search.eds-button--secondary:hover {
+    z-index: auto;
+}
+
+/* Focus layering */
+.eds-search__input:focus,
+.eds-search__button-clear,
+.eds-search__button-search:focus {
+    z-index: 1;
+}
+
+.eds-search--error .eds-search__input:not(:hover, :disabled) {
+    border-color: var(--eds-semantic-border-error);
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-semantic-border-error);
+}
+
+.eds-search--error .eds-search__input:focus-visible:not(:hover, :disabled) {
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-semantic-border-error),
+    var(--eds-semantic-focus);
+}
+
+
+.eds-search__popover {
+    max-height: 31rem; /* allow for 3 sections with 3 results each */
+    overflow-y: auto;
+}
+
+
+.eds-search__results-list {
+    display: grid;
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.eds-search__results-title {
+    padding: var(--eds-size-2) var(--eds-size-4);
+}
+
+.eds-search__results-item {
+    padding: var(--eds-size-2) var(--eds-size-4);
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        background-color: var(--eds-semantic-background-action-secondary-hover);
+    }
+
+    &:focus-visible {
+        box-shadow: inset 0 0 0 var(--eds-size-1) var(--eds-semantic-border-action-focus);
+        border-radius: var(--eds-border-radius-medium);
+        outline: none;
+    }
+}
+
+.eds-search__results-expand-button {
+    background-color: transparent;
+    color: var(--eds-semantic-text-action);
+    margin: var(--eds-size-2);
+    cursor: pointer;
+
+    &:focus-visible {
+        box-shadow: inset 0 0 0 var(--eds-size-1) var(--eds-semantic-border-action-focus);
+        border-radius: var(--eds-border-radius-medium);
+        outline: none;
+    }
+
+    &:hover {
+        color: var(--eds-semantic-text-action-hover);
+    }
+
+    &:active {
+        color: var(--eds-semantic-text-action-selected);
+    }
+}
+
+.eds-search__loading {
+    display: flex;
+    gap: var(--eds-size-1);
+    align-items: center;
+    padding: var(--eds-size-4);
+}
+
+.eds-search__results-no-results {
+    padding: var(--eds-size-2) var(--eds-size-4);
+}
+
+
+.eds-search :disabled {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.eds-search__button-clear:hover {
+    color: var(--eds-semantic-text-action-hover);
+}
+
+.eds-search__button-clear:focus-visible {
+    box-shadow: var(--eds-semantic-focus);
+    outline: none;
+}

@@ -1,0 +1,166 @@
+:root {
+  --eds-filter-panel-border-color: transparent;
+  --eds-filter-panel-border-radius: var(--eds-border-radius-medium);
+  --eds-filter-panel-border-color-hover: var(--eds-semantic-border-hover);
+  --eds-filter-panel-border-color-pressed: var(--eds-semantic-border-selected);
+  --eds-filter-panel-border-color-pressed-hover: var(--eds-semantic-border-hover);
+  --eds-filter-panel-background-color: var(--eds-semantic-background);
+  --eds-filter-panel-background-color-hover: var(--eds-semantic-background-action-secondary-hover);
+  --eds-filter-panel-background-color-pressed: var(--eds-semantic-background-action-secondary-active);
+  --eds-filter-panel-background-color-pressed-hover: var(--eds-semantic-background-action-secondary);
+  --eds-filter-panel-text-color: var(--eds-semantic-text);
+  --eds-filter-panel-text-color-hover: var(--eds-semantic-text);
+  --eds-filter-panel-text-color-pressed: var(--eds-semantic-text);
+  --eds-filter-panel-focus: var(--eds-semantic-focus);
+}
+
+.eds-filter-panel {
+  display: flex;
+  gap: var(--eds-size-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.eds-filter-panel svg {
+  vertical-align: middle;
+}
+
+.eds-filter-panel__label {
+  width: 100%;
+}
+
+.eds-filter-panel svg + .eds-filter-panel__chip-text {
+  margin-left: var(--eds-size-2);
+}
+
+.eds-filter-panel :where(li) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: block;
+}
+
+.eds-filter-panel__chip {
+  all: unset;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eds-size-1);
+  margin: 0;
+  border-radius: var(--eds-filter-panel-border-radius);
+  box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-filter-panel-border-color);
+  background-color: var(--eds-filter-panel-background-color);
+  color: var(--eds-filter-panel-text-color);
+}
+
+.eds-filter-panel--large .eds-filter-panel__chip {
+  padding: var(--eds-size-2-5) var(--eds-size-2);
+}
+
+.eds-filter-panel--medium .eds-filter-panel__chip {
+  padding: var(--eds-size-2) var(--eds-size-2);
+}
+
+.eds-filter-panel--small .eds-filter-panel__chip {
+  padding: var(--eds-size-2) var(--eds-size-1-5);
+}
+
+.eds-filter-panel__chip-readonly {
+  pointer-events: none;
+}
+
+.eds-filter-panel__chip:disabled {
+  color: var(--eds-semantic-text-disabled);
+  pointer-events: none;
+}
+
+.eds-filter-panel__chip:focus-visible {
+  box-shadow: 0 0 0 var(--eds-size-0-25) var(--eds-filter-panel-focus);
+}
+
+.eds-filter-panel__chip:not(:disabled):hover {
+  text-decoration: none;
+  box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-filter-panel-border-color-hover);
+  background-color: var(--eds-filter-panel-background-color-hover);
+  color: var(--eds-filter-panel-text-color-hover);
+}
+
+.eds-filter-panel__chip[aria-pressed="true"] {
+  text-decoration: none;
+  box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-filter-panel-border-color-pressed);
+  background-color: var(--eds-filter-panel-background-color-pressed);
+  color: var(--eds-filter-panel-text-color-pressed);
+}
+
+.eds-filter-panel__chip[aria-pressed="true"]:focus-visible,
+.eds-filter-panel__chip:active:focus-visible {
+  box-shadow:
+          inset 0 0 0 var(--eds-size-0-25) var(--eds-semantic-border),
+          0 0 0 var(--eds-size-0-25) var(--eds-filter-panel-focus);
+}
+
+.eds-filter-panel__chip[aria-pressed="true"]:not(:disabled):hover {
+  box-shadow: inset 0 0 0 var(--eds-size-0-25)  var(--eds-filter-panel-border-color-pressed-hover);
+}
+
+.eds-filter-panel__chip:disabled svg {
+  color: var(--eds-semantic-text-disabled);
+}
+
+@supports not selector(:focus-visible) {
+  .eds-filter-panel__chip:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--eds-filter-panel-focus);
+  }
+
+  .eds-filter-panel__chip[aria-pressed="true"]:focus,
+  .eds-filter-panel__chip:active:focus {
+    box-shadow:
+      inset 0 0 0 var(--eds-size-0-25) var(--eds-semantic-border),
+      0 0 0 2px var(--eds-filter-panel-focus);
+  }
+}
+
+@media (forced-colors: active) {
+  .eds-filter-panel__chip {
+    border: var(--eds-size-0-25) solid transparent;
+  }
+
+  .eds-filter-panel__chip:hover {
+    background-color: highlighttext;
+    color: highlight;
+  }
+
+  .eds-filter-panel__chip:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .eds-filter-panel__chip:where([aria-pressed="true"], :active, :hover) > span {
+    forced-color-adjust: none;
+  }
+
+  .eds-filter-panel__chip:active {
+    background-color: highlight;
+    color: highlighttext;
+  }
+
+  .eds-filter-panel__chip[aria-pressed="true"] {
+    background-color: var(--eds-filter-panel-background-color);
+    color: var(--eds-filter-panel-text-color);
+    border: var(--eds-size-0-25) solid var(--eds-filter-panel-border-color-active);
+  }
+
+  .eds-filter-panel__chip[aria-pressed="true"]:hover {
+    background-color:  var(--eds-filter-panel-background-color-hover);
+    color: var(--eds-filter-panel-text-color-hover);
+  }
+
+  .eds-filter-panel__chip[aria-pressed="true"]:active {
+    background-color: highlight;
+    color: highlighttext;
+  }
+}

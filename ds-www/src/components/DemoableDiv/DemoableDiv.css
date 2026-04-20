@@ -1,0 +1,33 @@
+:root {
+    --www-demoablediv-font-family: var(--eds-font-body-family);
+    --www-demoablediv-line-height: var(--eds-font-body-line-height-medium);
+    --www-demoablediv-font-size: var(--eds-font-body-size-medium);
+    --www-demoablediv-color-border: var(--eds-semantic-border);
+    --www-demoablediv-color-background-1: var(--eds-semantic-background);
+    --www-demoablediv-color-background-2: var(--eds-semantic-background-alternative);
+    --www-demoablediv-color-text: var(--eds-semantic-text);
+}
+
+.www-demoablediv {
+    margin-top: var(--eds-size-4);
+    margin-bottom: var(--eds-size-4);
+}
+
+.www-demoablediv .area {
+    font-family: var(--www-demoablediv-font-family);
+    line-height: var(--www-demoablediv-line-height);
+    font-size: var(--www-demoablediv-font-size);
+    color: var(--www-demoablediv-color-text);
+    border: 1px solid var(--www-demoablediv-color-border);
+
+}
+.www-demoablediv .area--transparent {
+    background: repeating-conic-gradient(
+            var(--www-demoablediv-color-background-2) 0 90deg,
+            var(--www-demoablediv-color-background-1) 0 180deg) 0 0/40px 40px;
+}
+
+.www-demoablediv .area--opaque {
+    background: var(--eds-semantic-background);
+}
+

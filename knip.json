@@ -1,0 +1,26 @@
+{
+  "eslint": {
+    "config": ["eslint.config.mjs"]
+  },
+  "ignoreDependencies": ["ajv", "@secretlint/secretlint-rule-preset-recommend"],
+  "ignoreBinaries": ["gitleaks"],
+  "workspaces": {
+    "ds-components": {
+      "entry": ["src/dist.ts"],
+      "project": ["src/**/*.{js,ts,tsx,jsx}"],
+      "ignoreDependencies": ["eslint-plugin-react", "eslint-plugin-react-hooks"]
+    },
+    "ds-icons": {
+      "entry": ["src/dist.ts"],
+      "project": ["src/**/*.{js,ts,tsx,jsx}"]
+    },
+    "ds-graph": {
+      "entry": ["src/dist.ts"],
+      "project": ["src/**/*.{js,ts,tsx,jsx}"]
+    },
+    "ds-www": {
+      "ignoreDependencies": [".*"]
+    }
+  },
+  "ignore": ["eslint.config.mjs", ".lintstagedrc", "ds-css/**", "ds-tokens/**"]
+}

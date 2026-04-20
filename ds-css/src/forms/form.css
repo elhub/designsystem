@@ -1,0 +1,30 @@
+.eds-form-item .eds-error-message {
+    display: flex;
+    gap: var(--eds-size-2);
+    align-items: center;
+    margin-top: var(--eds-size-0-5);
+}
+
+.eds-form-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-size-1);
+}
+
+.eds-form-item__description {
+    color: var(--eds-semantic-text-subtle);
+}
+
+.eds-form-item__label--required {
+    margin-left: var(--eds-size-0-5);
+    color: var(--eds-semantic-text-error);
+}
+
+.eds-form-item--disabled, .eds-form-item input:disabled {
+    background-color: var(--eds-semantic-background-action-secondary-disabled);
+    border: var(--eds-size-0-25) solid var(--eds-text-field-border-color-disabled);
+    color: var(--eds-text-field-text-color-disabled);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+

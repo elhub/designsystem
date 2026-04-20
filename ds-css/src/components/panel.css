@@ -1,0 +1,23 @@
+.eds-panel {
+    background-color: var(--eds-semantic-background);
+    color: var(--eds-semantic-text);
+    padding: var(--eds-size-4);
+    border-radius: var(--eds-border-radius-medium);
+    border: var(--eds-size-0-25) solid transparent;
+}
+
+.eds-panel--no-padding {
+    padding: 0;
+}
+
+.eds-panel--no-border-radius {
+    border-radius: 0;
+}
+
+.eds-panel--border {
+    border-color: var(--eds-semantic-border);
+}
+
+.eds-panel--background {
+    background-color: var(--eds-semantic-background-alternative);
+}

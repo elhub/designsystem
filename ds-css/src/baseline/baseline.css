@@ -1,0 +1,29 @@
+@import url("normalize.css");
+@import url("print.css");
+@import url("screenreaders.css");
+
+html {
+    box-sizing: border-box;
+    color: var(--eds-semantic-text);
+    background: var(--eds-semantic-background);
+}
+
+*,
+*::before,
+*::after {
+    border: 0 solid;
+    box-sizing: border-box
+}
+
+ul, ol {
+    line-height: 1.5rem;
+    margin: 0;
+}
+
+menu, ol, ul {
+    list-style: none
+}
+
+div#root {
+    min-height: 100vh;
+}

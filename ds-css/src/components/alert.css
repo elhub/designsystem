@@ -1,0 +1,69 @@
+.eds-alert {
+    border-radius: var(--eds-border-radius-medium);
+    border: none;
+    display: flex;
+    align-items: center;
+    color: var(--eds-semantic-text);
+}
+
+.eds-alert--spacing {
+    margin-bottom: var(--eds-size-4);
+}
+
+.eds-alert__icon {
+    flex: 0 0 auto;
+}
+
+.eds-alert--small {
+    padding: var(--eds-size-1-5) var(--eds-size-2);
+    gap: var(--eds-size-1-5);
+}
+
+.eds-alert--medium {
+    padding: var(--eds-size-2) var(--eds-size-4);
+    gap: var(--eds-size-2);
+}
+
+.eds-alert--error {
+    background-color: var(--eds-semantic-background-error);
+}
+
+.eds-alert--error > .eds-alert__icon,
+.eds-alert--error .eds-alert__header {
+    color: var(--eds-semantic-alternative-icons-failed);
+}
+
+.eds-alert--warning {
+    background-color: var(--eds-semantic-background-warning);
+}
+
+.eds-alert--warning > .eds-alert__icon,
+.eds-alert--warning .eds-alert__header {
+    color: var(--eds-semantic-alternative-icons-approved-with-warning);
+}
+
+.eds-alert--info {
+    background-color: var(--eds-semantic-background-information);
+}
+
+.eds-alert--info > .eds-alert__icon,
+.eds-alert--info .eds-alert__header {
+    color: var(--eds-semantic-alternative-icons-ongoing);
+}
+
+.eds-alert--success {
+    background-color: var(--eds-semantic-background-success);
+}
+
+.eds-alert--success > .eds-alert__icon,
+.eds-alert--success .eds-alert__header {
+    color: var(--eds-semantic-alternative-icons-approved);
+}
+
+.eds-alert__clear-button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--eds-semantic-text);
+    cursor: pointer;
+}

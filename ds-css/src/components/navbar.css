@@ -1,0 +1,81 @@
+:root {
+    --eds-navbar-link-text-color: var(--eds-semantic-text);
+    --eds-navbar-link-text-underscore-color: var(--eds-semantic-background-action-primary-hover);
+    --eds-navbar-link-text-color-hover: var(--eds-semantic-background-action-primary-hover);
+    --eds-navbar-link-text-color-selected: var(--eds-semantic-background-action-primary-hover);
+    --eds-navbar-link-background-color-hover: var(--eds-semantic-background);
+    --eds-navbar-link-background-color-selected: var(--eds-semantic-background);
+}
+
+.eds-navbar {
+    display: flex;
+    flex-flow: column;
+    width: fit-content;
+}
+
+.eds-navbar-link {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--eds-navbar-link-text-color);
+    position: relative;
+    border-radius: var(--eds-border-radius-medium);
+}
+
+.eds-navbar-link-medium {
+    padding: var(--eds-size-2) var(--eds-size-4);
+}
+
+.eds-navbar-link-small {
+    padding: var(--eds-size-1) var(--eds-size-2);
+}
+
+.eds-navbar-link__content {
+    white-space: nowrap;
+}
+
+.eds-navbar-link__content-text {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    vertical-align: middle;
+    transition: .16s all 0.025s;
+}
+
+.eds-navbar-link:hover {
+    color: var(--eds-navbar-link-text-color-hover);
+    text-shadow: 1px 0 0 var(--eds-navbar-link-text-color-hover);
+    background-color: var(--eds-navbar-link-background-color-hover);
+}
+
+.eds-navbar-link:active {
+    color: var(--eds-navbar-link-text-color);
+}
+
+.eds-navbar-link.eds-navbar-link--selected {
+    background-color: var(--eds-navbar-link-background-color-selected);
+    color: var(--eds-navbar-link-text-color-selected);
+    text-shadow: 1px 0 0 var(--eds-navbar-link-text-color-selected);
+}
+
+.eds-navbar-link::after {
+    content: "";
+    background: var(--eds-navbar-link-text-underscore-color);
+    width: 3px;
+    height: 0%;
+    position: absolute;
+    left: 0;
+    transition: .16s all 0.025s;
+    bottom: 0;
+    top: 100%;
+}
+
+.eds-navbar-link:hover::after,
+.eds-navbar-link--selected::after {
+    top: 0;
+    height: 100%;
+}
+
+.eds-navbar-link:hover ~ .eds-navbar-link::after {
+    top: 0;
+    height: 0%;
+}

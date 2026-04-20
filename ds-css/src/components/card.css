@@ -1,0 +1,45 @@
+:root {
+    --eds-card-background: var(--eds-semantic-background);
+    --eds-card-header-background: var(--eds-semantic-background-alternative);
+    --eds-card-border-radius: var(--eds-border-radius-medium);
+}
+
+.eds-card {
+    border: var(--eds-size-0-25) solid var(--eds-semantic-border);
+    border-radius: var(--eds-card-border-radius);
+}
+
+.eds-card__content {
+    background: var(--eds-card-background);
+    padding: var(--eds-size-3);
+    border-radius: 0 0 var(--eds-card-border-radius) var(--eds-card-border-radius);
+}
+
+.eds-card__header {
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--eds-size-6);
+    align-items: center;
+    background: var(--eds-card-header-background);
+    padding: var(--eds-size-3);
+    border-radius: var(--eds-card-border-radius) var(--eds-card-border-radius) 0 0;
+    border-bottom: var(--eds-size-0-25) solid var(--eds-semantic-border);
+}
+
+.eds-card__header-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.eds-card__header-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+}
+
+.eds-card__footer {
+    display: flex;
+    gap: var(--eds-size-4);
+    padding: 0 var(--eds-size-3) var(--eds-size-3) var(--eds-size-3);
+    background: var(--eds-card-background);
+}

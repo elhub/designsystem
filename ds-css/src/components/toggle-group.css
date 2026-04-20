@@ -1,0 +1,162 @@
+:root {
+  --eds-toggle-group-button-background-color: var(--eds-semantic-background);
+  --eds-toggle-group-button-background-color-hover: var(--eds-semantic-background-action-secondary-hover);
+  --eds-toggle-group-button-background-color-active: var(--eds-semantic-background-action-secondary-active);
+  --eds-toggle-group-button-background-color-disabled: var(--eds-semantic-background-action-secondary-disabled);
+  --eds-toggle-group-button-background-color-selected: var(--eds-semantic-background-action-primary);
+  --eds-toggle-group-button-background-color-selected-hover: var(--eds-semantic-background-action-secondary);
+  --eds-toggle-group-button-background-color-selected-active: var(--eds-semantic-background-action-secondary);
+  --eds-toggle-group-button-text-color: var(--eds-semantic-text-subtle);
+  --eds-toggle-group-button-text-color-hover: var(--eds-semantic-text);
+  --eds-toggle-group-button-text-color-active: var(--eds-semantic-text);
+  --eds-toggle-group-button-text-color-disabled: var(--eds-semantic-text-disabled);
+  --eds-toggle-group-button-text-color-selected: var(--eds-semantic-text-inverted);
+  --eds-toggle-group-button-text-color-selected-hover: var(--eds-semantic-text-action);
+  --eds-toggle-group-button-text-color-selected-active: var(--eds-semantic-text-action);
+  --eds-toggle-group-button-border-color: var(--eds-semantic-border);
+  --eds-toggle-group-button-border-color-hover: var(--eds-semantic-border-hover);
+  --eds-toggle-group-button-border-color-active: var(--eds-semantic-border-active);
+  --eds-toggle-group-button-border-color-disabled: var(--eds-semantic-border-disabled);
+  --eds-toggle-group-button-border-color-selected: var(--eds-semantic-border);
+  --eds-toggle-group-button-border-color-selected-hover: var(--eds-semantic-border);
+  --eds-toggle-group-button-border-color-selected-active: var(--eds-semantic-border);
+}
+
+.eds-form-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eds-size-2);
+}
+
+.eds-toggle-group {
+  padding: 0;
+  gap: 0;
+  display: inline-grid;
+  grid-auto-flow: column;
+}
+
+
+.eds-toggle-group__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--eds-size-2-5) var(--eds-size-2-5);
+  box-shadow: 0 0 0 var(--eds-size-0-25) var(--eds-toggle-group-button-border-color);
+  cursor: pointer;
+  background-color: var(--eds-toggle-group-button-background-color);
+  color: var(--eds-toggle-group-button-text-color);
+  min-width: fit-content;
+}
+
+.eds-toggle-group__button--small {
+  padding: var(--eds-size-1-5) var(--eds-size-2-5);
+}
+
+.eds-toggle-group__button--medium {
+  padding: var(--eds-size-1-5) var(--eds-size-2-5);
+}
+
+.eds-toggle-group__button--large {
+  padding: var(--eds-size-2-5) var(--eds-size-4);
+}
+
+.eds-toggle-group__divider {
+  background-color: var(--eds-toggle-group-button-border-color);
+  width: var(--eds-size-0-25);
+}
+
+.eds-toggle-group__divider:last-child {
+  display: none;
+}
+
+.eds-toggle-group__button:first-child {
+  border-radius: var(--eds-border-radius-small) 0 0 var(--eds-border-radius-small);
+}
+
+.eds-toggle-group__button:last-of-type {
+  border-radius: 0 var(--eds-border-radius-small) var(--eds-border-radius-small) 0;
+}
+
+.eds-toggle-group__button:active {
+  background-color: var(--eds-toggle-group-button-background-color-active);
+  box-shadow: 0 0 0 var(--eds-size-0-25) var(--eds-toggle-group-button-border-color-active);
+  color: var(--eds-toggle-group-button-text-color-active);
+}
+
+.eds-toggle-group__button:focus-visible {
+  outline: none;
+  z-index: 3;
+  box-shadow: inset 0 0 0 0 var(--eds-toggle-group-button-background-color),
+  var(--eds-semantic-focus);
+}
+
+.eds-toggle-group__button:disabled,
+.eds-toggle-group__button:active:disabled,
+.eds-toggle-group__button:hover:disabled {
+  cursor: not-allowed;
+  color: var(--eds-toggle-group-button-text-color-disabled);
+  background-color: var(--eds-toggle-group-button-background-color-disabled);
+}
+
+.eds-toggle-group__button:hover:not(:disabled) {
+  background-color: var(--eds-toggle-group-button-background-color-hover);
+  box-shadow: 0 0 0 var(--eds-size-0-25) var(--eds-toggle-group-button-border-color-hover);
+  color: var(--eds-toggle-group-button-text-color-hover);
+}
+
+
+.eds-toggle-group__button:first-child:last-of-type {
+  border-radius: var(--eds-border-radius-small);
+}
+
+.eds-toggle-group__button[aria-pressed="true"],
+.eds-toggle-group__button[aria-checked="true"] {
+  background-color: var(--eds-toggle-group-button-background-color-selected);
+  color: var(--eds-toggle-group-button-text-color-selected);
+  box-shadow: 0 0 0 var(--eds-size-0-25) var(--eds-toggle-group-button-border-color-selected);
+}
+
+.eds-toggle-group__button:hover[aria-pressed="true"] {
+  background-color: var(--eds-toggle-group-button-background-color-selected-hover);
+  box-shadow: 0 0 0 var(--eds-size-0-25) var(--eds-toggle-group-button-border-color-selected-hover);
+  color: var(--eds-toggle-group-button-text-color-selected-hover);
+}
+
+.eds-toggle-group__button:active[aria-pressed="true"] {
+  background-color: var(--eds-toggle-group-button-background-color-selected-active);
+  box-shadow: 0 0 0 var(--eds-size-0-25) var(--eds-toggle-group-button-border-color-selected-active);
+  color: var(--eds-toggle-group-button-text-color-selected-active);
+}
+
+.eds-toggle-group__button:focus-visible:hover[aria-pressed="false"] {
+  z-index: 3;
+  box-shadow: inset 0 0 0 0 var(--eds-toggle-group-button-background-color),
+    var(--eds-semantic-focus);
+}
+
+.eds-toggle-group__button-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--eds-size-2);
+}
+
+.eds-toggle-group__button-inner > * {
+  flex-shrink: 0;
+}
+
+.eds-toggle-group__button > .eds-toggle-group__button-inner > svg {
+  height: var(--eds-size-4);
+  width: var(--eds-size-4);
+}
+
+.eds-toggle-group--small
+  > .eds-toggle-group__button
+  > .eds-toggle-group__button-inner
+  > svg {
+    height: var(--eds-size-3);
+    width: var(--eds-size-3);
+}
+
+.eds-toggle-group__label {
+  margin-bottom: 0;
+}

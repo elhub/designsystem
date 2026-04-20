@@ -1,0 +1,250 @@
+:root {
+    --eds-datepicker-cell-selected-background-color: var(--eds-semantic-background-action-primary);
+    --eds-datepicker-shadow-focus: inset 0 0 0 var(--eds-size-0-5) var(--eds-semantic-background-action-secondary-active);
+}
+
+.react-datepicker {
+    border: var(--eds-size-0-5) solid var(--eds-semantic-border);
+}
+
+.eds-datepicker {
+    display: grid;
+    gap: var(--eds-size-1);
+}
+
+.eds-datepicker__container {
+    display: flex;
+}
+
+.eds-datepicker__cell {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+    height: 1.5rem;
+    border-radius: var(--eds-size-1);
+    padding: 0.5rem;
+    text-transform: capitalize;
+}
+
+
+.eds-datepicker__container--day > .react-datepicker-wrapper {
+    width: 8rem;
+}
+
+.eds-datepicker__container--dayWithDayname > .react-datepicker-wrapper /* stylelint-disable-line */
+{
+    width: 12.5rem;
+}
+
+.eds-datepicker__container--month > .react-datepicker-wrapper {
+    width: 10rem;
+}
+
+.eds-datepicker__container--year > .react-datepicker-wrapper {
+    width: 5.625rem;
+}
+
+.eds-datepicker-header__arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--eds-size-1);
+}
+
+.eds-datepicker__chevron-button--small {
+    height: 1.5rem;
+    width: 1.75rem;
+}
+
+.eds-datepicker__chevron-button--medium {
+    height: 2rem;
+    width: 2rem;
+}
+
+.eds-datepicker__chevron-button--large {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.eds-datepicker__chevron-button--left {
+    margin-right: 1px;
+}
+
+.eds-datepicker__chevron-button--right {
+    margin-left: 1px;
+}
+
+.eds-datepicker__chevron-button {
+    /* override default button styling just this once... */
+    border-width: var(--eds-size-0-25) !important;
+    border-radius: var(--eds-border-radius-medium) !important;
+    border-color: var(--eds-semantic-border) !important;
+}
+
+.eds-datepicker__chevron-button:hover:not(:disabled) {
+    border-color: var(--eds-semantic-border-hover) !important;
+}
+
+.eds-datepicker__chevron-button:active:not(:disabled) {
+    background-color: var(--eds-semantic-background-action-secondary-active) !important;
+    border-color: var(--eds-semantic-border-active) !important;
+}
+
+
+.eds-datepicker__chevron-button.eds-datepicker__chevron-button--error {
+    border-color: var(--eds-semantic-border-error) !important;
+    color: var(--eds-semantic-text-error) !important;
+}
+
+.react-datepicker__header {
+    background: var(--eds-semantic-background);
+    border-bottom: none;
+}
+
+.eds-datepicker__header {
+    display: grid;
+    gap: var(--eds-size-1-5);
+    padding: var(--eds-size-1) var(--eds-size-4);
+}
+
+.eds-datepicker__arrow-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.eds-datepicker__year-month {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--eds-size-1-5);
+}
+
+.eds-datepicker__arrow-container .eds-datepicker__header--arrow {
+    cursor: pointer;
+    width: auto;
+    background: var(--eds-semantic-background);
+}
+
+.eds-datepicker__arrow-container .eds-datepicker-header__arrow:focus-visible {
+    outline: none;
+    box-shadow: var(--eds-datepicker-shadow-focus);
+}
+
+.react-datepicker__year-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.react-datepicker__day--outside-month > .eds-datepicker__cell {
+    color: var(--eds-semantic-text-disabled);
+    font-weight: normal;
+}
+
+.react-datepicker__day {
+    outline: none;
+}
+
+.react-datepicker__day-name {
+    color: var(--eds-semantic-text-subtle);
+}
+
+.react-datepicker__input-container .eds-form-item .eds-text-field__input-container {
+    width: 100%;
+}
+
+
+.react-datepicker__day > .eds-datepicker__cell {
+    justify-content: center;
+}
+
+.eds-datepicker__cell:focus-visible {
+    outline: none;
+    box-shadow: var(--eds-datepicker-shadow-focus);
+}
+
+.eds-datepicker__cell:hover {
+    background: var(--eds-semantic-background-action-secondary-hover);
+    border-radius: var(--eds-size-1);
+    box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-semantic-border-hover);
+    color: var(--eds-semantic-text);
+}
+
+.react-datepicker__day--disabled .eds-datepicker__cell {
+    color: var(--eds-semantic-text-disabled);
+
+    &:hover {
+        color: var(--eds-semantic-text-disabled);
+        background-color: var(--eds-semantic-background)
+    }
+}
+
+
+.react-datepicker__day--selected {
+    outline: none;
+    background: var(--eds-datepicker-cell-selected-background-color);
+    color: var(--eds-semantic-text-inverted);
+}
+
+.react-datepicker__day--keyboard-selected {
+    background: transparent;
+    box-shadow: var(--eds-datepicker-shadow-focus);
+    outline: none;
+}
+
+.react-datepicker__month, .react-datepicker__year {
+    margin: 0 1rem 1rem;
+}
+
+.react-datepicker__month-text {
+    width: 5rem !important;
+    display: inline-flex !important;
+    margin: var(--eds-size-1) !important;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+}
+
+.react-datepicker__month-text--keyboard-selected {
+    background: transparent;
+    box-shadow: var(--eds-datepicker-shadow-focus);
+}
+
+.react-datepicker__month-text--selected {
+    background: var(--eds-datepicker-cell-selected-background-color);
+    color: var(--eds-semantic-text-inverted);
+}
+
+.react-datepicker__year-text--selected {
+    background: var(--eds-datepicker-cell-selected-background-color);
+    color: var(--eds-semantic-text-inverted);
+}
+
+.react-datepicker__year .react-datepicker__year-text {
+    width: fit-content;
+    margin: var(--eds-size-1) !important;
+}
+
+.eds-datepicker__year-select-content {
+    max-height: 19rem;
+}
+
+.eds-datepicker__select-month {
+    width: 7.5rem;
+}
+
+.eds-datepicker__calendar-icon {
+    vertical-align: middle;
+}
+
+.react-datepicker-popper {
+    z-index: var(--eds-z-index-tooltip);
+}
+
+.eds-datepicker .eds-form-item .eds-error-message {
+    max-width: 8rem;
+}
+
+.eds-datepicker input {
+    text-transform: capitalize;
+}

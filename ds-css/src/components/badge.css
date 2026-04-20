@@ -1,0 +1,70 @@
+.eds-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--eds-size-1-5);
+  width: fit-content;
+}
+
+.eds-badge--variant-default.eds-badge--size-medium {
+  border-radius: var(--eds-size-5);
+  padding: 0 var(--eds-size-6) 0 0;
+}
+
+.eds-badge--variant-block.eds-badge--size-medium {
+  border-radius: var(--eds-size-5);
+  padding: var(--eds-size-3) var(--eds-size-6) var(--eds-size-3) var(--eds-size-4-5);
+}
+
+.eds-badge--variant-default.eds-badge--size-small {
+  border-radius: var(--eds-size-4);
+  padding:  0 var(--eds-size-4) 0 0;
+}
+
+.eds-badge--variant-block.eds-badge--size-small {
+  border-radius: var(--eds-size-4);
+  padding: var(--eds-size-2) var(--eds-size-4) var(--eds-size-2) var(--eds-size-3)
+}
+
+.eds-badge--status-ongoing .eds-badge__icon {
+  color: var(--eds-semantic-alternative-icons-ongoing);
+}
+
+.eds-badge--status-failed .eds-badge__icon {
+  color: var(--eds-semantic-alternative-icons-failed)
+}
+
+.eds-badge--status-approved-with-warning .eds-badge__icon {
+  color: var(--eds-semantic-alternative-icons-approved-with-warning)
+}
+
+.eds-badge--status-approved .eds-badge__icon {
+  color: var(--eds-semantic-alternative-icons-approved)
+}
+
+.eds-badge--status-stopped .eds-badge__icon {
+  color: var(--eds-semantic-alternative-icons-stopped)
+}
+
+.eds-badge--status-temporarily-stopped .eds-badge__icon {
+  color: var(--eds-semantic-alternative-icons-temporarily-stopped)
+}
+
+.eds-badge--variant-block.eds-badge--status-ongoing {
+  background-color: var(--eds-semantic-background-information);
+}
+
+.eds-badge--variant-block.eds-badge--status-failed {
+  background-color: var(--eds-semantic-background-error);
+}
+
+.eds-badge--variant-block.eds-badge--status-approved-with-warning {
+  background-color: var(--eds-semantic-background-warning);
+}
+
+.eds-badge--variant-block.eds-badge--status-approved {
+  background-color: var(--eds-semantic-background-success);
+}
+
+.eds-badge--variant-block.eds-badge--status-stopped {
+  background-color: var(--eds-semantic-background-comparison);
+}
