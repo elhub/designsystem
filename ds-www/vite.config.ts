@@ -5,8 +5,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths'
 import { resolve } from 'node:path'
 
 export default defineConfig({
-  // depending on your application, base can also be "/"
-  base: '/',
+  base: process.env.GITHUB_ACTIONS ? '/elhub-ui-design-system/' : '/',
   plugins: [react(), viteTsconfigPaths(), svgr()],
   assetsInclude: ['**/*.md'],
   server: {
@@ -28,7 +27,7 @@ export default defineConfig({
     }
   },
   resolve: {
-    mainFields: ['module', "browser", 'main'], // for react-element-to-jsx-string compatibility
+    mainFields: ['module', 'browser', 'main'], // for react-element-to-jsx-string compatibility
     alias: {
       '@elhub/ds-components': resolve(__dirname, '../ds-components/src/dist.ts'),
       '@elhub/ds-css': resolve(__dirname, '../ds-css/src/index.css'),
