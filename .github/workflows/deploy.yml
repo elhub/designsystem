@@ -36,9 +36,9 @@ jobs:
           node-version: 20
           cache: "npm"
       - name: Install dependencies
-        run: npm install
-        env:
-          npm_config_registry: https://registry.npmjs.org/
+        run: |
+          printf 'registry=https://registry.npmjs.org/\nlegacy-peer-deps=true\n' > .npmrc
+          npm install --no-package-lock
       - name: Verify build tools
         run: |
           echo "rimraf: $(node_modules/.bin/rimraf --version 2>/dev/null || echo MISSING)"
