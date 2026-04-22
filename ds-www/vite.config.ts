@@ -5,7 +5,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths'
 import { resolve } from 'node:path'
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? '/elhub-ui-design-system/' : '/',
+  base: process.env.GITHUB_ACTIONS ? '/designsystem/' : '/',
   plugins: [react(), viteTsconfigPaths(), svgr()],
   assetsInclude: ['**/*.md'],
   server: {
