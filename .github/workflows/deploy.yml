@@ -35,10 +35,15 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
-      - name: Clean npm cache
-        run: npm cache clean --force
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+        env:
+          npm_config_registry: https://registry.npmjs.org/
+      - name: Verify build tools
+        run: |
+          echo "rimraf: $(node_modules/.bin/rimraf --version 2>/dev/null || echo MISSING)"
+          echo "ts-node: $(node_modules/.bin/ts-node --version 2>/dev/null || echo MISSING)"
+          echo "vite: $(node_modules/.bin/vite --version 2>/dev/null || echo MISSING)"
       - name: Build
         run: |
           export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
