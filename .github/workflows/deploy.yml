@@ -39,10 +39,10 @@ jobs:
         run: npm cache clean --force
       - name: Install dependencies
         run: npm ci
-      - name: Add node_modules/.bin to PATH
-        run: echo "$GITHUB_WORKSPACE/node_modules/.bin" >> $GITHUB_PATH
       - name: Build
-        run: npm run build --ws --if-present
+        run: |
+          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
+          npm run build --ws --if-present
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
