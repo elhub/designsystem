@@ -24,6 +24,7 @@ import {
   Datepicker,
   Divider,
   Dropdown,
+  Feedback,
   FilterPanel,
   FlexDiv,
   FormItem,
@@ -59,9 +60,15 @@ import ComponentPanel from 'components/ComponentPanel/ComponentPanel'
 
 import React, { useRef, useState } from 'react'
 
+type FeedbackActiveState = 'idle' | 'collecting' | 'submitting' | 'submitted' | 'error'
+type FeedbackRatingValue = 'good' | 'okay' | 'bad'
+
 const ComponentsHome: React.FC = () => {
   const [query, setQuery] = useState<string>('')
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [feedbackRating, setFeedbackRating] = useState<FeedbackRatingValue | null>(null)
+  const [feedbackState, setFeedbackState] = useState<FeedbackActiveState>('idle')
+  const [feedbackComment, setFeedbackComment] = useState<string>('')
   const [openState, setOpenState] = useState<boolean>(false)
   const [pageState, setPageState] = useState<number>(1)
   const [toggleValue, setToggleValue] = useState<string>('ulest')
@@ -287,6 +294,95 @@ const ComponentsHome: React.FC = () => {
           <FilterPanel.Chip>Milk</FilterPanel.Chip>
           <FilterPanel.Chip>Flour</FilterPanel.Chip>
         </FilterPanel>
+      )
+    },
+    {
+      navigate: '/components/feedback',
+      label: 'Feedback',
+      description: 'Form for submitting feedback',
+      el: (
+        <Feedback>
+          {feedbackState === 'idle' && (
+            <Feedback.Idle>
+              <Heading size='medium'>How was this page to use</Heading>
+              <Feedback.Idle.ButtonGroup>
+                <Feedback.Idle.Button
+                  size='large'
+                  variant='happy'
+                  onClick={() => {
+                    setFeedbackRating('good')
+                    setFeedbackState('collecting')
+                  }}
+                >
+                  Good
+                </Feedback.Idle.Button>
+                <Feedback.Idle.Button
+                  size='large'
+                  variant='neutral'
+                  onClick={() => {
+                    setFeedbackRating('okay')
+                    setFeedbackState('collecting')
+                  }}
+                >
+                  Okay
+                </Feedback.Idle.Button>
+                <Feedback.Idle.Button
+                  size='large'
+                  variant='sad'
+                  onClick={() => {
+                    setFeedbackRating('bad')
+                    setFeedbackState('collecting')
+                  }}
+                >
+                  Bad
+                </Feedback.Idle.Button>
+              </Feedback.Idle.ButtonGroup>
+            </Feedback.Idle>
+          )}
+
+          {feedbackState === 'collecting' && (
+            <Feedback.Collecting>
+              <Heading size='medium'>What made you feel this way? (Optional)</Heading>
+              <BodyText>Your answer will help with future prioritisations and improvements.</BodyText>
+              <BodyText>Do not write any personal information.</BodyText>
+
+              <VerticalSpace size='1' />
+
+              <Textarea
+                placeholder='Do not write any personal information.'
+                value={feedbackComment}
+                onChange={(e) => setFeedbackComment(e.target.value)}
+              />
+
+              <VerticalSpace size='2' />
+
+              <Feedback.Collecting.ButtonGroup>
+                <Button
+                  variant='primary'
+                  onClick={async () => {
+                    if (!feedbackRating) return
+                    setFeedbackState('submitting')
+                    await new Promise((r) => setTimeout(r, 1000))
+                    setFeedbackState('submitted')
+                  }}
+                >
+                  Send feedback
+                </Button>
+                <Button variant='tertiary' onClick={() => setFeedbackState('idle')}>
+                  Cancel
+                </Button>
+              </Feedback.Collecting.ButtonGroup>
+            </Feedback.Collecting>
+          )}
+
+          {feedbackState === 'submitting' && <Loader />}
+
+          {feedbackState === 'submitted' && (
+            <Feedback.Submitted>
+              <BodyText>Thanks for your feedback!</BodyText>
+            </Feedback.Submitted>
+          )}
+        </Feedback>
       )
     },
     {

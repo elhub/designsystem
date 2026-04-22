@@ -12,6 +12,7 @@ import CookieBanner from './CookieBanner'
 import Datepicker from './Datepicker'
 import Divider from './Divider'
 import Dropdown from './Dropdown'
+import Feedback from './Feedback'
 import FilterPanel from './FilterPanel'
 import FormItem from './FormItem'
 import Link from './Link'
@@ -56,6 +57,7 @@ export {
   Datepicker,
   Divider,
   Dropdown,
+  Feedback,
   FilterPanel,
   FormItem,
   Link,
