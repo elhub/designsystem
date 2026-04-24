@@ -105,15 +105,15 @@
 
 .eds-feedback-button--happy:hover .eds-feedback-button__icon {
     fill: var(--eds-semantic-alternative-icons-approved);
-    color: white;
+    color: var(--eds-color-white);
 }
 
 .eds-feedback-button--neutral:hover .eds-feedback-button__icon {
     fill: var(--eds-semantic-alternative-icons-approved-with-warning);
-    color: white;
+    color: var(--eds-color-white);
 }
 
 .eds-feedback-button--sad:hover .eds-feedback-button__icon {
     fill: var(--eds-semantic-alternative-icons-failed);
-    color: white;
+    color: var(--eds-color-white);
 }
