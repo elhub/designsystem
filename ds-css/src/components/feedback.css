@@ -7,7 +7,7 @@
 .eds-feedback {
     display: flex;
     flex-direction: column;
-    gap: var(--eds-size-2, 8px);
+    gap: var(--eds-size-2);
 }
 
 .eds-feedback__idle,
@@ -36,9 +36,9 @@
     justify-content: flex-start;
     width: auto;
     min-width: var(--eds-size-11);
-    padding: var(--eds-size-2, 8px);
+    padding: var(--eds-size-2);
     border: none;
-    border-radius: var(--eds-border-radius-medium, 4px);
+    border-radius: var(--eds-border-radius-medium);
     cursor: pointer;
     background-color: transparent;
     transition: background-color 0.2s ease, transform 0.05s ease;
@@ -52,17 +52,17 @@
 }
 
 .eds-feedback-button--small {
-    padding-block: var(--eds-size-1, 4px);
+    padding-block: var(--eds-size-1);
     padding-inline: 0;
 }
 
 .eds-feedback-button--medium {
-    padding-block: var(--eds-size-2, 8px);
+    padding-block: var(--eds-size-2);
     padding-inline: 0;
 }
 
 .eds-feedback-button--large {
-    padding-block: var(--eds-size-3, 12px);
+    padding-block: var(--eds-size-3);
     padding-inline: 0;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .eds-feedback-button__label {
-    margin-top: var(--eds-size-1, 4px);
+    margin-top: var(--eds-size-1);
     text-align: center;
     line-height: var(--eds-size-4);
     transition: color 0.2s ease;
