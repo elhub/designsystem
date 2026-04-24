@@ -9,7 +9,7 @@ const FeedbackCollectingButtonGroup: React.FC<FeedbackCollectingButtonGroupProps
   ...rest
 }) => {
   return (
-    <div className={cl('eds-feedback__actions', className)} {...rest}>
+    <div className={cl('eds-feedback-collecting__actions', className)} {...rest}>
       {children}
     </div>
   )

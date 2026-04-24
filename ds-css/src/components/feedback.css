@@ -17,13 +17,13 @@
     flex-direction: column;
 }
 
-.eds-feedback__button-group {
+.eds-feedback-idle__button-group {
     display: flex;
     gap: var(--eds-size-2);
     align-items: center;
 }
 
-.eds-feedback__actions {
+.eds-feedback-collecting__actions {
     display: flex;
     gap: var(--eds-size-2);
     align-items: center;

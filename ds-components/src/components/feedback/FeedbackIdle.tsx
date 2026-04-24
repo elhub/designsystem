@@ -1,22 +1,11 @@
 import cl from 'clsx'
 import React from 'react'
 import FeedbackIdleButton, { type FeedbackIdleButtonProps } from './FeedbackIdleButton'
+import FeedbackIdleButtonGroup, { type FeedbackIdleButtonGroupProps } from './FeedbackIdleButtonGroup'
 import { useFeedbackContext } from './useFeedbackContext'
 
 export type FeedbackIdleProps = React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>
-export type FeedbackIdleButtonGroupProps = React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>
-
-const FeedbackIdleButtonGroup: React.FC<FeedbackIdleButtonGroupProps> = ({
-  children,
-  className,
-  ...rest
-}) => {
-  return (
-    <div role='radiogroup' className={cl('eds-feedback__button-group', className)} {...rest}>
-      {children}
-    </div>
-  )
-}
+export type { FeedbackIdleButtonGroupProps }
 
 export type FeedbackIdleType = React.FC<FeedbackIdleProps> & {
   ButtonGroup: React.FC<FeedbackIdleButtonGroupProps>
@@ -37,7 +26,5 @@ FeedbackIdle.ButtonGroup = FeedbackIdleButtonGroup
 FeedbackIdle.Button = FeedbackIdleButton
 
 FeedbackIdle.displayName = 'Feedback.Idle'
-FeedbackIdleButtonGroup.displayName = 'Feedback.Idle.ButtonGroup'
-FeedbackIdleButton.displayName = 'Feedback.Idle.Button'
 
 export default FeedbackIdle

@@ -6,8 +6,8 @@ export type FeedbackVariant = 'happy' | 'neutral' | 'sad'
 interface FeedbackContextType {
   size: FormItemSize
   hasError?: boolean
-  value?: FeedbackVariant
-  onValueChange?: (value: FeedbackVariant) => void
+  variant?: FeedbackVariant
+  onVariantChange?: (variant: FeedbackVariant) => void
 }
 
 export const FeedbackContext = createContext<FeedbackContextType | null>(null)

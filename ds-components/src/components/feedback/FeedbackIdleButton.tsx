@@ -19,10 +19,10 @@ const FeedbackIdleButton: React.FC<FeedbackIdleButtonProps> = ({
   onClick,
   ...rest
 }) => {
-  const { size: contextSize, value, onValueChange } = useFeedbackContext()
+  const { size: contextSize, variant: contextVariant, onVariantChange } = useFeedbackContext()
 
   const _size = size ?? contextSize
-  const selected = value === variant
+  const selected = contextVariant === variant
 
   const buttonClass = cl(
     'eds-feedback-button',
@@ -50,7 +50,7 @@ const FeedbackIdleButton: React.FC<FeedbackIdleButtonProps> = ({
       aria-checked={selected}
       className={buttonClass}
       onClick={(event) => {
-        onValueChange?.(variant)
+        onVariantChange?.(variant)
         onClick?.(event)
       }}
       {...rest}

@@ -34,11 +34,11 @@ const wait = (ms: number): Promise<void> =>
 
 const Component = () => {
   const [state, setState] = useState<ActiveState>('idle')
-  const [rating, setRating] = useState<FeedbackVariant | null>(null)
+  const [variant, setVariant] = useState<FeedbackVariant | null>(null)
   const [comment, setComment] = useState('')
 
   const submit = async () => {
-    if (!rating) return
+    if (!variant) return
     setState('submitting')
     await wait(900)
     // setState('error') // Uncomment to simulate a backend error
@@ -47,9 +47,9 @@ const Component = () => {
 
   return (
     <Feedback
-      value={rating}
-      onValueChange={(value) => {
-        setRating(value)
+      variant={variant}
+      onVariantChange={(newVariant) => {
+        setVariant(newVariant)
         if (state === 'idle') setState('collecting')
       }}
     >
@@ -124,11 +124,11 @@ interface FeedbackFlowProps {
 
 const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulateBackendError = false }) => {
   const [state, setState] = useState<ActiveState>('idle')
-  const [rating, setRating] = useState<FeedbackVariant | null>(null)
+  const [variant, setVariant] = useState<FeedbackVariant | null>(null)
   const [comment, setComment] = useState('')
 
   const submit = async () => {
-    if (!rating) return
+    if (!variant) return
     setState('submitting')
     await wait(900)
 
@@ -147,9 +147,9 @@ const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulat
       <VerticalSpace />
 
       <Feedback
-        value={rating}
-        onValueChange={(value) => {
-          setRating(value)
+        variant={variant}
+        onVariantChange={(newVariant) => {
+          setVariant(newVariant)
           if (state === 'idle') setState('collecting')
         }}
       >
@@ -323,7 +323,7 @@ const ComponentsFeedback: React.FC = () => {
           </Table.Row>
           <Table.Row>
             <Table.DataCell>
-              <code>value</code>
+              <code>variant</code>
             </Table.DataCell>
             <Table.DataCell>
               <code>'happy' | 'neutral' | 'sad'</code>
@@ -334,7 +334,7 @@ const ComponentsFeedback: React.FC = () => {
           </Table.Row>
           <Table.Row>
             <Table.DataCell>
-              <code>defaultValue</code>
+              <code>defaultVariant</code>
             </Table.DataCell>
             <Table.DataCell>
               <code>'happy' | 'neutral' | 'sad'</code>
@@ -345,10 +345,10 @@ const ComponentsFeedback: React.FC = () => {
           </Table.Row>
           <Table.Row>
             <Table.DataCell>
-              <code>onValueChange</code>
+              <code>onVariantChange</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>(value) =&gt; void</code>
+              <code>(variant) =&gt; void</code>
             </Table.DataCell>
             <Table.DataCell>Called when sentiment changes.</Table.DataCell>
             <Table.DataCell>No</Table.DataCell>

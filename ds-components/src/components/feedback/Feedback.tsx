@@ -1,5 +1,5 @@
 import cl from 'clsx'
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import FeedbackIdle, { type FeedbackIdleType } from './FeedbackIdle'
 import FeedbackCollecting, { type FeedbackCollectingType } from './FeedbackCollecting'
 import FeedbackSubmitted, { type FeedbackSubmittedType } from './FeedbackSubmitted'
@@ -10,9 +10,9 @@ import { type FormItemProps } from '../form/form-item'
 interface FeedbackProps
   extends React.HTMLAttributes<HTMLDivElement>, Omit<FormItemProps, 'error' | 'children'> {
   children: React.ReactNode
-  value?: FeedbackVariant
-  defaultValue?: FeedbackVariant
-  onValueChange?: (value: FeedbackVariant) => void
+  variant?: FeedbackVariant
+  defaultVariant?: FeedbackVariant
+  onVariantChange?: (variant: FeedbackVariant) => void
   error?: boolean
 }
 
@@ -26,26 +26,26 @@ const Feedback: FeedbackComponent = ({
   children,
   className,
   size,
-  value,
-  defaultValue,
-  onValueChange,
+  variant,
+  defaultVariant,
+  onVariantChange,
   error,
   ...rest
 }) => {
   const { error: { hasError } = {}, size: formItemSize } = useFormItemContext()
-  const [internalValue, setInternalValue] = React.useState<FeedbackVariant | undefined>(defaultValue)
+  const [internalVariant, setInternalVariant] = useState<FeedbackVariant | undefined>(defaultVariant)
 
-  const isControlled = value !== undefined
-  const currentValue = isControlled ? value : internalValue
+  const isParentControlled = variant !== undefined
+  const resolvedVariant = isParentControlled ? variant : internalVariant
 
-  const handleValueChange = React.useCallback(
-    (nextValue: FeedbackVariant) => {
-      if (!isControlled) {
-        setInternalValue(nextValue)
+  const handleVariantChange = useCallback(
+    (nextVariant: FeedbackVariant) => {
+      if (!isParentControlled) {
+        setInternalVariant(nextVariant)
       }
-      onValueChange?.(nextValue)
+      onVariantChange?.(nextVariant)
     },
-    [isControlled, onValueChange]
+    [isParentControlled, onVariantChange]
   )
 
   const _size = size ?? formItemSize ?? 'medium'
@@ -56,8 +56,8 @@ const Feedback: FeedbackComponent = ({
       value={{
         size: _size,
         hasError: _error,
-        value: currentValue,
-        onValueChange: handleValueChange
+        variant: resolvedVariant,
+        onVariantChange: handleVariantChange
       }}
     >
       <div className={cl('eds-feedback', className)} {...rest}>
