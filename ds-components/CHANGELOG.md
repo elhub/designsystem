@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.14.0
+
+### Minor Changes
+
+- feat(feedback): added new Feedback component
+
 ## 4.13.1
 
 ### Patch Changes
