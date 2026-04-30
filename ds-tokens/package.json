@@ -5,11 +5,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "url": "ssh://git@github.com:elhub/designsystem.git",
     "directory": "ds-tokens"
   },
   "publishConfig": {
-    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/"
+    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/",
+    "access": "public"
   },
   "main": "dist/tokens.css",
   "scripts": {
@@ -20,13 +21,16 @@
     "lint:fix": "eslint \"src/**ts*\" --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/*.{ts,tsx}\"",
-    "release": "npm publish || exit 0",
+    "release": "npm publish --registry https://registry.npmjs.org || exit 0",
+    "unpublish": "npm unpublish ${npm_package_name}@${npm_package_version} --registry https://registry.npmjs.org --force",
     "test": "",
     "test:ci": "",
     "typecheck": ""
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "README.md",
+    "LICENSE"
   ],
   "dependencies": {
     "style-dictionary": "^3.9.2"

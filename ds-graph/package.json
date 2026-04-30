@@ -5,7 +5,7 @@
   "license": "(MIT AND Highcharts Commercial License)",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "url": "ssh://git@github.com:elhub/designsystem.git",
     "directory": "ds-graph"
   },
   "publishConfig": {

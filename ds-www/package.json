@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "url": "ssh://git@github.com:elhub/designsystem.git",
     "directory": "ds-www"
   },
   "homepage": ".",
