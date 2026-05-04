@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.13.2
+
+### Patch Changes
+
+- bump because previous version was unpublished on npm and its impossible to publish the same again
+
 ## 4.13.1
 
 ### Patch Changes

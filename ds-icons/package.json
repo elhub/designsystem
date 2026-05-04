@@ -5,17 +5,20 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "url": "ssh://git@github.com:elhub/designsystem.git",
     "directory": "ds-icons"
   },
   "publishConfig": {
-    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/"
+    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/",
+    "access": "public"
   },
   "type": "module",
   "main": "./dist/ds-icons.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist/*"
+    "dist/*",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "clean": "rimraf dist",
@@ -25,7 +28,7 @@
     "lint:fix": "",
     "prettier": "",
     "prettier:fix": "",
-    "release": "npm publish || exit 0",
+    "release": "npm publish --registry https://registry.npmjs.org || exit 0",
     "test": "",
     "test:ci": "",
     "typecheck": ""
