@@ -31,39 +31,16 @@ jobs:
           printf 'registry=https://registry.npmjs.org/\nlegacy-peer-deps=true\n' > .npmrc
           npm install --no-package-lock
 
-      - name: Build ds-tokens
+      - name: Build
         run: |
           export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
-          npm run build -w @elhub/ds-tokens
+          npm run build --ws --if-present
 
-      - name: Build ds-icons
+      - name: Publish
         run: |
-          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
-          npm run build -w @elhub/ds-icons
-
-      - name: Build ds-css
-        run: |
-          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
-          npm run build -w @elhub/ds-css
-
-      - name: Build ds-components
-        run: |
-          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
-          npm run build -w @elhub/ds-components
-
-      - name: Publish ds-tokens
-        run: npm publish --provenance --access public
-        working-directory: ds-tokens
-
-      - name: Publish ds-icons
-        run: npm publish --provenance --access public
-        working-directory: ds-icons
-
-      - name: Publish ds-css
-        run: npm publish --provenance --access public
-        working-directory: ds-css
-
-      - name: Publish ds-components
-        run: npm publish --provenance --access public
-        working-directory: ds-components
+          npm publish --provenance --access public \
+            -w @elhub/ds-tokens \
+            -w @elhub/ds-icons \
+            -w @elhub/ds-css \
+            -w @elhub/ds-components
 
