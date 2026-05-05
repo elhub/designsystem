@@ -38,7 +38,7 @@ jobs:
 
       - name: Publish
         run: |
-          npm publish --provenance --access public \
+          npm publish --provenance --access public --registry https://registry.npmjs.org \
             -w @elhub/ds-tokens \
             -w @elhub/ds-icons \
             -w @elhub/ds-css \
