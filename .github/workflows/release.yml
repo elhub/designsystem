@@ -7,18 +7,63 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+# Required for OIDC trusted publishing
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          printf 'registry=https://registry.npmjs.org/\nlegacy-peer-deps=true\n' > .npmrc
+          npm install --no-package-lock
+
+      - name: Build ds-tokens
+        run: |
+          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
+          npm run build -w @elhub/ds-tokens
+
+      - name: Build ds-icons
+        run: |
+          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
+          npm run build -w @elhub/ds-icons
+
+      - name: Build ds-css
+        run: |
+          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
+          npm run build -w @elhub/ds-css
+
+      - name: Build ds-components
+        run: |
+          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
+          npm run build -w @elhub/ds-components
+
+      - name: Publish ds-tokens
+        run: npm publish --provenance --access public
+        working-directory: ds-tokens
+
+      - name: Publish ds-icons
+        run: npm publish --provenance --access public
+        working-directory: ds-icons
+
+      - name: Publish ds-css
+        run: npm publish --provenance --access public
+        working-directory: ds-css
+
+      - name: Publish ds-components
+        run: npm publish --provenance --access public
+        working-directory: ds-components
+
