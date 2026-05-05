@@ -24,6 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
         run: |
@@ -35,9 +36,17 @@ jobs:
           export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
           npm run build --ws --if-present
 
+      - name: Remove JFrog publishConfig for CI publish
+        run: |
+          npm pkg delete publishConfig.registry \
+            -w @elhub/ds-tokens \
+            -w @elhub/ds-icons \
+            -w @elhub/ds-css \
+            -w @elhub/ds-components
+
       - name: Publish
         run: |
-          npm publish --provenance --access public --registry https://registry.npmjs.org \
+          npm publish --provenance --access public \
             -w @elhub/ds-tokens \
             -w @elhub/ds-icons \
             -w @elhub/ds-css \
