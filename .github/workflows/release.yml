@@ -36,7 +36,7 @@ jobs:
           export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
           npm run build --ws --if-present
 
-      - name: Publish
+      - name: Remove JFrog publishConfig for CI publish
         run: |
           npm publish --provenance --access public \
             -w @elhub/ds-tokens \
