@@ -9,7 +9,6 @@
     "directory": "ds-components"
   },
   "publishConfig": {
-    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/",
     "access": "public"
   },
   "type": "module",
@@ -29,7 +28,7 @@
     "lint:fix": "eslint src --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{ts,tsx}\"",
-    "release": "npm publish --registry https://registry.npmjs.org || exit 0",
+    "release": "npm publish || exit 0",
     "test": "vitest --passWithNoTests",
     "test:ci": "vitest run --passWithNoTests",
     "test:coverage": "vitest --passWithNoTests --coverage",
