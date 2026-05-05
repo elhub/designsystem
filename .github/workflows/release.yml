@@ -29,7 +29,7 @@ jobs:
       - name: Install Dependencies
         run: |
           printf 'registry=https://registry.npmjs.org/\nlegacy-peer-deps=true\n' > .npmrc
-          npm install --no-package-lock
+          npm install --no-package-lock && npm install --ws --no-package-lock
 
       - name: Build
         run: |
