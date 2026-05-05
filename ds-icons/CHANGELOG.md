@@ -1,5 +1,11 @@
 # @elhub/ds-icons
 
+## 4.8.1
+
+### Patch Changes
+
+- Test automated GitHub Actions publish workflow
+
 ## 4.8.0
 
 ### Minor Changes
