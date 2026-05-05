@@ -27,6 +27,9 @@ jobs:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
 
+      - name: Debug npmrc
+        run: cat ~/.npmrc || echo "~/.npmrc does not exist"
+
       - name: Install Dependencies
         run: |
           sed -i '/authToken/d' ~/.npmrc
