@@ -24,6 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
         run: |
@@ -37,7 +38,7 @@ jobs:
 
       - name: Publish
         run: |
-          npm publish --provenance --access public --registry https://registry.npmjs.org \
+          npm publish --provenance --access public \
             -w @elhub/ds-tokens \
             -w @elhub/ds-icons \
             -w @elhub/ds-css \

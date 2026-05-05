@@ -9,7 +9,6 @@
     "directory": "ds-icons"
   },
   "publishConfig": {
-    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/",
     "access": "public"
   },
   "type": "module",
@@ -28,7 +27,7 @@
     "lint:fix": "",
     "prettier": "",
     "prettier:fix": "",
-    "release": "npm publish --registry https://registry.npmjs.org || exit 0",
+    "release": "npm publish || exit 0",
     "test": "",
     "test:ci": "",
     "typecheck": ""

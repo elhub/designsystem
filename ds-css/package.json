@@ -9,7 +9,6 @@
     "directory": "ds-css"
   },
   "publishConfig": {
-    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/",
     "access": "public"
   },
   "main": "./dist/index.css",
@@ -29,7 +28,7 @@
     "lint:fix": "stylelint 'src/**/*.css' --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{css}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{css}\"",
-    "release": "npm publish --registry https://registry.npmjs.org || exit 0",
+    "release": "npm publish || exit 0",
     "test": "",
     "test:ci": "",
     "typecheck": ""
