@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.13.3
+
+### Patch Changes
+
+- Test automated GitHub Actions publish workflow
+
 ## 4.13.2
 
 ### Patch Changes
