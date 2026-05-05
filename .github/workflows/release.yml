@@ -29,6 +29,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          sed -i '/authToken/d' ~/.npmrc
           printf 'registry=https://registry.npmjs.org/\nlegacy-peer-deps=true\n' > .npmrc
           npm install --no-package-lock && npm install --ws --no-package-lock
 
