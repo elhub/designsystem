@@ -26,7 +26,6 @@
     "dist": "npm run build",
     "lint": "eslint \"src/**/*.ts*\"",
     "lint:fix": "eslint \"src/**/*.ts*\" --fix",
-    "release": "npm publish --registry https://registry.npmjs.org || exit 0",
     "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{ts,tsx}\"",
     "test": "",
