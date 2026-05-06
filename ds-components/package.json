@@ -1,6 +1,6 @@
 {
   "name": "@elhub/ds-components",
-  "version": "4.13.3",
+  "version": "4.13.4",
   "description": "Elhub design system components",
   "license": "MIT",
   "repository": {
@@ -28,7 +28,6 @@
     "lint:fix": "eslint src --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{ts,tsx}\"",
-    "release": "npm publish || exit 0",
     "test": "vitest --passWithNoTests",
     "test:ci": "vitest run --passWithNoTests",
     "test:coverage": "vitest --passWithNoTests --coverage",

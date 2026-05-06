@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.1.5
+
+### Patch Changes
+
+- Test automated GitHub Actions by running changeset publish from root
+
 ## 6.1.4
 
 ### Patch Changes

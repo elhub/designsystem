@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.13.4
+
+### Patch Changes
+
+- Test automated GitHub Actions by running changeset publish from root
+
 ## 4.13.3
 
 ### Patch Changes

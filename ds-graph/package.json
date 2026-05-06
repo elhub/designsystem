@@ -26,7 +26,6 @@
     "lint:fix": "eslint \"src/**/*.ts*\" --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{ts,tsx}\"",
-    "release": "npm publish || exit 0",
     "test": "",
     "test:ci": "",
     "typecheck": "tsc"
