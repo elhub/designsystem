@@ -1,5 +1,11 @@
 # @elhub/ds-graph
 
+## 6.0.1
+
+### Patch Changes
+
+- Test automated GitHub Actions by running changeset publish from root
+
 ## 6.0.0
 
 ### Major Changes
