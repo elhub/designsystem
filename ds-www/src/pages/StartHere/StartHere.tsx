@@ -45,26 +45,6 @@ const StartHere: React.FC = () => {
 
       <VerticalSpace size='2' />
 
-      {/* Internal registry connection instructions */}
-      <Heading className='toc' level='2' id='react-package' size='medium'>
-        Connect to the Elhub Registry
-      </Heading>
-
-      <VerticalSpace size='1' />
-
-      <BodyText>
-        To access EDS packages you need to connect to the Elhub registry. Create a `.npmrc` file in root with
-        the following content:
-      </BodyText>
-
-      <CodeDiv spacing expand={false}>
-        {`registry=https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm/
-legacy-peer-deps=true`}
-        registry=https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm/legacy-peer-deps=true
-      </CodeDiv>
-
-      <VerticalSpace size='2' />
-
       {/* Existing React Project Installation Instructions */}
       <Heading className='toc' level='2' id='react-package' size='medium'>
         Integrate EDS into Your React Project
