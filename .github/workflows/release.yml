@@ -39,9 +39,4 @@ jobs:
 
       - name: Publish
         run: |
-          npm publish --provenance --access public \
-            -w @elhub/ds-tokens \
-            -w @elhub/ds-icons \
-            -w @elhub/ds-css \
-            -w @elhub/ds-components
-
+          npm run publish

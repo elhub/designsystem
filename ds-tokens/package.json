@@ -1,6 +1,6 @@
 {
   "name": "@elhub/ds-tokens",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "description": "Elhub design system tokens",
   "license": "MIT",
   "repository": {
@@ -20,7 +20,6 @@
     "lint:fix": "eslint \"src/**ts*\" --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/*.{ts,tsx}\"",
-    "release": "npm publish || exit 0",
     "test": "",
     "test:ci": "",
     "typecheck": ""

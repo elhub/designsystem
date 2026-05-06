@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a **monorepo design system** with 6 npm workspaces managed by Changesets for versioning and publishing to JFrog. Each workspace builds independently but shares common infrastructure (tokens, icons, CSS).
+This is a **monorepo design system** with 6 npm workspaces managed by Changesets for versioning and publishing to npm. Each workspace builds independently but shares common infrastructure (tokens, icons, CSS).
 
 **Key workspaces:**
 - `ds-components` - React component library (Vite + React SWC, styled-components, Vitest)
@@ -74,7 +74,7 @@ npm run knip           # Check for unused dependencies
 npm run changeset           # Create changelog entry (run before PR)
 npm run changeset:version   # Bump versions (run on release branch)
 npm run prerelease          # Prepare publish (runs prepare-publish.js)
-npm run publish             # Publish to JFrog (uses custom .tc.npmrc)
+npm run publish             # Publish to npm (automated via GitHub Actions release workflow)
 ```
 
 ## Project-Specific Conventions
@@ -120,7 +120,7 @@ npm run publish             # Publish to JFrog (uses custom .tc.npmrc)
 
 ### Version Management
 - **Changesets workflow:** Create `.changeset/*.md` files before PRs; commit them
-- **Publishing registry:** JFrog (not npm) - see `publishConfig.registry` in workspace package.json files
+- **Publishing registry:** npmjs.org - packages are published automatically via GitHub Actions on every push to `main` using OIDC trusted publishing
 
 ## Common Tasks & Patterns
 
