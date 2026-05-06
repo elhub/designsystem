@@ -38,5 +38,4 @@ jobs:
           npm run build --ws --if-present
 
       - name: Publish
-        run: |
-          npm run publish
+        run: npm run publish
