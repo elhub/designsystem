@@ -1,13 +1,13 @@
 import React from 'react'
 import cl from 'clsx'
 import { IconSmileyHappy, IconSmileyNeutral, IconSmileySad } from '@elhub/ds-icons'
-import { useFeedbackContext, type FeedbackVariant } from './useFeedbackContext'
+import { useFeedbackContext, type FeedbackType } from './useFeedbackContext'
 
-export type FeedbackIdleButtonVariant = FeedbackVariant
+export type FeedbackIdleButtonType = FeedbackType
 export type FeedbackIdleButtonSize = 'small' | 'medium' | 'large'
 
 export interface FeedbackIdleButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
-  variant: FeedbackIdleButtonVariant
+  variant: FeedbackIdleButtonType
   size?: FeedbackIdleButtonSize
 }
 
@@ -19,10 +19,10 @@ const FeedbackIdleButton: React.FC<FeedbackIdleButtonProps> = ({
   onClick,
   ...rest
 }) => {
-  const { size: contextSize, variant: contextVariant, onVariantChange } = useFeedbackContext()
+  const { size: contextSize, feedbackType: contextFeedbackType, onFeedbackTypeChange } = useFeedbackContext()
 
   const _size = size ?? contextSize
-  const selected = contextVariant === variant
+  const selected = contextFeedbackType === variant
 
   const buttonClass = cl(
     'eds-feedback-button',
@@ -50,7 +50,7 @@ const FeedbackIdleButton: React.FC<FeedbackIdleButtonProps> = ({
       aria-checked={selected}
       className={buttonClass}
       onClick={(event) => {
-        onVariantChange?.(variant)
+        onFeedbackTypeChange?.(variant)
         onClick?.(event)
       }}
       {...rest}

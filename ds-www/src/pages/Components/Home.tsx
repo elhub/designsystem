@@ -379,7 +379,8 @@ const ComponentsHome: React.FC = () => {
 
           {feedbackState === 'submitted' && (
             <Feedback.Submitted>
-              <BodyText>Thanks for your feedback!</BodyText>
+              <IconCheckCircle aria-hidden='true' className='eds-feedback__submitted-icon' />
+              <Heading size='small'>Thanks for your feedback!</Heading>
             </Feedback.Submitted>
           )}
         </Feedback>

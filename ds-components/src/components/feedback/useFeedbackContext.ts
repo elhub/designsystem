@@ -1,13 +1,13 @@
 import { createContext, useContext } from 'react'
 import { type FormItemSize } from '../form/form-item'
 
-export type FeedbackVariant = 'happy' | 'neutral' | 'sad'
+export type FeedbackType = 'happy' | 'neutral' | 'sad'
 
 interface FeedbackContextType {
   size: FormItemSize
   hasError?: boolean
-  variant?: FeedbackVariant
-  onVariantChange?: (variant: FeedbackVariant) => void
+  feedbackType?: FeedbackType
+  onFeedbackTypeChange?: (feedbackType: FeedbackType) => void
 }
 
 export const FeedbackContext = createContext<FeedbackContextType | null>(null)

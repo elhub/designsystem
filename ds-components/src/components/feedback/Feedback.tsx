@@ -1,18 +1,15 @@
 import cl from 'clsx'
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import FeedbackIdle, { type FeedbackIdleType } from './FeedbackIdle'
 import FeedbackCollecting, { type FeedbackCollectingType } from './FeedbackCollecting'
 import FeedbackSubmitted, { type FeedbackSubmittedType } from './FeedbackSubmitted'
-import { FeedbackContext, type FeedbackVariant } from './useFeedbackContext'
+import { FeedbackContext, type FeedbackType } from './useFeedbackContext'
 import { useFormItemContext } from '../form/form-item/useFormItemContext'
 import { type FormItemProps } from '../form/form-item'
 
 interface FeedbackProps
   extends React.HTMLAttributes<HTMLDivElement>, Omit<FormItemProps, 'error' | 'children'> {
   children: React.ReactNode
-  variant?: FeedbackVariant
-  defaultVariant?: FeedbackVariant
-  onVariantChange?: (variant: FeedbackVariant) => void
   error?: boolean
 }
 
@@ -22,31 +19,9 @@ interface FeedbackComponent extends React.FC<FeedbackProps> {
   Submitted: FeedbackSubmittedType
 }
 
-const Feedback: FeedbackComponent = ({
-  children,
-  className,
-  size,
-  variant,
-  defaultVariant,
-  onVariantChange,
-  error,
-  ...rest
-}) => {
+const Feedback: FeedbackComponent = ({ children, className, size, error, ...rest }) => {
   const { error: { hasError } = {}, size: formItemSize } = useFormItemContext()
-  const [internalVariant, setInternalVariant] = useState<FeedbackVariant | undefined>(defaultVariant)
-
-  const isParentControlled = variant !== undefined
-  const resolvedVariant = isParentControlled ? variant : internalVariant
-
-  const handleVariantChange = useCallback(
-    (nextVariant: FeedbackVariant) => {
-      if (!isParentControlled) {
-        setInternalVariant(nextVariant)
-      }
-      onVariantChange?.(nextVariant)
-    },
-    [isParentControlled, onVariantChange]
-  )
+  const [selectedFeedbackType, setSelectedFeedbackType] = useState<FeedbackType | null>(null)
 
   const _size = size ?? formItemSize ?? 'medium'
   const _error = error || hasError
@@ -56,8 +31,8 @@ const Feedback: FeedbackComponent = ({
       value={{
         size: _size,
         hasError: _error,
-        variant: resolvedVariant,
-        onVariantChange: handleVariantChange
+        feedbackType: selectedFeedbackType ?? undefined,
+        onFeedbackTypeChange: setSelectedFeedbackType
       }}
     >
       <div className={cl('eds-feedback', className)} {...rest}>
