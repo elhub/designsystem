@@ -15,11 +15,6 @@ import { IconCheckCircle } from '@elhub/ds-icons'
 type ActiveState = 'idle' | 'collecting' | 'submitting' | 'submitted' | 'error'
 type FeedbackType = 'happy' | 'neutral' | 'sad'
 
-const wait = (ms: number): Promise<void> =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-
 const EXAMPLE_CODE = `import React, { useState } from 'react'
 import { BodyText, Button, Feedback, Heading, Loader, Textarea, VerticalSpace } from '@elhub/ds-components'
 import { IconCheckCircle } from '@elhub/ds-icons'
@@ -40,7 +35,7 @@ const Component = () => {
   const submit = async () => {
     if (!selectedFeedbackType) return
     setFeedbackState('submitting')
-    await wait(900) // Used to simulate call to a backend for the example. Replace with actual call and handle state change accordingly
+    await new Promise((r) => setTimeout(r, 900)) // Used to simulate call to a backend for the example. Replace with actual call and handle state change accordingly
     // setFeedbackState('error') // Uncomment to simulate a backend error
     setFeedbackState('submitted')
   }
@@ -122,9 +117,8 @@ const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulat
 
   const submit = async () => {
     if (!selectedFeedbackType) return
-    console.log('Feedback submitted:', { selectedFeedbackType, comment })
     setFeedbackState('submitting')
-    await wait(900)
+    await new Promise((r) => setTimeout(r, 900)) // Simulate waiting for backend to respond
 
     if (simulateBackendError) {
       setFeedbackState('error')
