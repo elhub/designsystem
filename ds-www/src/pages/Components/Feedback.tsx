@@ -22,11 +22,6 @@ import { IconCheckCircle } from '@elhub/ds-icons'
 type ActiveState = 'idle' | 'collecting' | 'submitting' | 'submitted' | 'error'
 type FeedbackType = 'happy' | 'neutral' | 'sad'
 
-const wait = (ms: number): Promise<void> =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-
 const Component = () => {
   const [feedbackState, setFeedbackState] = useState<ActiveState>('idle')
   const [selectedFeedbackType, setSelectedFeedbackType] = useState<FeedbackType | null>(null)
