@@ -1,5 +1,17 @@
 # @elhub/ds-tokens
 
+## 7.2.2
+
+### Patch Changes
+
+- Test automated GitHub Actions by running changeset publish from root
+
+## 7.2.1
+
+### Patch Changes
+
+- Test automated GitHub Actions publish workflow
+
 ## 7.2.0
 
 ### Minor Changes

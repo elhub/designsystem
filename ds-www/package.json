@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "url": "ssh://git@github.com:elhub/designsystem.git",
     "directory": "ds-www"
   },
   "homepage": ".",
@@ -21,7 +21,6 @@
     "lint:fix": "eslint \"src/**/*.ts*\" --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{ts,tsx}\"",
-    "release": "",
     "test": "",
     "test:ci": "",
     "test:coverage": "",

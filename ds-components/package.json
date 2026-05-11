@@ -1,22 +1,24 @@
 {
   "name": "@elhub/ds-components",
-  "version": "4.14.0",
+  "version": "4.13.4",
   "description": "Elhub design system components",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:elhub/elhub-ui-design-system.git",
+    "url": "ssh://git@github.com:elhub/designsystem.git",
     "directory": "ds-components"
   },
   "publishConfig": {
-    "registry": "https://jfrog.elhub.cloud/artifactory/api/npm/elhub-npm-release-local/"
+    "access": "public"
   },
   "type": "module",
   "module": "dist/ds-components.js",
   "main": "dist/ds-components.js",
   "types": "dist/ds-components.d.ts",
   "files": [
-    "dist/*"
+    "dist/*",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "clean": "rimraf dist node_modules",
@@ -26,7 +28,6 @@
     "lint:fix": "eslint src --fix",
     "prettier": "prettier --config ../.prettierrc -c \"src/**/*.{ts,tsx}\"",
     "prettier:fix": "prettier --config ../.prettierrc -w \"src/**/*.{ts,tsx}\"",
-    "release": "npm publish || exit 0",
     "test": "vitest --passWithNoTests",
     "test:ci": "vitest run --passWithNoTests",
     "test:coverage": "vitest --passWithNoTests --coverage",

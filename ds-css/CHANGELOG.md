@@ -1,10 +1,16 @@
 # @elhub/ds-css
 
-## 6.2.0
+## 6.1.5
 
-### Minor Changes
+### Patch Changes
 
-- feat(feedback): added new Feedback component
+- Test automated GitHub Actions by running changeset publish from root
+
+## 6.1.4
+
+### Patch Changes
+
+- Test automated GitHub Actions publish workflow
 
 ## 6.1.3
 

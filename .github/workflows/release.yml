@@ -7,18 +7,35 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+# Required for OIDC trusted publishing
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    environment: npm-publish
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          printf 'registry=https://registry.npmjs.org/\nlegacy-peer-deps=true\n' > .npmrc
+          npm install --no-package-lock && npm install --ws --no-package-lock
+
+      - name: Build
+        run: |
+          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
+          npm run build --ws --if-present
+
+      - name: Publish
+        run: npm run publish
