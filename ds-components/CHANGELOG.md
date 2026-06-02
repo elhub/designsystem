@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.14.0
+
+### Minor Changes
+
+- e2b6c63: add new feedback component
+
 ## 4.13.4
 
 ### Patch Changes

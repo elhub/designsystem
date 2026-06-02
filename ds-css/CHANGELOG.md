@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.2.0
+
+### Minor Changes
+
+- e2b6c63: add new feedback component
+
 ## 6.1.5
 
 ### Patch Changes
