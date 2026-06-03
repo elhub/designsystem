@@ -7,12 +7,12 @@ export type FeedbackIdleButtonType = FeedbackType
 export type FeedbackIdleButtonSize = 'small' | 'medium' | 'large'
 
 export interface FeedbackIdleButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
-  variant: FeedbackIdleButtonType
+  type: FeedbackIdleButtonType
   size?: FeedbackIdleButtonSize
 }
 
 const FeedbackIdleButton: React.FC<FeedbackIdleButtonProps> = ({
-  variant,
+  type,
   size,
   className,
   children,
@@ -22,18 +22,18 @@ const FeedbackIdleButton: React.FC<FeedbackIdleButtonProps> = ({
   const { size: contextSize, feedbackType: contextFeedbackType, onFeedbackTypeChange } = useFeedbackContext()
 
   const _size = size ?? contextSize
-  const selected = contextFeedbackType === variant
+  const selected = contextFeedbackType === type
 
   const buttonClass = cl(
     'eds-feedback-button',
-    `eds-feedback-button--${variant}`,
+    `eds-feedback-button--${type}`,
     `eds-feedback-button--${_size}`,
     selected && 'eds-feedback-button--selected',
     className
   )
 
   const renderIcon = () => {
-    switch (variant) {
+    switch (type) {
       case 'happy':
         return <IconSmileyHappy className='eds-feedback-button__icon' />
       case 'neutral':
@@ -50,7 +50,7 @@ const FeedbackIdleButton: React.FC<FeedbackIdleButtonProps> = ({
       aria-checked={selected}
       className={buttonClass}
       onClick={(event) => {
-        onFeedbackTypeChange?.(variant)
+        onFeedbackTypeChange?.(type)
         onClick?.(event)
       }}
       {...rest}
