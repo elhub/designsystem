@@ -1,8 +1,8 @@
 # @elhub/ds-css
 
-## 6.2.0
+## 6.1.6
 
-### Minor Changes
+### Patch Changes
 
 - Adjust textfield size for large text.
 
