@@ -46,7 +46,7 @@
 }
 
 .eds-text-field__unit + .eds-text-field__input {
-    padding-right: var(--eds-size-9);
+    padding-right: var(--eds-size-8);
 }
 
 .eds-text-field__toggle-password + .eds-text-field__input {
