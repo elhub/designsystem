@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.13.5
+
+### Patch Changes
+
+- Make Badge icons optional and keep badge spacing correct when no icon is provided.
+
 ## 4.13.4
 
 ### Patch Changes
