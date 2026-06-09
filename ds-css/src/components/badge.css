@@ -5,9 +5,17 @@
   width: fit-content;
 }
 
+.eds-badge--without-icon {
+  gap: 0;
+}
+
 .eds-badge--variant-default.eds-badge--size-medium {
   border-radius: var(--eds-size-5);
   padding: 0 var(--eds-size-6) 0 0;
+}
+
+.eds-badge--variant-default.eds-badge--size-medium.eds-badge--without-icon {
+  padding-left: var(--eds-size-6);
 }
 
 .eds-badge--variant-block.eds-badge--size-medium {
@@ -18,6 +26,10 @@
 .eds-badge--variant-default.eds-badge--size-small {
   border-radius: var(--eds-size-4);
   padding:  0 var(--eds-size-4) 0 0;
+}
+
+.eds-badge--variant-default.eds-badge--size-small.eds-badge--without-icon {
+  padding-left: var(--eds-size-4);
 }
 
 .eds-badge--variant-block.eds-badge--size-small {

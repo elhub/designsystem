@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.1.7
+
+### Patch Changes
+
+- Make Badge icons optional and keep badge spacing correct when no icon is provided.
+
 ## 6.1.6
 
 ### Patch Changes

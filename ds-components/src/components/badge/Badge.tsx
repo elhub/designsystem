@@ -14,7 +14,7 @@ type StatusProp =
 type VariantProp = 'default' | 'block' | 'simple-dot'
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  icon: React.ComponentType<SvgIconProps>
+  icon?: React.ComponentType<SvgIconProps>
   children?: React.ReactNode
   size?: 'medium' | 'small'
   status?: StatusProp
@@ -26,7 +26,7 @@ type BadgeType = OverridableComponent<BadgeProps>
 const Badge: BadgeType = forwardRef(
   (
     {
-      icon,
+      icon: Icon,
       size = 'medium',
       status = 'ongoing',
       variant = 'default',
@@ -37,8 +37,6 @@ const Badge: BadgeType = forwardRef(
     },
     ref
   ) => {
-    const Icon = icon
-
     return (
       <Component
         {...rest}
@@ -48,10 +46,13 @@ const Badge: BadgeType = forwardRef(
           `eds-badge--size-${size}`,
           `eds-badge--status-${status}`,
           `eds-badge--variant-${variant}`,
+          {
+            'eds-badge--without-icon': !Icon
+          },
           className as ClassValue
         )}
       >
-        <Icon className='eds-badge__icon' />
+        {Icon && <Icon className='eds-badge__icon' />}
         {children && (
           <BodyText weight='bold' size={size}>
             {children}
