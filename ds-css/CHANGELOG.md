@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.1.8
+
+### Patch Changes
+
+- Fix selected table rows so their text stays inverted against the selected background.
+
 ## 6.1.7
 
 ### Patch Changes

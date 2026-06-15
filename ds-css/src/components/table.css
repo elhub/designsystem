@@ -11,7 +11,10 @@
     --eds-table-row-background-color-not-zebra: var(--eds-semantic-background);
     --eds-table-cell-border-color-hover: var(--eds-semantic-border);
     --eds-table-text-color: var(--eds-semantic-text);
+    --eds-table-text-color-selected: var(--eds-semantic-text-inverted);
     --eds-table-text-color-hover: var(--eds-semantic-text-action-hover);
+    --eds-table-toggle-expand-button-color: var(--eds-table-text-color);
+    --eds-table-toggle-expand-button-color-hover: var(--eds-table-text-color-hover);
     --eds-table-sort-button-text: var(--eds-semantic-text);
     --eds-table-color-focus: var(--eds-semantic-border-action-focus);
     --eds-table-border-color: var(--eds-semantic-border);
@@ -48,6 +51,10 @@
 
 .eds-table__row--selected {
     background-color: var(--eds-table-row-background-color-selected);
+    color: var(--eds-table-text-color-selected);
+
+    --eds-table-toggle-expand-button-color: var(--eds-table-text-color-selected);
+    --eds-table-toggle-expand-button-color-hover: var(--eds-table-text-color-selected);
 }
 
 .eds-table__body .eds-table__row--selected:hover {
@@ -202,7 +209,7 @@
     align-items: center;
     cursor: pointer;
     padding: var(--eds-size-4);
-    color: var(--eds-table-text-color);
+    color: var(--eds-table-toggle-expand-button-color);
 }
 
 .eds-table--small .eds-table__toggle-expand-button {
@@ -222,7 +229,7 @@
 }
 
 .eds-table__toggle-expand-button:hover {
-    color: var(--eds-table-text-color-hover);
+    color: var(--eds-table-toggle-expand-button-color-hover);
 }
 
 .eds-table__toggle-expand-button:hover .eds-table__expandable-icon--filled {
