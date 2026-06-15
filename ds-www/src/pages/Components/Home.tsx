@@ -60,15 +60,15 @@ import ComponentPanel from 'components/ComponentPanel/ComponentPanel'
 
 import React, { useRef, useState } from 'react'
 
-type FeedbackActiveState = 'idle' | 'collecting' | 'submitting' | 'submitted' | 'error'
-type FeedbackRatingValue = 'good' | 'okay' | 'bad'
+type FeedbackActiveState = 'idle' | 'collecting' | 'isPending' | 'submitted' | 'error'
+type FeedbackType = 'happy' | 'neutral' | 'sad'
 
 const ComponentsHome: React.FC = () => {
   const [query, setQuery] = useState<string>('')
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [feedbackRating, setFeedbackRating] = useState<FeedbackRatingValue | null>(null)
-  const [feedbackState, setFeedbackState] = useState<FeedbackActiveState>('idle')
-  const [feedbackComment, setFeedbackComment] = useState<string>('')
+  const [selectedFeedbackType, setSelectedFeedbackType] = useState<FeedbackType | null>(null)
+  const [activeState, setActiveState] = useState<FeedbackActiveState>('idle')
+  const [comment, setComment] = useState<string>('')
   const [openState, setOpenState] = useState<boolean>(false)
   const [pageState, setPageState] = useState<number>(1)
   const [toggleValue, setToggleValue] = useState<string>('ulest')
@@ -302,36 +302,36 @@ const ComponentsHome: React.FC = () => {
       description: 'Form for submitting feedback',
       el: (
         <Feedback>
-          {feedbackState === 'idle' && (
+          {activeState === 'idle' && (
             <Feedback.Idle>
-              <Heading size='medium'>How was this page to use</Heading>
-              <Feedback.Idle.ButtonGroup>
+              <Heading size='small'>How was this page to use?</Heading>
+              <Feedback.Idle.ButtonGroup aria-label='Rate this page'>
                 <Feedback.Idle.Button
                   size='large'
-                  variant='happy'
+                  type='happy'
                   onClick={() => {
-                    setFeedbackRating('good')
-                    setFeedbackState('collecting')
+                    setSelectedFeedbackType('happy')
+                    setActiveState('collecting')
                   }}
                 >
                   Good
                 </Feedback.Idle.Button>
                 <Feedback.Idle.Button
                   size='large'
-                  variant='neutral'
+                  type='neutral'
                   onClick={() => {
-                    setFeedbackRating('okay')
-                    setFeedbackState('collecting')
+                    setSelectedFeedbackType('neutral')
+                    setActiveState('collecting')
                   }}
                 >
                   Okay
                 </Feedback.Idle.Button>
                 <Feedback.Idle.Button
                   size='large'
-                  variant='sad'
+                  type='sad'
                   onClick={() => {
-                    setFeedbackRating('bad')
-                    setFeedbackState('collecting')
+                    setSelectedFeedbackType('sad')
+                    setActiveState('collecting')
                   }}
                 >
                   Bad
@@ -340,18 +340,18 @@ const ComponentsHome: React.FC = () => {
             </Feedback.Idle>
           )}
 
-          {feedbackState === 'collecting' && (
+          {activeState === 'collecting' && (
             <Feedback.Collecting>
-              <Heading size='medium'>What made you feel this way? (Optional)</Heading>
-              <BodyText>Your answer will help with future prioritisations and improvements.</BodyText>
+              <Heading size='small'>What made you feel this way? (Optional)</Heading>
+              <BodyText>Your answer helps us improve this page.</BodyText>
               <BodyText>Do not write any personal information.</BodyText>
 
               <VerticalSpace size='1' />
 
               <Textarea
                 placeholder='Do not write any personal information.'
-                value={feedbackComment}
-                onChange={(e) => setFeedbackComment(e.target.value)}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
               />
 
               <VerticalSpace size='2' />
@@ -360,24 +360,43 @@ const ComponentsHome: React.FC = () => {
                 <Button
                   variant='primary'
                   onClick={async () => {
-                    if (!feedbackRating) return
-                    setFeedbackState('submitting')
-                    await new Promise((r) => setTimeout(r, 1000))
-                    setFeedbackState('submitted')
+                    if (!selectedFeedbackType) return
+                    console.log('Feedback submitted:', { selectedFeedbackType, comment })
+                    setActiveState('isPending')
+                    await new Promise((r) => setTimeout(r, 900))
+                    setActiveState('submitted')
                   }}
                 >
                   Send feedback
                 </Button>
-                <Button variant='tertiary' onClick={() => setFeedbackState('idle')}>
+                <Button variant='tertiary' onClick={() => setActiveState('idle')}>
                   Cancel
                 </Button>
               </Feedback.Collecting.ButtonGroup>
             </Feedback.Collecting>
           )}
 
-          {feedbackState === 'submitting' && <Loader />}
+          {activeState === 'isPending' && <Loader />}
 
-          {feedbackState === 'submitted' && (
+          {activeState === 'error' && (
+            <Feedback.Collecting>
+              <Heading size='small'>We could not submit your feedback right now.</Heading>
+              <BodyText>Try again in a moment.</BodyText>
+
+              <VerticalSpace size='2' />
+
+              <Feedback.Collecting.ButtonGroup>
+                <Button variant='primary' onClick={() => setActiveState('collecting')}>
+                  Try again
+                </Button>
+                <Button variant='tertiary' onClick={() => setActiveState('idle')}>
+                  Back
+                </Button>
+              </Feedback.Collecting.ButtonGroup>
+            </Feedback.Collecting>
+          )}
+
+          {activeState === 'submitted' && (
             <Feedback.Submitted>
               <IconCheckCircle aria-hidden='true' className='eds-feedback__submitted-icon' />
               <Heading size='small'>Thanks for your feedback!</Heading>

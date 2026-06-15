@@ -12,43 +12,43 @@ import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
 import React, { useState } from 'react'
 import { IconCheckCircle } from '@elhub/ds-icons'
 
-type ActiveState = 'idle' | 'collecting' | 'submitting' | 'submitted' | 'error'
+type ActiveState = 'idle' | 'collecting' | 'isPending' | 'submitted' | 'error'
 type FeedbackType = 'happy' | 'neutral' | 'sad'
 
 const EXAMPLE_CODE = `import React, { useState } from 'react'
 import { BodyText, Button, Feedback, Heading, Loader, Textarea, VerticalSpace } from '@elhub/ds-components'
 import { IconCheckCircle } from '@elhub/ds-icons'
 
-type ActiveState = 'idle' | 'collecting' | 'submitting' | 'submitted' | 'error'
+type ActiveState = 'idle' | 'collecting' | 'isPending' | 'submitted' | 'error'
 type FeedbackType = 'happy' | 'neutral' | 'sad'
 
 const Component = () => {
-  const [feedbackState, setFeedbackState] = useState<ActiveState>('idle')
+  const [activeState, setActiveState] = useState<ActiveState>('idle')
   const [selectedFeedbackType, setSelectedFeedbackType] = useState<FeedbackType | null>(null)
   const [comment, setComment] = useState('')
 
   const submit = async () => {
     if (!selectedFeedbackType) return
-    setFeedbackState('submitting')
+    setActiveState('isPending')
     await new Promise((r) => setTimeout(r, 900)) // Used to simulate call to a backend for the example. Replace with actual call and handle state change accordingly
-    // setFeedbackState('error') // Uncomment to simulate a backend error
-    setFeedbackState('submitted')
+    // setActiveState('error') // Uncomment to simulate a backend error
+    setActiveState('submitted')
   }
 
   return (
     <Feedback>
-      {feedbackState === 'idle' && (
+      {activeState === 'idle' && (
         <Feedback.Idle>
           <Heading size='small'>How was this page to use?</Heading>
           <Feedback.Idle.ButtonGroup aria-label='Rate this page'>
-            <Feedback.Idle.Button size='large' variant='happy' onClick={() => { setSelectedFeedbackType('happy'); setFeedbackState('collecting') }}>Good</Feedback.Idle.Button>
-            <Feedback.Idle.Button size='large' variant='neutral' onClick={() => { setSelectedFeedbackType('neutral'); setFeedbackState('collecting') }}>Okay</Feedback.Idle.Button>
-            <Feedback.Idle.Button size='large' variant='sad' onClick={() => { setSelectedFeedbackType('sad'); setFeedbackState('collecting') }}>Bad</Feedback.Idle.Button>
+            <Feedback.Idle.Button size='large' type='happy' onClick={() => { setSelectedFeedbackType('happy'); setActiveState('collecting') }}>Good</Feedback.Idle.Button>
+            <Feedback.Idle.Button size='large' type='neutral' onClick={() => { setSelectedFeedbackType('neutral'); setActiveState('collecting') }}>Okay</Feedback.Idle.Button>
+            <Feedback.Idle.Button size='large' type='sad' onClick={() => { setSelectedFeedbackType('sad'); setActiveState('collecting') }}>Bad</Feedback.Idle.Button>
           </Feedback.Idle.ButtonGroup>
         </Feedback.Idle>
       )}
 
-      {feedbackState === 'collecting' && (
+      {activeState === 'collecting' && (
         <Feedback.Collecting>
           <Heading size='small'>What made you feel this way? (Optional)</Heading>
           <BodyText>Your answer helps us improve this page.</BodyText>
@@ -66,14 +66,14 @@ const Component = () => {
 
           <Feedback.Collecting.ButtonGroup>
             <Button variant='primary' onClick={submit}>Send feedback</Button>
-            <Button variant='tertiary' onClick={() => setFeedbackState('idle')}>Cancel</Button>
+            <Button variant='tertiary' onClick={() => setActiveState('idle')}>Cancel</Button>
           </Feedback.Collecting.ButtonGroup>
         </Feedback.Collecting>
       )}
 
-      {feedbackState === 'submitting' && <Loader />}
+      {activeState === 'isPending' && <Loader />}
 
-      {feedbackState === 'error' && (
+      {activeState === 'error' && (
         <Feedback.Collecting>
           <Heading size='small'>We could not submit your feedback right now.</Heading>
           <BodyText>Try again in a moment.</BodyText>
@@ -81,13 +81,13 @@ const Component = () => {
           <VerticalSpace size='2' />
 
           <Feedback.Collecting.ButtonGroup>
-            <Button variant='primary' onClick={() => setFeedbackState('collecting')}>Try again</Button>
-            <Button variant='tertiary' onClick={() => setFeedbackState('idle')}>Back</Button>
+            <Button variant='primary' onClick={() => setActiveState('collecting')}>Try again</Button>
+            <Button variant='tertiary' onClick={() => setActiveState('idle')}>Back</Button>
           </Feedback.Collecting.ButtonGroup>
         </Feedback.Collecting>
       )}
 
-      {feedbackState === 'submitted' && (
+      {activeState === 'submitted' && (
         <Feedback.Submitted>
           <IconCheckCircle aria-hidden='true' className='eds-feedback__submitted-icon' />
           <Heading size='small'>Thanks for your feedback!</Heading>
@@ -106,21 +106,21 @@ interface FeedbackFlowProps {
 }
 
 const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulateBackendError = false }) => {
-  const [feedbackState, setFeedbackState] = useState<ActiveState>('idle')
+  const [activeState, setActiveState] = useState<ActiveState>('idle')
   const [selectedFeedbackType, setSelectedFeedbackType] = useState<FeedbackType | null>(null)
   const [comment, setComment] = useState('')
 
   const submit = async () => {
     if (!selectedFeedbackType) return
-    setFeedbackState('submitting')
+    setActiveState('isPending')
     await new Promise((r) => setTimeout(r, 900)) // Simulate waiting for backend to respond
 
     if (simulateBackendError) {
-      setFeedbackState('error')
+      setActiveState('error')
       return
     }
 
-    setFeedbackState('submitted')
+    setActiveState('submitted')
   }
 
   return (
@@ -130,36 +130,36 @@ const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulat
       <VerticalSpace />
 
       <Feedback>
-        {feedbackState === 'idle' && (
+        {activeState === 'idle' && (
           <Feedback.Idle>
             <Heading size='small'>How was this page to use?</Heading>
             <Feedback.Idle.ButtonGroup aria-label='Rate this page'>
               <Feedback.Idle.Button
                 size='large'
-                variant='happy'
+                type='happy'
                 onClick={() => {
                   setSelectedFeedbackType('happy')
-                  setFeedbackState('collecting')
+                  setActiveState('collecting')
                 }}
               >
                 Good
               </Feedback.Idle.Button>
               <Feedback.Idle.Button
                 size='large'
-                variant='neutral'
+                type='neutral'
                 onClick={() => {
                   setSelectedFeedbackType('neutral')
-                  setFeedbackState('collecting')
+                  setActiveState('collecting')
                 }}
               >
                 Okay
               </Feedback.Idle.Button>
               <Feedback.Idle.Button
                 size='large'
-                variant='sad'
+                type='sad'
                 onClick={() => {
                   setSelectedFeedbackType('sad')
-                  setFeedbackState('collecting')
+                  setActiveState('collecting')
                 }}
               >
                 Bad
@@ -168,7 +168,7 @@ const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulat
           </Feedback.Idle>
         )}
 
-        {feedbackState === 'collecting' && (
+        {activeState === 'collecting' && (
           <Feedback.Collecting>
             <Heading size='small'>What made you feel this way? (Optional)</Heading>
             <BodyText>Your answer helps us improve this page.</BodyText>
@@ -188,16 +188,16 @@ const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulat
               <Button variant='primary' onClick={submit}>
                 Send feedback
               </Button>
-              <Button variant='tertiary' onClick={() => setFeedbackState('idle')}>
+              <Button variant='tertiary' onClick={() => setActiveState('idle')}>
                 Cancel
               </Button>
             </Feedback.Collecting.ButtonGroup>
           </Feedback.Collecting>
         )}
 
-        {feedbackState === 'submitting' && <Loader />}
+        {activeState === 'isPending' && <Loader />}
 
-        {feedbackState === 'error' && (
+        {activeState === 'error' && (
           <Feedback.Collecting>
             <Heading size='small'>We could not submit your feedback right now.</Heading>
             <BodyText>Try again in a moment.</BodyText>
@@ -205,17 +205,17 @@ const FeedbackFlow: React.FC<FeedbackFlowProps> = ({ title, description, simulat
             <VerticalSpace size='2' />
 
             <Feedback.Collecting.ButtonGroup>
-              <Button variant='primary' onClick={() => setFeedbackState('collecting')}>
+              <Button variant='primary' onClick={() => setActiveState('collecting')}>
                 Try again
               </Button>
-              <Button variant='tertiary' onClick={() => setFeedbackState('idle')}>
+              <Button variant='tertiary' onClick={() => setActiveState('idle')}>
                 Back
               </Button>
             </Feedback.Collecting.ButtonGroup>
           </Feedback.Collecting>
         )}
 
-        {feedbackState === 'submitted' && (
+        {activeState === 'submitted' && (
           <Feedback.Submitted>
             <IconCheckCircle aria-hidden='true' className='eds-feedback__submitted-icon' />
             <Heading size='small'>Thanks for your feedback!</Heading>
@@ -393,7 +393,7 @@ const ComponentsFeedback: React.FC = () => {
         <Table.Body>
           <Table.Row>
             <Table.DataCell>
-              <code>variant</code>
+              <code>type</code>
             </Table.DataCell>
             <Table.DataCell>
               <code>'happy' | 'neutral' | 'sad'</code>
