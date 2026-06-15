@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.2.0
+
+### Minor Changes
+
+- feat(feedback): add new feedback component
+
 ## 6.1.9
 
 ### Patch Changes
