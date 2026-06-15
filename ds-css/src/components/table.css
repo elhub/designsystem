@@ -12,6 +12,7 @@
     --eds-table-cell-border-color-hover: var(--eds-semantic-border);
     --eds-table-text-color: var(--eds-semantic-text);
     --eds-table-text-color-selected: var(--eds-semantic-text-inverted);
+    --eds-table-text-color-selected-hover: var(--eds-semantic-text);
     --eds-table-text-color-hover: var(--eds-semantic-text-action-hover);
     --eds-table-toggle-expand-button-color: var(--eds-table-text-color);
     --eds-table-toggle-expand-button-color-hover: var(--eds-table-text-color-hover);
@@ -59,6 +60,10 @@
 
 .eds-table__body .eds-table__row--selected:hover {
     background-color: var(--eds-table-row-background-color-selected-hover);
+    color: var(--eds-table-text-color-selected-hover);
+
+    --eds-table-toggle-expand-button-color: var(--eds-table-text-color-selected-hover);
+    --eds-table-toggle-expand-button-color-hover: var(--eds-table-text-color-selected-hover);
 }
 
 .eds-table

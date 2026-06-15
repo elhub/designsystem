@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.1.9
+
+### Patch Changes
+
+- Fix selected table rows so hover text switches back to the default semantic text color.
+
 ## 6.1.8
 
 ### Patch Changes
