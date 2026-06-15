@@ -1,10 +1,10 @@
 # @elhub/ds-components
 
-## 4.14.0
+## 4.13.5
 
-### Minor Changes
+### Patch Changes
 
-- e2b6c63: add new feedback component
+- Make Badge icons optional and keep badge spacing correct when no icon is provided.
 
 ## 4.13.4
 

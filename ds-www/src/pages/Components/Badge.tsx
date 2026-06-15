@@ -9,7 +9,6 @@ import {
 } from '@elhub/ds-components'
 import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
 import React from 'react'
-import reactElementToJSXString from 'react-element-to-jsx-string'
 import {
   IconCheckCircle,
   IconClockCircle,
@@ -229,7 +228,17 @@ const AllVariants: React.FC = () => (
   </>
 )
 
-const DefaultBadge: React.FC = () => <Badge icon={IconQualitiesCircle}>Ongoing</Badge>
+const DefaultBadge: React.FC = () => <Badge>Ongoing</Badge>
+
+const NoIconBadge: React.FC = () => (
+  <FlexCenterDiv>
+    <Badge>Ongoing</Badge>
+    <HorizontalSpace />
+    <Badge variant='block' status='approved'>
+      Approved
+    </Badge>
+  </FlexCenterDiv>
+)
 
 const SizeBadge: React.FC = () => (
   <FlexCenterDiv>
@@ -277,6 +286,174 @@ const VariantBadge: React.FC = () => (
   </FlexCenterDiv>
 )
 
+const allVariantsCode = `// import
+import { Badge, Heading, Table, VerticalSpace } from '@elhub/ds-components'
+import {
+  IconQualitiesCircle,
+  IconCrossCircle,
+  IconQuestionCircle,
+  IconCheckCircle,
+  IconInformationCircle,
+  IconClockCircle
+} from '@elhub/ds-icons'
+
+// render
+<>
+  <Heading>Medium size</Heading>
+  <Table>
+    <Table.Body>
+      <Table.Row>
+        <Table.DataCell>
+          <Badge size='medium' status='ongoing' variant='default' icon={IconQualitiesCircle}>
+            Ongoing
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='medium' status='failed' variant='default' icon={IconCrossCircle}>
+            Failed
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='medium' status='approved-with-warning' variant='default' icon={IconQuestionCircle}>
+            Approved with warning
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='medium' status='approved' variant='default' icon={IconCheckCircle}>
+            Approved
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='medium' status='stopped' variant='default' icon={IconInformationCircle}>
+            Stopped
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='medium' status='temporarily-stopped' variant='default' icon={IconClockCircle}>
+            Temporarily stopped
+          </Badge>
+        </Table.DataCell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+  <VerticalSpace size='3' />
+  <Heading>Small size</Heading>
+  <Table>
+    <Table.Body>
+      <Table.Row>
+        <Table.DataCell>
+          <Badge size='small' status='ongoing' variant='default' icon={IconQualitiesCircle}>
+            Ongoing
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='small' status='failed' variant='default' icon={IconCrossCircle}>
+            Failed
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='small' status='approved-with-warning' variant='default' icon={IconQuestionCircle}>
+            Approved with warning
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='small' status='approved' variant='default' icon={IconCheckCircle}>
+            Approved
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='small' status='stopped' variant='default' icon={IconInformationCircle}>
+            Stopped
+          </Badge>
+        </Table.DataCell>
+        <Table.DataCell>
+          <Badge size='small' status='temporarily-stopped' variant='default' icon={IconClockCircle}>
+            Temporarily stopped
+          </Badge>
+        </Table.DataCell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+</>`
+
+const defaultBadgeCode = `// import
+import { Badge } from '@elhub/ds-components'
+
+// render
+<Badge>Ongoing</Badge>`
+
+const noIconBadgeCode = `// import
+import { Badge, FlexCenterDiv, HorizontalSpace } from '@elhub/ds-components'
+
+// render
+<FlexCenterDiv>
+  <Badge>Ongoing</Badge>
+  <HorizontalSpace />
+  <Badge variant='block' status='approved'>
+    Approved
+  </Badge>
+</FlexCenterDiv>`
+
+const sizeBadgeCode = `// import
+import { Badge, FlexCenterDiv, HorizontalSpace } from '@elhub/ds-components'
+import { IconQualitiesCircle } from '@elhub/ds-icons'
+
+// render
+<FlexCenterDiv>
+  <Badge size='small' icon={IconQualitiesCircle}>
+    Badge
+  </Badge>
+  <HorizontalSpace />
+  <Badge size='medium' icon={IconQualitiesCircle}>
+    Badge
+  </Badge>
+</FlexCenterDiv>`
+
+const statusBadgeCode = `// import
+import { Badge, FlexCenterDiv, HorizontalSpace } from '@elhub/ds-components'
+import {
+  IconQualitiesCircle,
+  IconCrossCircle,
+  IconQuestionCircle,
+  IconCheckCircle
+} from '@elhub/ds-icons'
+
+// render
+<FlexCenterDiv>
+  <Badge status='ongoing' variant='block' icon={IconQualitiesCircle}>
+    Ongoing
+  </Badge>
+  <HorizontalSpace />
+  <Badge status='failed' variant='block' icon={IconCrossCircle}>
+    Failed
+  </Badge>
+  <HorizontalSpace />
+  <Badge status='approved-with-warning' variant='block' icon={IconQuestionCircle}>
+    Approved with warning
+  </Badge>
+  <HorizontalSpace />
+  <Badge status='approved' variant='block' icon={IconCheckCircle}>
+    Approved
+  </Badge>
+</FlexCenterDiv>`
+
+const variantBadgeCode = `// import
+import { Badge, FlexCenterDiv, HorizontalSpace } from '@elhub/ds-components'
+import { IconQualitiesCircle } from '@elhub/ds-icons'
+
+// render
+<FlexCenterDiv>
+  <Badge variant='default' icon={IconQualitiesCircle}>
+    Badge
+  </Badge>
+  <HorizontalSpace />
+  <Badge variant='block' icon={IconQualitiesCircle}>
+    Badge
+  </Badge>
+  <HorizontalSpace />
+  <Badge variant='simple-dot' icon={IconQualitiesCircle} />
+</FlexCenterDiv>`
+
 const ComponentsBadge: React.FC = () => {
   return (
     <>
@@ -293,24 +470,7 @@ const ComponentsBadge: React.FC = () => {
       <Heading className='toc' size='medium' id='badge-default' level='2' spacing>
         All variants
       </Heading>
-      <DemoableDiv
-        alignContent='center'
-        code={`
-// import
-import { Badge, FlexCenterDiv, HorizontalSpace } from '@elhub/ds-components'
-import {
-  IconQualitiesCircle,
-  IconCrossCircle,
-  IconQuestionCircle,
-  IconCheckCircle,
-  IconInformationCircle,
-  IconClockCircle
-} from '@elhub/ds-icons'
-
-// render
-${reactElementToJSXString(AllVariants({}))}
-`}
-      >
+      <DemoableDiv alignContent='center' code={allVariantsCode}>
         <AllVariants />
       </DemoableDiv>
       <VerticalSpace size='3' />
@@ -326,18 +486,19 @@ ${reactElementToJSXString(AllVariants({}))}
         <li>Status: Ongoing</li>
         <li>Style: Default</li>
       </ul>
-      <DemoableDiv
-        alignContent='center'
-        code={`
-// import
-import { Badge } from '@elhub/ds-components'
-import { IconQualitiesCircle } from '@elhub/ds-icons'
-
-// render
-${reactElementToJSXString(DefaultBadge({}))}
-`}
-      >
+      <DemoableDiv alignContent='center' code={defaultBadgeCode}>
         <DefaultBadge />
+      </DemoableDiv>
+      <VerticalSpace size='3' />
+      {/* ------------------------------------------------------------------ */}
+      <Heading className='toc' size='medium' id='badge-no-icon' level='2' spacing>
+        Without icon
+      </Heading>
+      <VerticalSpace />
+      <BodyText>Badges can also be rendered without an icon.</BodyText>
+      <VerticalSpace />
+      <DemoableDiv alignContent='center' code={noIconBadgeCode}>
+        <NoIconBadge />
       </DemoableDiv>
       <VerticalSpace size='3' />
       {/* ------------------------------------------------------------------ */}
@@ -352,17 +513,7 @@ ${reactElementToJSXString(DefaultBadge({}))}
       </ul>
       <VerticalSpace />
 
-      <DemoableDiv
-        alignContent='center'
-        code={`
-// import
-import { Badge, FlexCenterDiv } from '@elhub/ds-components'
-import { IconQualitiesCircle } from '@elhub/ds-icons'
-
-// render
-${reactElementToJSXString(SizeBadge({}))}
-`}
-      >
+      <DemoableDiv alignContent='center' code={sizeBadgeCode}>
         <SizeBadge />
       </DemoableDiv>
       <VerticalSpace size='3' />
@@ -380,24 +531,7 @@ ${reactElementToJSXString(SizeBadge({}))}
       </ul>
       <VerticalSpace />
 
-      <DemoableDiv
-        alignContent='center'
-        code={`
-// import
-import { Badge, FlexCenterDiv, HorizontalSpace } from '@elhub/ds-components'
-import {
-  IconQualitiesCircle,
-  IconCrossCircle,
-  IconQuestionCircle,
-  IconCheckCircle,
-  IconInformationCircle,
-  IconClockCircle
-} from '@elhub/ds-icons'
-
-// render
-${reactElementToJSXString(StatusBadge({}))}
-`}
-      >
+      <DemoableDiv alignContent='center' code={statusBadgeCode}>
         <StatusBadge />
       </DemoableDiv>
       <VerticalSpace size='3' />
@@ -415,17 +549,7 @@ ${reactElementToJSXString(StatusBadge({}))}
       </ul>
       <VerticalSpace />
 
-      <DemoableDiv
-        alignContent='center'
-        code={`
-// import
-import { Badge, FlexCenterDiv } from '@elhub/ds-components'
-import { IconQualitiesCircle } from '@elhub/ds-icons'
-
-// render
-${reactElementToJSXString(VariantBadge({}))}
-`}
-      >
+      <DemoableDiv alignContent='center' code={variantBadgeCode}>
         <VariantBadge />
       </DemoableDiv>
       <VerticalSpace size='3' />
@@ -454,10 +578,10 @@ ${reactElementToJSXString(VariantBadge({}))}
               <code>icon</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>React.ReactNode</code>
+              <code>React.ComponentType&lt;SvgIconProps&gt;</code>
             </Table.DataCell>
             <Table.DataCell>Renders an icon on the left side</Table.DataCell>
-            <Table.DataCell>Yes</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>
               <code>-</code>
             </Table.DataCell>

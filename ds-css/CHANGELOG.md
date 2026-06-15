@@ -1,10 +1,28 @@
 # @elhub/ds-css
 
-## 6.2.0
+## 6.1.9
 
-### Minor Changes
+### Patch Changes
 
-- e2b6c63: add new feedback component
+- Fix selected table rows so hover text switches back to the default semantic text color.
+
+## 6.1.8
+
+### Patch Changes
+
+- Fix selected table rows so their text stays inverted against the selected background.
+
+## 6.1.7
+
+### Patch Changes
+
+- Make Badge icons optional and keep badge spacing correct when no icon is provided.
+
+## 6.1.6
+
+### Patch Changes
+
+- Adjust textfield size for large text.
 
 ## 6.1.5
 
