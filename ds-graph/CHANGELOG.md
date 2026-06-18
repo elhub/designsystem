@@ -1,5 +1,11 @@
 # @elhub/ds-graph
 
+## 6.0.2
+
+### Patch Changes
+
+- feat(ds-graph): re-export highcharts types
+
 ## 6.0.1
 
 ### Patch Changes
