@@ -28,7 +28,7 @@
     "changeset:prerelease": "changeset pre enter next",
     "release": "npm run build && npm run publish",
     "publish": "changeset publish",
-    "prerelease": "node ./prepare-publish.js",
+
     "test": "npm run test --ws",
     "test:ci": "npm run test:ci --ws",
     "knip": "knip",
