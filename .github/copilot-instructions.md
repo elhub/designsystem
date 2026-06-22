@@ -187,6 +187,6 @@ root/
 | Dev loop | `npm run start -w ds-www` |
 | Pre-commit check | `npm run tidy` (lint + prettier + typecheck) |
 | Full QA before PR | `npm run checktidy` (lint + prettier + typecheck + test) |
-| Release prep | `npm run changeset` then `npm run changeset:version` then `npm run prerelease` |
+| Release prep | `npm run changeset` then `npm run changeset:version` |
 | Publish | `npm run publish` |
 | Clean rebuild | `npm run clean && npm run install:all && npm run build` |
