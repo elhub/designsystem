@@ -46,7 +46,7 @@ const figma = async <T>(endpoint: string): Promise<T> => {
 
 const exportIcons = (): void => {
   execSync(
-    `../node_modules/.bin/svgr \
+    `npm exec svgr -- \
       --typescript \
       --no-dimensions \
       --template "src/extract/template.cjs" \
@@ -101,6 +101,9 @@ void (async () => {
   const rootPath = execSync('git rev-parse --show-toplevel').toString().trim()
 
   const iconsFolder = path.join(rootPath, iconsPathFromRoot)
+  const svgFolder = path.join(iconsFolder, 'svg')
+
+  fs.mkdirSync(svgFolder, { recursive: true })
 
   // Write SVG files
   await Promise.all(
@@ -119,7 +122,7 @@ void (async () => {
 
       if (!imageRes) return
       // Write to ds-icons/src/icons/svg/Icon.svg
-      const filePath = path.join(iconsFolder, 'svg', `${matchingIcon.name.trim()}.svg`)
+      const filePath = path.join(svgFolder, `${matchingIcon.name.trim()}.svg`)
       fs.writeFileSync(filePath, imageRes)
     })
   )

@@ -9,16 +9,13 @@ export const IconChevronDoubleLeft = React.forwardRef<SVGSVGElement, SvgProps>(
         width={sizeMap[size]}
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
-        viewBox='0 0 18 18'
+        viewBox='0 0 15 16'
         {...props}
       >
         <title>{title}</title>
         <path
-          stroke='currentColor'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth={1.6}
-          d='M9 17.182 1.086 9.644a.91.91 0 0 1 0-1.288L9.001.818m8.18 16.364L9.267 9.644a.91.91 0 0 1 0-1.288L17.182.818'
+          fill='currentColor'
+          d='M7.385.213a.665.665 0 0 1 .976 0c.269.284.269.744 0 1.028L1.95 8l6.41 6.759c.269.284.269.744 0 1.028a.665.665 0 0 1-.976 0L0 8zm6.422.018a.665.665 0 0 1 .974-.035.755.755 0 0 1 .033 1.027L8.816 8l5.998 6.777a.755.755 0 0 1-.033 1.027.665.665 0 0 1-.974-.035L6.929 8z'
         />
       </svg>
     )

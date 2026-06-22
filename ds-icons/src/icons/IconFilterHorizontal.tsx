@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { sizeMap, type SvgProps } from './types'
-export const IconTrash = React.forwardRef<SVGSVGElement, SvgProps>(
+export const IconFilterHorizontal = React.forwardRef<SVGSVGElement, SvgProps>(
   ({ size = 'small', title, ...props }, ref) => {
     return (
       <svg
@@ -17,13 +17,14 @@ export const IconTrash = React.forwardRef<SVGSVGElement, SvgProps>(
           stroke='currentColor'
           strokeLinecap='round'
           strokeLinejoin='round'
-          strokeWidth={1.6}
-          clipPath='url(#IconTrash_svg__a)'
+          strokeWidth={1.5}
+          clipPath='url(#IconFilterHorizontal_svg__a)'
         >
-          <path d='M1.2 4.006h13.6M11.6 15.2H4.4a1.6 1.6 0 0 1-1.6-1.6V4h10.4v9.6a1.6 1.6 0 0 1-1.6 1.6M5.133 4v-.366a2.834 2.834 0 0 1 5.667 0V4M6.383 7.2V12M9.624 7.2V12' />
+          <path d='M.5.5h15v15H.5zM8.5 10.5h4M3.5 10.5h2' />
+          <path d='M8.5 10.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M9.5 5.5h-6M12.5 5.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0' />
         </g>
         <defs>
-          <clipPath id='IconTrash_svg__a'>
+          <clipPath id='IconFilterHorizontal_svg__a'>
             <path fill='currentColor' d='M0 0h16v16H0z' />
           </clipPath>
         </defs>
@@ -31,4 +32,4 @@ export const IconTrash = React.forwardRef<SVGSVGElement, SvgProps>(
     )
   }
 )
-IconTrash.displayName = 'IconTrash'
+IconFilterHorizontal.displayName = 'IconFilterHorizontal'

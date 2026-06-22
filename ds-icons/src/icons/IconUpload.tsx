@@ -18,14 +18,7 @@ export const IconUpload = React.forwardRef<SVGSVGElement, SvgProps>(
           strokeLinecap='round'
           strokeLinejoin='round'
           strokeWidth={1.5}
-          d='M8 2.66666V9.66666M8 2.66666L10.5 4.66666M8 2.66666L5.5 4.66666'
-        />
-        <path
-          stroke='currentColor'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth={1.5}
-          d='M1 9.86667V12.8667C1 13.419 1.44772 13.8667 2 13.8667H14C14.5523 13.8667 15 13.419 15 12.8667V9.86667'
+          d='M8 2.667v7m-2.5-5 2.5-2 2.5 2M1 9.867v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3'
         />
       </svg>
     )
