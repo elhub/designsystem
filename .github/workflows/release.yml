@@ -7,9 +7,9 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-# Required for OIDC trusted publishing
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
   id-token: write
 
 jobs:
@@ -19,23 +19,24 @@ jobs:
     environment: npm-publish
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Setup Node.js 24
-        uses: actions/setup-node@v4
+      - name: Setup Node.js 26
+        uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 26
+          cache: npm
           registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
         run: |
           printf 'registry=https://registry.npmjs.org/\nlegacy-peer-deps=true\n' > .npmrc
-          npm install --no-package-lock && npm install --ws --no-package-lock
+          npm ci
 
-      - name: Build
-        run: |
-          export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
-          npm run build --ws --if-present
-
-      - name: Publish
-        run: npm run publish
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

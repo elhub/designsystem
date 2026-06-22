@@ -73,7 +73,7 @@ npm run knip           # Check for unused dependencies
 ```bash
 npm run changeset           # Create changelog entry (run before PR)
 npm run changeset:version   # Bump versions (run on release branch)
-npm run prerelease          # Prepare publish (runs prepare-publish.js)
+npm run release             # Build and publish packages with Changesets
 npm run publish             # Publish to npm (automated via GitHub Actions release workflow)
 ```
 
@@ -120,7 +120,7 @@ npm run publish             # Publish to npm (automated via GitHub Actions relea
 
 ### Version Management
 - **Changesets workflow:** Create `.changeset/*.md` files before PRs; commit them
-- **Publishing registry:** npmjs.org - packages are published automatically via GitHub Actions on every push to `main` using OIDC trusted publishing
+- **Publishing registry:** npmjs.org - packages are published automatically via GitHub Actions on pushes to `main` using `changesets/action` with OIDC trusted publishing
 
 ## Common Tasks & Patterns
 
