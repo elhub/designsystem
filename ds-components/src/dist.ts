@@ -75,6 +75,8 @@ export type {
   FormItemSize
 } from './components/form'
 
+export { Feedback } from './components/feedback'
+
 export { FilterPanel } from './components/filter-panel'
 export type { FilterPanelProps } from './components/filter-panel'
 

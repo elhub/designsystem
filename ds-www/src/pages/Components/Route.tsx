@@ -36,6 +36,7 @@ const Route: React.FC = () => {
     { label: 'Datepicker', value: 'datepicker' },
     { label: 'Divider', value: 'divider' },
     { label: 'Dropdown', value: 'dropdown' },
+    { label: 'Feedback', value: 'feedback' },
     { label: 'FilterPanel', value: 'filterpanel' },
     { label: 'FormItem', value: 'form-item' },
     { label: 'Link', value: 'link' },

@@ -55,6 +55,7 @@ root.render(
             <Route path='datepicker' element={<Pages.Components.Datepicker />} />
             <Route path='divider' element={<Pages.Components.Divider />} />
             <Route path='dropdown' element={<Pages.Components.Dropdown />} />
+            <Route path='feedback' element={<Pages.Components.Feedback />} />
             <Route path='filterpanel' element={<Pages.Components.FilterPanel />} />
             <Route path='form-item' element={<Pages.Components.FormItem />} />
             <Route path='link' element={<Pages.Components.Link />} />
