@@ -18,7 +18,7 @@ export const IconDownload = React.forwardRef<SVGSVGElement, SvgProps>(
           strokeLinecap='round'
           strokeLinejoin='round'
           strokeWidth={1.5}
-          d='M1 9.667v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3m-7-.334v-7m0 7-2.5-2m2.5 2 2.5-2'
+          d='M1 9.667v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3m-7-.334v-7m2.5 5-2.5 2-2.5-2'
         />
       </svg>
     )

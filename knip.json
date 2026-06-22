@@ -12,7 +12,8 @@
     },
     "ds-icons": {
       "entry": ["src/dist.ts"],
-      "project": ["src/**/*.{js,ts,tsx,jsx}"]
+      "project": ["src/**/*.{js,ts,tsx,jsx}"],
+      "ignoreDependencies": ["@svgr/cli"]
     },
     "ds-graph": {
       "entry": ["src/dist.ts"],
