@@ -69,13 +69,12 @@ npm run checktidy      # Lint + prettier + typecheck + test (full check)
 npm run knip           # Check for unused dependencies
 ```
 
-### Publishing
+### Versioning and publishing
 ```bash
-npm run changeset           # Create changelog entry (run before PR)
-npm run changeset:version   # Bump versions (run on release branch)
-npm run release             # Build and publish packages with Changesets
-npm run publish             # Publish to npm (automated via GitHub Actions release workflow)
+npm run changeset           # Create a changeset for published-package changes
 ```
+
+A GitHub Action creates the release PR and handles publishing automatically after changesets are merged to `main`.
 
 ## Project-Specific Conventions
 
@@ -119,7 +118,7 @@ npm run publish             # Publish to npm (automated via GitHub Actions relea
 - Peer dependencies: `react`, `react-dom` (must be provided by consuming applications)
 
 ### Version Management
-- **Changesets workflow:** Create `.changeset/*.md` files before PRs; commit them
+- **Changesets workflow:** Create and commit `.changeset/*.md` files when a change should be released in a published package
 - **Publishing registry:** npmjs.org - packages are published automatically via GitHub Actions on pushes to `main` using `changesets/action` with OIDC trusted publishing
 
 ## Common Tasks & Patterns
@@ -187,6 +186,4 @@ root/
 | Dev loop | `npm run start -w ds-www` |
 | Pre-commit check | `npm run tidy` (lint + prettier + typecheck) |
 | Full QA before PR | `npm run checktidy` (lint + prettier + typecheck + test) |
-| Release prep | `npm run changeset` then `npm run changeset:version` |
-| Publish | `npm run publish` |
 | Clean rebuild | `npm run clean && npm run install:all && npm run build` |

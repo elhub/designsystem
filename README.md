@@ -39,10 +39,9 @@ contributions to continuously improve the quality and accessibility of our user 
 
 If you want to improve the design system, clone this repository and follow the development instructions below.
 
-If you want to use the design system in your project, currently you need to clone the repository from GitHub,
-build it locally, and include the packages in your project. Eventually, these packages will be published to
-npm under the [@elhub organization](https://www.npmjs.com/org/elhub), allowing you to install them directly
-using npm or yarn.
+If you want to use the design system in your project, install the published packages from npm under the
+[@elhub organization](https://www.npmjs.com/org/elhub). If you want to contribute or work on the design
+system itself, clone this repository and follow the development instructions below.
 
 # Structure
 
@@ -61,26 +60,16 @@ This repository is a monorepo scoped as @elhub, and contains the following npm w
 
 ### For End Users
 
-Currently, to use the design system in your project, you need to:
+Install the published packages directly from npm:
 
-1. Clone this repository:
-```bash
-git clone https://github.com/elhub/user-interface-design-system.git
-cd user-interface-design-system
-```
-
-2. Install dependencies and build:
-```bash
-npm run install:all
-npm run build
-```
-
-3. Link the packages to your project or reference them directly.
-
-**Coming soon:** Packages will be published to npm under the [@elhub organization](https://www.npmjs.com/org/elhub),
-allowing direct installation via:
 ```bash
 npm install @elhub/ds-components @elhub/ds-css
+```
+
+Optional packages:
+
+```bash
+npm install @elhub/ds-graph @elhub/ds-icons @elhub/ds-tokens
 ```
 
 ### Required Dependencies
@@ -189,8 +178,8 @@ npm -v   # Should output 9.x.x or higher
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/elhub/user-interface-design-system.git
-cd user-interface-design-system
+git clone https://github.com/elhub/designsystem.git
+cd designsystem
 ```
 
 2. **Install all dependencies:**
@@ -321,7 +310,7 @@ This project uses [Changesets](https://github.com/changesets/changesets) for ver
 #### Creating a Changeset
 
 1. Make your changes to the codebase
-2. Create a changeset:
+2. If the change should be released in a published package, create a changeset:
 ```bash
 npm run changeset
 ```
@@ -330,16 +319,14 @@ npm run changeset
 
 #### Versioning
 
-To bump versions based on changesets:
-```bash
-npm run changeset:version
-```
+A GitHub Action creates or updates the release PR and generates version bumps and changelog
+updates for committed changesets.
 
 #### Publishing
 
-Publishing is handled by the GitHub Actions release workflow with `changesets/action`, which
-creates a release PR when changesets are present and publishes to npm after merge to `main`
-using npm trusted publishing (OIDC).
+Publishing is handled by a GitHub Action using `changesets/action`, which creates the release PR
+when changesets are present and publishes to npm after merge to `main` using npm trusted
+publishing (OIDC).
 You can also publish manually from the repository root:
 ```bash
 npm run release
@@ -373,7 +360,7 @@ npm run update    # Update all package.json files with latest dependency version
 | **Linting**         | ESLint (Flat Config) |
 | **Formatting**      | Prettier             |
 | **Version Control** | Git, GitHub          |
-| **CI/CD**           | TeamCity             |
+| **CI/CD**           | GitHub Actions       |
 | **Package Manager** | npm (workspaces)     |
 
 ### Browser Support

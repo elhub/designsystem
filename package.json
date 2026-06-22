@@ -24,7 +24,6 @@
     "prettier": "npm run prettier --ws",
     "prettier:fix": "npm run prettier:fix --ws",
     "changeset": "changeset",
-    "changeset:version": "changeset version",
     "changeset:prerelease": "changeset pre enter next",
     "release": "npm run build && npm run publish",
     "publish": "changeset publish",
