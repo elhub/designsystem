@@ -1,5 +1,11 @@
 # @elhub/ds-icons
 
+## 4.9.0
+
+### Minor Changes
+
+- 118f668: Add IconFilterHorizontal
+
 ## 4.8.2
 
 ### Patch Changes
