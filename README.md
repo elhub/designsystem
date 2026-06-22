@@ -337,10 +337,12 @@ npm run changeset:version
 
 #### Publishing
 
-Publishing is typically handled by CI/CD (TeamCity), but can be done manually:
+Publishing is handled by the GitHub Actions release workflow with `changesets/action`, which
+creates a release PR when changesets are present and publishes to npm after merge to `main`
+using npm trusted publishing (OIDC).
+You can also publish manually from the repository root:
 ```bash
-npm run prerelease   # Prepare for release
-npm run publish      # Publish to registry
+npm run release
 ```
 
 ### Updating Dependencies
