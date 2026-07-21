@@ -1,0 +1,65 @@
+:root {
+    --eds-code-snippet-border: var(--eds-semantic-border);
+    --eds-code-snippet-border-radius: var(--eds-border-radius-medium);
+    --eds-code-snippet-toolbar-background: var(--eds-semantic-background);
+    --eds-code-snippet-code-background: var(--eds-color-grey-900);
+    --eds-code-snippet-code-color: var(--eds-color-white);
+}
+
+.eds-code-snippet {
+    border: var(--eds-size-0-25) solid var(--eds-code-snippet-border);
+    border-radius: var(--eds-code-snippet-border-radius);
+    overflow: hidden;
+}
+
+.eds-code-snippet__toolbar {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--eds-size-4);
+    padding: var(--eds-size-3);
+    background: var(--eds-code-snippet-toolbar-background);
+}
+
+.eds-code-snippet__controls {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--eds-size-4);
+    flex: 1;
+    min-width: 0;
+}
+
+.eds-code-snippet__copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--eds-size-1);
+    padding: var(--eds-size-1) var(--eds-size-2);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--eds-semantic-text);
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-end;
+    margin-bottom: var(--eds-size-1);
+}
+
+.eds-code-snippet__copy-button:hover {
+    color: var(--eds-semantic-text-action-selected);
+}
+
+.eds-code-snippet__copy-icon {
+    flex-shrink: 0;
+}
+
+.eds-code-snippet__code {
+    background: var(--eds-code-snippet-code-background);
+    color: var(--eds-code-snippet-code-color);
+    padding: var(--eds-size-4);
+    margin: 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: monospace;
+    font-size: var(--eds-font-size-small);
+    line-height: var(--eds-line-height-small);
+}

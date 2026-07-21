@@ -21,6 +21,9 @@ export {
   CardHeaderContent
 } from './components/card'
 
+export { CodeSnippet } from './components/code-snippet'
+export type { CodeSnippetProps } from './components/code-snippet'
+
 export { Chips, Chip } from './components/chips'
 export type { ChipsProps, ChipProps } from './components/chips'
 
