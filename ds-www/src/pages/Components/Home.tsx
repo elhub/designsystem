@@ -12,6 +12,8 @@ import {
   CardHeaderActions,
   CardHeaderContent,
   CardTitle,
+  CodeSnippet,
+  type CodeSnippetRequest,
   CookieBanner,
   CookieBannerActions,
   CookieBannerContent,
@@ -222,6 +224,19 @@ const ComponentsHome: React.FC = () => {
           <FormItemLabel>Ingredients</FormItemLabel>
           <Combobox options={['egg', 'milk', 'sugar']} />
         </FormItem>
+      )
+    },
+    {
+      navigate: '/components/code-snippet',
+      label: 'CodeSnippet',
+      description: 'Renders a code block with a copy button and optional language/request selectors.',
+      el: (
+        <CodeSnippet
+          requests={[
+            { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/grid-areas' },
+            { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/grid-areas/50Y2VA2X6F00RRCT' },
+          ] as CodeSnippetRequest[]}
+        />
       )
     },
     {

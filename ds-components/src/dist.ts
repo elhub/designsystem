@@ -1,4 +1,4 @@
-export { Accordion } from './components/accordion'
+﻿export { Accordion } from './components/accordion'
 export type { AccordionProps, AccordionVariant, AccordionSize } from './components/accordion'
 
 export { Alert } from './components/alert'
@@ -20,6 +20,9 @@ export {
   CardHeaderActions,
   CardHeaderContent
 } from './components/card'
+
+export { CodeSnippet } from './components/code-snippet'
+export type { CodeSnippetProps, CodeSnippetRequest } from './components/code-snippet'
 
 export { Chips, Chip } from './components/chips'
 export type { ChipsProps, ChipProps } from './components/chips'
