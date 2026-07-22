@@ -5,6 +5,8 @@ import { TableDefaultExample } from './examples/Default'
 import tableDefaultSource from './examples/Default.tsx?raw'
 import { TableExpandableExample } from './examples/Expandable'
 import tableExpandableSource from './examples/Expandable.tsx?raw'
+import { TableLoadingAndOverflowExample } from './examples/LoadingAndOverflow'
+import tableLoadingAndOverflowSource from './examples/LoadingAndOverflow.tsx?raw'
 import { TableSelectableExample } from './examples/Selectable'
 import tableSelectableSource from './examples/Selectable.tsx?raw'
 import { TableSizesExample } from './examples/Sizes'
@@ -67,12 +69,29 @@ const ComponentsTable = () => {
       <VerticalSpace />
 
       <BodyText>
-        Set the <code>sort</code> prop and <code>onSortChange</code> to handle the sort requests. You also
-        have to add the <code>sortable</code> prop to the column headers you want to allow to be sorted by.
+        Use <code>sort</code> and <code>onSortChange</code> for controlled sorting. The callback receives the
+        complete next sort state, making it suitable for backend sorting. Add <code>sortable</code> and a{' '}
+        <code>sortKey</code> to sortable column headers. This example updates the indicator immediately while
+        simulating an 800 ms debounced backend request before updating the rows.
       </BodyText>
 
       <DemoableDiv alignContent='center' code={tableSortableSource} codeHighlighter='shiki'>
         <TableSortableExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+
+      <Heading classRecipe='toc' size='medium' id='table-loading-overflow' level='2' spacing>
+        Loading and horizontal overflow
+      </Heading>
+
+      <BodyText>
+        Use <code>Table.Skeleton</code> to preserve the table layout while data loads. For wide tables, wrap a
+        content-fitted table in <code>Table.ScrollContainer</code>.
+      </BodyText>
+
+      <DemoableDiv alignContent='center' code={tableLoadingAndOverflowSource} codeHighlighter='shiki'>
+        <TableLoadingAndOverflowExample />
       </DemoableDiv>
 
       <VerticalSpace size='2' />
@@ -127,6 +146,21 @@ const ComponentsTable = () => {
             <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>
               <code>medium</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>fit</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>'auto' | 'container' | 'content'</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              Controls whether the table fills its container or uses its content width
+            </Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>auto</code>
             </Table.DataCell>
           </Table.Row>
           <Table.Row>
