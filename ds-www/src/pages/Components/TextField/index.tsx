@@ -1,0 +1,243 @@
+import { BodyText, Heading, Table, VerticalSpace } from '@elhub/ds-components'
+import CodeDiv from 'components/CodeDiv/CodeDiv'
+import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { TextFieldDefaultExample } from './examples/Default'
+import textFieldDefaultSource from './examples/Default.tsx?raw'
+import { TextFieldControlledExample } from './examples/Controlled'
+import textFieldControlledSource from './examples/Controlled.tsx?raw'
+import { TextFieldTypesExample } from './examples/Types'
+import textFieldTypesSource from './examples/Types.tsx?raw'
+import { TextFieldSizesExample } from './examples/Sizes'
+import textFieldSizesSource from './examples/Sizes.tsx?raw'
+import { TextFieldUnitExample } from './examples/Unit'
+import textFieldUnitSource from './examples/Unit.tsx?raw'
+import { TextFieldIconExample } from './examples/Icon'
+import textFieldIconSource from './examples/Icon.tsx?raw'
+import { TextFieldDisabledExample } from './examples/Disabled'
+import textFieldDisabledSource from './examples/Disabled.tsx?raw'
+import { TextFieldErrorExample } from './examples/Error'
+import textFieldErrorSource from './examples/Error.tsx?raw'
+
+const ComponentsTextField: React.FC = () => {
+  return (
+    <>
+      <VerticalSpace />
+      <Heading size='large' id='textfield' level='1' spacing>
+        TextField
+      </Heading>
+      <VerticalSpace />
+      <BodyText>
+        The default component is a simple text input field. It can be controlled or uncontrolled, and supports
+        props for size, unit, and more.
+      </BodyText>
+      <VerticalSpace />
+      <BodyText>
+        The <code>TextField</code> component needs to be used inside a <code>FormItem</code> component, which
+        handles:
+        <ul>
+          <li>
+            <strong>Accessibility</strong>: Ensures proper <code>id</code> and <code>aria</code> attributes
+            are applied to the input and associated label.
+          </li>
+          <li>
+            <strong>State Management</strong>: Shares properties including <code>size</code> as well as{' '}
+            <code>disabled</code> and <code>hasError</code> with its child components.
+          </li>
+          <li>
+            <strong>Error and Description Linking</strong>: Associates the input field with error messages and
+            helper text using <code>aria-describedby</code>.
+          </li>
+        </ul>
+      </BodyText>
+      <VerticalSpace />
+      <BodyText>
+        You can look at the code provided in the examples, as well as go to the{' '}
+        <Link to={'/components/form-item'}>FormItem</Link> documentation for further usage and implementation.
+      </BodyText>
+      <VerticalSpace size='2' />
+      <Heading className='toc' size='medium' id='textfield-default' level='2' spacing>
+        Default component
+      </Heading>
+      <VerticalSpace size='2' />
+      <DemoableDiv alignContent='center' code={textFieldDefaultSource} codeHighlighter='shiki'>
+        <TextFieldDefaultExample />
+      </DemoableDiv>
+      <VerticalSpace size='2' />
+      <Heading className='toc' size='medium' id='textfield-controlled' level='2' spacing>
+        Controlled
+      </Heading>
+      <BodyText>
+        The TextField component can be controlled by passing a value prop and an onChange function
+      </BodyText>
+      <VerticalSpace size='2' />
+      <DemoableDiv alignContent='center' code={textFieldControlledSource} codeHighlighter='shiki'>
+        <TextFieldControlledExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='medium' id='textfield-controlled' level='2' spacing>
+        Type
+      </Heading>
+      <VerticalSpace size='2' />
+      <DemoableDiv alignContent='center' code={textFieldTypesSource} codeHighlighter='shiki'>
+        <TextFieldTypesExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='medium' id='select-size' level='2' spacing>
+        Size
+      </Heading>
+
+      <CodeDiv expand={false} highlighter='shiki' spacing>
+        export type FormItemSize = 'large' | 'medium' | 'small'
+      </CodeDiv>
+
+      <VerticalSpace size='2' />
+
+      <DemoableDiv alignContent='center' code={textFieldSizesSource} codeHighlighter='shiki'>
+        <TextFieldSizesExample />
+      </DemoableDiv>
+
+      <VerticalSpace />
+      <Heading className='toc' size='medium' id='unit' level='2' spacing>
+        Unit
+      </Heading>
+
+      <VerticalSpace />
+
+      <BodyText>The unit prop is used for displaying a unit after the input field</BodyText>
+
+      <DemoableDiv alignContent='center' code={textFieldUnitSource} codeHighlighter='shiki'>
+        <TextFieldUnitExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+      <Heading className='toc' size='medium' id='icon' level='2' spacing>
+        Icon
+      </Heading>
+
+      <VerticalSpace />
+
+      <BodyText>
+        If you want to use an icon, you can use the <code>icon</code> prop and specify an icon from
+        @elhub/ds-icons
+      </BodyText>
+
+      <DemoableDiv alignContent='center' code={textFieldIconSource} codeHighlighter='shiki'>
+        <TextFieldIconExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='medium' id='select-disable' level='2' spacing>
+        Disable
+      </Heading>
+
+      <VerticalSpace size='2' />
+
+      <DemoableDiv alignContent='center' code={textFieldDisabledSource} codeHighlighter='shiki'>
+        <TextFieldDisabledExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='medium' id='select-error' level='2' spacing>
+        Error
+      </Heading>
+
+      <VerticalSpace />
+
+      <BodyText>
+        To propagate errors, use the <code>FormItem</code> component which will handle errors and display them
+        in the correct position.
+      </BodyText>
+
+      <VerticalSpace size='2' />
+
+      <DemoableDiv alignContent='center' code={textFieldErrorSource} codeHighlighter='shiki'>
+        <TextFieldErrorExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='large' id='properties' level='2' spacing>
+        Props table
+      </Heading>
+
+      <VerticalSpace size='2' />
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeader>Name</Table.ColumnHeader>
+            <Table.ColumnHeader>Type</Table.ColumnHeader>
+            <Table.ColumnHeader>Description</Table.ColumnHeader>
+            <Table.ColumnHeader>Required</Table.ColumnHeader>
+            <Table.ColumnHeader>Default</Table.ColumnHeader>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          <Table.Row>
+            <Table.DataCell>
+              <code>value</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>text</code>
+            </Table.DataCell>
+            <Table.DataCell>Sets TextField value</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>defaultValue</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>text</code>
+            </Table.DataCell>
+            <Table.DataCell>Sets TextField default value</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+
+          <Table.Row>
+            <Table.DataCell>
+              <code>type</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>'date' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'url'</code>
+            </Table.DataCell>
+            <Table.DataCell>Set TextField type, for better text input</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>text</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>unit</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>ReactNode</code>
+            </Table.DataCell>
+            <Table.DataCell>Used for rendering a unit after the input field</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+      <VerticalSpace size='3' />
+    </>
+  )
+}
+
+export default ComponentsTextField

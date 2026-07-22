@@ -10,7 +10,8 @@
     "allowJs": false,
     "skipLibCheck": true,
     "target": "ESNext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "declaration": true,
     "outDir": "dist",
     "types": ["vite/client"]

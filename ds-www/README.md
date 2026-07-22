@@ -21,7 +21,7 @@ The documentation site showcases:
 - **Routing**: React Router v6
 - **Styling**: Design system components from `@elhub/ds-components` and `@elhub/ds-css`
 - **Markdown**: react-markdown with GitHub Flavored Markdown support
-- **Code Highlighting**: react-syntax-highlighter
+- **Code Highlighting**: Shiki
 
 ## Development
 

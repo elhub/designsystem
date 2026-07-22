@@ -1,0 +1,26 @@
+-- styles.css 
+.eds-button--green {
+  background-color: var(--eds-color-elhub-brand-green);
+}
+
+--- Component.js
+import { Button } from '@elhub/ds-components'
+import styled from 'styled-components'
+import '@elhub/ds-css'
+
+const GreenButton = styled(Button)`
+  background-color: var(--eds-color-elhub-brand-green);
+`
+
+const Component = () => {
+  return (
+  <div>
+    <GreenButton>
+      Green Button with styled-components
+    </GreenButton>
+    <Button className="eds-button--green">
+      Green Button with css
+    </Button>
+    </div>
+  )
+}

@@ -1,0 +1,9 @@
+<Container>
+  <Header height='10rem'/>
+  <FlexDiv>
+    <Margin/>
+    <Content flex='6'/>
+    <Margin/>
+  </FlexDiv>
+  <Footer height='5rem'/>
+</Container>

@@ -1,16 +1,15 @@
 import { Accordion, PileDiv, Heading, VerticalSpace } from '@elhub/ds-components'
 import CopyClipboardButton from 'components/CopyClipboardButton/CopyClipboardButton'
-import React from 'react'
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-type CodeDivProps = React.PropsWithChildren & {
-  expand: boolean
+type CodeDivProps = {
+  children: string
+  expand?: boolean
   copy?: boolean
-  spacing: boolean
+  spacing?: boolean
   padded?: boolean
+  highlighter?: 'shiki'
 }
 
 const CornerDiv = styled.div<{ padded?: 'true' }>`
@@ -20,6 +19,16 @@ const CornerDiv = styled.div<{ padded?: 'true' }>`
 `
 
 const CodeDivWrapper = styled(PileDiv)`
+  .shiki,
+  .shiki-fallback {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 1rem 1rem 1rem 1.5rem;
+    overflow-x: auto;
+    background-color: var(--eds-semantic-background-alternative) !important;
+  }
+
   .code:hover .copyButton {
     display: inherit;
   }
@@ -28,7 +37,51 @@ const CodeDivWrapper = styled(PileDiv)`
   }
 `
 
-SyntaxHighlighter.registerLanguage('jsx', jsx)
+const shikiHighlighter = Promise.all([
+  import('shiki/core'),
+  import('shiki/engine/javascript'),
+  import('@shikijs/langs/tsx'),
+  import('@shikijs/themes/github-light')
+]).then(
+  ([
+    { createHighlighterCore },
+    { createJavaScriptRegexEngine },
+    { default: tsx },
+    { default: githubLight }
+  ]) =>
+    createHighlighterCore({
+      themes: [githubLight],
+      langs: [tsx],
+      engine: createJavaScriptRegexEngine()
+    })
+)
+
+const ShikiHighlighter: React.FC<{ code: string }> = ({ code }) => {
+  const [html, setHtml] = useState<string>()
+  const [error, setError] = useState<Error>()
+
+  useEffect(() => {
+    let active = true
+
+    void shikiHighlighter
+      .then((highlighter) => highlighter.codeToHtml(code, { lang: 'tsx', theme: 'github-light' }))
+      .then((highlightedCode) => {
+        if (active) setHtml(highlightedCode)
+      })
+      .catch((cause: unknown) => {
+        if (active) setError(cause instanceof Error ? cause : new Error('Failed to highlight code'))
+      })
+
+    return () => {
+      active = false
+    }
+  }, [code])
+
+  if (error) return <pre className='shiki-fallback'>Unable to highlight code: {error.message}</pre>
+  if (!html) return <pre className='shiki-fallback'>{code}</pre>
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
+}
 
 const CodeDiv: React.FC<CodeDivProps> = ({
   expand = true,
@@ -56,13 +109,11 @@ const CodeDiv: React.FC<CodeDivProps> = ({
             <Accordion.Content style={{ padding: '0px' }}>
               <div className='code' style={{ position: 'relative' }}>
                 {copy && (
-                  <CornerDiv padded={padded} className='copyButton'>
+                  <CornerDiv padded={padded ? 'true' : undefined} className='copyButton'>
                     <CopyClipboardButton text={children} />
                   </CornerDiv>
                 )}
-                <SyntaxHighlighter language='jsx' style={prism}>
-                  {children}
-                </SyntaxHighlighter>
+                <ShikiHighlighter code={children} />
               </div>
             </Accordion.Content>
           </Accordion.Item>
@@ -77,13 +128,11 @@ const CodeDiv: React.FC<CodeDivProps> = ({
           }}
         >
           {copy && (
-            <CornerDiv padded={padded} className='copyButton'>
+            <CornerDiv padded={padded ? 'true' : undefined} className='copyButton'>
               <CopyClipboardButton text={children} />
             </CornerDiv>
           )}
-          <SyntaxHighlighter language='jsx' style={prism} wrapLines>
-            {children}
-          </SyntaxHighlighter>
+          <ShikiHighlighter code={children} />
         </div>
       )}
       {spacing && <VerticalSpace />}

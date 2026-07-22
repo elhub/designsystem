@@ -1,0 +1,3 @@
+import { IconBulb } from '@elhub/ds-icons'
+
+<IconBulb size="small" />
