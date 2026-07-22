@@ -248,3 +248,7 @@
 .eds-datepicker input {
     text-transform: capitalize;
 }
+
+.eds-datepicker input::placeholder {
+    text-transform: none;
+}
