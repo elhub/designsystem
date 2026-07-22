@@ -1,0 +1,7 @@
+<Container>
+    <Header height='10rem'/>
+    <FlexDiv>
+      <Nav/>
+      <Content flex='6'/>
+    </FlexDiv>
+</Container>

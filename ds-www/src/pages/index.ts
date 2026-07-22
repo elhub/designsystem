@@ -1,5 +1,5 @@
 import Home from './Home/Home'
-import StartHere from './StartHere/StartHere'
+import StartHere from './StartHere'
 import * as Resources from './Resources'
 import * as Changelog from './Changelog'
 import * as Components from './Components'
