@@ -7,6 +7,8 @@ import ExpandableRow, { type ExpandableRowType } from './ExpandableRow'
 import Header, { type HeaderType } from './Header'
 import HeaderCell, { type HeaderCellType } from './HeaderCell'
 import Row, { type RowType } from './Row'
+import ScrollContainer, { type ScrollContainerType } from './ScrollContainer'
+import Skeleton, { type SkeletonType } from './Skeleton'
 
 export type SortDirection = 'ascending' | 'descending'
 
@@ -25,13 +27,18 @@ export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> 
    */
   size?: 'medium' | 'small'
   /**
-   * Sort state
+   * Controlled sort state.
    */
   sort?: SortState
   /**
-   * Callback whens sort state changes
+   * Called with the complete next sort state.
    */
-  onSortChange?: (sortKey?: string) => void
+  onSortChange?: (sort?: SortState) => void
+  /**
+   * Controls whether the table uses automatic browser sizing, fills its container, or uses its content width.
+   * @default "auto"
+   */
+  fit?: 'auto' | 'container' | 'content'
 }
 
 interface TableType extends React.ForwardRefExoticComponent<
@@ -44,21 +51,50 @@ interface TableType extends React.ForwardRefExoticComponent<
   HeaderCell: HeaderCellType
   ColumnHeader: ColumnHeaderType
   ExpandableRow: ExpandableRowType
+  ScrollContainer: ScrollContainerType
+  Skeleton: SkeletonType
 }
 
 interface TableContextProps {
   size: 'medium' | 'small'
-  onSortChange?: (sortKey: string) => void
+  requestSort: (sortKey: string, type?: SortType) => void
   sort?: SortState
 }
 
 export const TableContext = createContext<TableContextProps | null>(null)
 
-const Table = forwardRef(({ className, size = 'small', onSortChange, sort, ...rest }, ref) => (
-  <TableContext.Provider value={{ size, onSortChange, sort }}>
-    <table {...rest} ref={ref} className={cl('eds-table', `eds-table--${size}`, className)} />
-  </TableContext.Provider>
-)) as TableType
+const getNextSort = (
+  sort: SortState | undefined,
+  sortKey: string,
+  type?: SortType
+): SortState | undefined => {
+  if (sort?.orderBy !== sortKey) {
+    return { orderBy: sortKey, direction: 'ascending', type }
+  }
+  if (sort.direction === 'ascending') {
+    return { orderBy: sortKey, direction: 'descending', type }
+  }
+  return undefined
+}
+
+const Table = forwardRef((props, ref) => {
+  const { className, size = 'small', fit = 'auto', onSortChange, sort, ...rest } = props
+
+  const requestSort = (sortKey: string, type?: SortType) => {
+    const nextSort = getNextSort(sort, sortKey, type)
+    onSortChange?.(nextSort)
+  }
+
+  return (
+    <TableContext.Provider value={{ size, requestSort, sort }}>
+      <table
+        {...rest}
+        ref={ref}
+        className={cl('eds-table', `eds-table--${size}`, `eds-table--fit-${fit}`, className)}
+      />
+    </TableContext.Provider>
+  )
+}) as TableType
 
 Table.Header = Header
 Table.Body = Body
@@ -67,6 +103,8 @@ Table.ColumnHeader = ColumnHeader
 Table.HeaderCell = HeaderCell
 Table.DataCell = DataCell
 Table.ExpandableRow = ExpandableRow
+Table.ScrollContainer = ScrollContainer
+Table.Skeleton = Skeleton
 
 Table.displayName = 'Table'
 export default Table

@@ -105,7 +105,13 @@ export { Stepper } from './components/stepper'
 export type { StepProps, StepperProps } from './components/stepper'
 
 export { Table } from './components/table'
-export type { TableProps, SortState, SortDirection } from './components/table'
+export type {
+  TableProps,
+  SortState,
+  SortDirection,
+  SkeletonProps as TableSkeletonProps,
+  ScrollContainerProps as TableScrollContainerProps
+} from './components/table'
 
 export { Tabs } from './components/tabs'
 export type { TabsProps } from './components/tabs'
