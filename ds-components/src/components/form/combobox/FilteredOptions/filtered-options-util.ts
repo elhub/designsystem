@@ -11,8 +11,8 @@ const getMatchingValuesFromList = (value: string, list: ComboboxOption[]) =>
 
 const getFilteredOptionsId = (comboboxId: string) => `${comboboxId}-filtered-options`
 
-const getOptionId = (comboboxId: string, option: string) =>
-  `${comboboxId.toLocaleLowerCase()}-option-${option.replace(' ', '-').toLocaleLowerCase()}`
+const getOptionId = (comboboxId: string, optionIndex: number) =>
+  `${comboboxId.toLocaleLowerCase()}-option-${optionIndex}`
 
 const getAddNewOptionId = (comboboxId: string) => `${comboboxId}-combobox-new-option`
 

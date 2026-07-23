@@ -113,7 +113,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           // so we don't interfere with text editing
           if ('selectionStart' in e.target && e.target.selectionStart === value?.length) {
             e.preventDefault()
-            if (virtualFocus.activeElement === null || !isListOpen) {
+            if (!activeDecendantId || !isListOpen) {
               toggleIsListOpen(true)
             }
             virtualFocus.moveFocusDown()
