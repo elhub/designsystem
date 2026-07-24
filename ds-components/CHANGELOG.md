@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.15.0
+
+### Minor Changes
+
+- 7e67145: Improve controlled Table sorting with complete sort-state callbacks. Add content-width tables, a horizontal scroll container, and reusable skeleton rows.
+
 ## 4.14.0
 
 ### Minor Changes

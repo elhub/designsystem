@@ -1,5 +1,15 @@
 # @elhub/ds-css
 
+## 6.3.0
+
+### Minor Changes
+
+- 7e67145: Improve controlled Table sorting with complete sort-state callbacks. Add content-width tables, a horizontal scroll container, and reusable skeleton rows.
+
+### Patch Changes
+
+- 0545666: Preserve Datepicker placeholder casing.
+
 ## 6.2.0
 
 ### Minor Changes
