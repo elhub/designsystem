@@ -47,7 +47,7 @@
     "react-merge-refs": "^2.1.1",
     "react-modal": "^3.16.1",
     "react-popper": "^2.3.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.4.4"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
