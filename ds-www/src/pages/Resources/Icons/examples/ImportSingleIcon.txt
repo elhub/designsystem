@@ -1,0 +1,3 @@
+import { Email } from '@elhub/ds-icons'
+
+const EmailIcon = () => (<Email size="medium" title="Email" />)

@@ -222,7 +222,13 @@ const ComponentsHome: React.FC = () => {
       el: (
         <FormItem>
           <FormItemLabel>Ingredients</FormItemLabel>
-          <Combobox options={['egg', 'milk', 'sugar']} />
+          <Combobox
+            options={[
+              { label: 'Egg', value: 'egg' },
+              { label: 'Milk', value: 'milk' },
+              { label: 'Sugar', value: 'sugar' }
+            ]}
+          />
         </FormItem>
       )
     },

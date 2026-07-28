@@ -14,6 +14,11 @@ interface ColumnHeaderProps extends HeaderCellProps {
    * @default false
    */
   sortable?: boolean
+  /**
+   * Value type used by consumers when applying the requested sort.
+   * @default "string"
+   */
+  sortType?: 'string' | 'date' | 'number'
 }
 
 export type ColumnHeaderType = React.ForwardRefExoticComponent<
@@ -21,7 +26,7 @@ export type ColumnHeaderType = React.ForwardRefExoticComponent<
 >
 
 const ColumnHeader: ColumnHeaderType = forwardRef(
-  ({ className, children, sortable = false, sortKey, ...rest }, ref) => {
+  ({ className, children, sortable = false, sortKey, sortType = 'string', ...rest }, ref) => {
     const context = useContext(TableContext)
 
     if (sortable && !sortKey) {
@@ -42,7 +47,7 @@ const ColumnHeader: ColumnHeaderType = forwardRef(
         {sortable ? (
           <button
             className='eds-table__sort-button'
-            onClick={sortable && sortKey ? () => context?.onSortChange?.(sortKey) : undefined}
+            onClick={sortable && sortKey ? () => context?.requestSort(sortKey, sortType) : undefined}
           >
             {children}
             {context?.sort?.orderBy === sortKey ? (

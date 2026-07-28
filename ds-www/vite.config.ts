@@ -27,7 +27,6 @@ export default defineConfig({
     }
   },
   resolve: {
-    mainFields: ['module', 'browser', 'main'], // for react-element-to-jsx-string compatibility
     alias: {
       '@elhub/ds-components': resolve(__dirname, '../ds-components/src/dist.ts'),
       '@elhub/ds-css': resolve(__dirname, '../ds-css/src/index.css'),

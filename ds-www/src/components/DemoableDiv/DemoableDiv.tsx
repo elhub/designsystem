@@ -4,7 +4,8 @@ import CodeDiv from 'components/CodeDiv/CodeDiv'
 import React from 'react'
 
 type DemoableDivProps = React.PropsWithChildren & {
-  code?: React.ReactNode
+  code?: string
+  codeHighlighter?: 'shiki'
   alignContent?: string
   justifyContent?: string
 }
@@ -12,6 +13,7 @@ type DemoableDivProps = React.PropsWithChildren & {
 const DemoableDiv: React.FC<DemoableDivProps> = ({
   children,
   code,
+  codeHighlighter = 'shiki',
   alignContent = 'inherit',
   justifyContent = 'center'
 }) => {
@@ -26,7 +28,7 @@ const DemoableDiv: React.FC<DemoableDivProps> = ({
           {children}
         </PileDiv>
       </FlexDiv>
-      {code && <CodeDiv>{code}</CodeDiv>}
+      {code && <CodeDiv highlighter={codeHighlighter}>{code}</CodeDiv>}
     </div>
   )
 }
