@@ -13,7 +13,6 @@ import {
   CardHeaderContent,
   CardTitle,
   CodeSnippet,
-  type CodeSnippetRequest,
   CookieBanner,
   CookieBannerActions,
   CookieBannerContent,
@@ -240,8 +239,11 @@ const ComponentsHome: React.FC = () => {
         <CodeSnippet
           requests={[
             { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/grid-areas' },
-            { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/grid-areas/50Y2VA2X6F00RRCT' },
-          ] as CodeSnippetRequest[]}
+            {
+              label: 'Default with id',
+              url: 'https://api.elhub.no/energy-data/v0/grid-areas/50Y2VA2X6F00RRCT'
+            }
+          ]}
         />
       )
     },
