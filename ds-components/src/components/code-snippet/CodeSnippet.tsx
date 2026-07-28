@@ -52,6 +52,11 @@ export interface CodeSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   copyLabel?: string
   /**
+   * Label for the copy button when copied.
+   * @default "Copied"
+   */
+  copiedLabel?: string
+  /**
    * Visual theme for the code block.
    * @default "dark"
    */
@@ -78,6 +83,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
       code,
       onCopy,
       copyLabel = 'Copy',
+      copiedLabel = 'Copied',
       variant = 'dark',
       ...rest
     },
@@ -101,7 +107,9 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
     }, [resolvedCode, onCopy])
 
     return (
-      <CodeSnippetContext.Provider value={{ resolvedCode, variant, copied, copyLabel, handleCopy }}>
+      <CodeSnippetContext.Provider
+        value={{ resolvedCode, variant, copied, copyLabel, copiedLabel, handleCopy }}
+      >
         <div
           {...rest}
           ref={ref}

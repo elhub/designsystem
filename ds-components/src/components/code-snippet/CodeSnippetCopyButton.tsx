@@ -8,7 +8,7 @@ export type CodeSnippetCopyButtonType = typeof CodeSnippetCopyButton
 
 const CodeSnippetCopyButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ className, ...rest }, ref) => {
-    const { copied, copyLabel, handleCopy } = useCodeSnippetContext()
+    const { copied, copyLabel, copiedLabel, handleCopy } = useCodeSnippetContext()
     return (
       <button
         ref={ref}
@@ -24,7 +24,7 @@ const CodeSnippetCopyButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttr
           <IconCopy size='xsmall' className='eds-code-snippet__copy-icon' />
         )}
         <BodyText as='span' size='small' weight='bold'>
-          {copied ? 'Copied' : copyLabel}
+          {copied ? copiedLabel : copyLabel}
         </BodyText>
       </button>
     )

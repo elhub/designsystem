@@ -5,6 +5,7 @@ interface CodeSnippetContextType {
   variant: 'light' | 'dark'
   copied: boolean
   copyLabel: string
+  copiedLabel: string
   handleCopy: () => void
 }
 
