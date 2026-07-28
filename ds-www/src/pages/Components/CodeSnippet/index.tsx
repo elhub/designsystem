@@ -1,92 +1,11 @@
-﻿import { BodyText, CodeSnippet, Heading, Table, VerticalSpace } from '@elhub/ds-components'
+import { BodyText, Heading, Table, VerticalSpace } from '@elhub/ds-components'
+import { DarkVariant } from './examples/Dark'
+import { LightVariant } from './examples/Light'
+import { WithHeaders } from './examples/Headers'
+import { SingleRequest } from './examples/Single'
 import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
 import React from 'react'
-
-/* ------------------------------------------------------------------ */
-/*  Code strings for DemoableDiv                                        */
-/* ------------------------------------------------------------------ */
-
-const darkCode = `// import
-import { CodeSnippet } from '@elhub/ds-components'
-
-// render — 2+ requests shows the "Request for" selector
-<CodeSnippet
-  requests={[
-    { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/grid-areas' },
-    { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/grid-areas/50Y2VA2X6F00RRCT' },
-  ]}
-/>`
-
-const lightCode = `// import
-import { CodeSnippet } from '@elhub/ds-components'
-
-// render
-<CodeSnippet
-  variant="light"
-  requests={[
-    { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/grid-areas' },
-    { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/grid-areas/50Y2VA2X6F00RRCT' },
-  ]}
-/>`
-
-const headersCode = `// import
-import { CodeSnippet } from '@elhub/ds-components'
-
-// render
-<CodeSnippet
-  requests={[
-    { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/metering-points' },
-    { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/metering-points/{YOUR_ID}' },
-  ]}
-  headers={{
-    Authorization: 'Bearer {MASKINPORTEN_ACCESS_TOKEN}',
-    'X-Elhub-GLN': '{YOUR_GLN_VALUE}',
-  }}
-/>`
-
-const singleRequestCode = `// import
-import { CodeSnippet } from '@elhub/ds-components'
-
-// render — 1 request, no "Request for" selector shown
-<CodeSnippet
-  requests={[
-    { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/grid-areas' },
-  ]}
-/>`
-
-/* ------------------------------------------------------------------ */
-/*  Demo components                                                     */
-/* ------------------------------------------------------------------ */
-
-const GRID_AREA_REQUESTS = [
-  { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/grid-areas' },
-  { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/grid-areas/50Y2VA2X6F00RRCT' }
-]
-
-const DarkVariant: React.FC = () => <CodeSnippet requests={GRID_AREA_REQUESTS} />
-
-const LightVariant: React.FC = () => <CodeSnippet variant='light' requests={GRID_AREA_REQUESTS} />
-
-const WithHeaders: React.FC = () => (
-  <CodeSnippet
-    requests={[
-      { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/metering-points' },
-      { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/metering-points/%7BYOUR_ID%7D' }
-    ]}
-    headers={{
-      Authorization: 'Bearer {MASKINPORTEN_ACCESS_TOKEN}',
-      'X-Elhub-GLN': '{YOUR_GLN_VALUE}'
-    }}
-  />
-)
-
-const SingleRequest: React.FC = () => (
-  <CodeSnippet requests={[{ label: 'Default', url: 'https://api.elhub.no/energy-data/v0/grid-areas' }]} />
-)
-
-/* ------------------------------------------------------------------ */
-/*  Page                                                                */
-/* ------------------------------------------------------------------ */
+import { darkCode, lightCode, headersCode, singleRequestCode } from './utils/codeStrings'
 
 const ComponentsCodeSnippet: React.FC = () => {
   return (
