@@ -2,10 +2,11 @@ import { BodyText, Heading, Table, VerticalSpace } from '@elhub/ds-components'
 import { DarkVariant } from './examples/Dark'
 import { LightVariant } from './examples/Light'
 import { WithHeaders } from './examples/Headers'
+import { TranslatedVariant } from './examples/Translated'
 import { SingleRequest } from './examples/Single'
 import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
 import React from 'react'
-import { darkCode, lightCode, headersCode, singleRequestCode } from './utils/codeStrings'
+import { darkCode, lightCode, headersCode, singleRequestCode, translatedCode } from './utils/codeStrings'
 
 const ComponentsCodeSnippet: React.FC = () => {
   return (
@@ -76,6 +77,17 @@ const ComponentsCodeSnippet: React.FC = () => {
       <VerticalSpace />
       <DemoableDiv alignContent='left' code={singleRequestCode}>
         <SingleRequest />
+      </DemoableDiv>
+      <VerticalSpace size='3' />
+
+      {/* ------------------------------------------------------------------ */}
+      <Heading className='toc' size='medium' id='code-snippet-translated' level='2' spacing>
+        Language translation
+      </Heading>
+      <BodyText>Translated labels for the different text fields.</BodyText>
+      <VerticalSpace />
+      <DemoableDiv alignContent='left' code={translatedCode}>
+        <TranslatedVariant />
       </DemoableDiv>
       <VerticalSpace size='3' />
 
@@ -228,6 +240,32 @@ const ComponentsCodeSnippet: React.FC = () => {
             <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>
               <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>requestPlaceholder</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>string</code>
+            </Table.DataCell>
+            <Table.DataCell>Placeholder for the request selector.</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>"Select request"</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>languagePlaceholder</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>string</code>
+            </Table.DataCell>
+            <Table.DataCell>Placeholder for the language selector.</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>"Select language"</code>
             </Table.DataCell>
           </Table.Row>
         </Table.Body>

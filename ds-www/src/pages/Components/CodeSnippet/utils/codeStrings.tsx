@@ -49,3 +49,19 @@ import { CodeSnippet } from '@elhub/ds-components'
     { label: 'Default', url: 'https://api.elhub.no/energy-data/v-1/grid-areas' },
   ]}
 />`
+export const translatedCode = `// import
+import { CodeSnippet } from '@elhub/ds-components'
+import { useTranslation} from 'react-i18next'
+
+  
+const { t } = useTranslation()
+
+// render
+<CodeSnippet
+  requestPlaceholder={t('requestPlaceholder', 'Velg forespørsel')}
+  languagePlaceholder={t('languagePlaceholder', 'Velg språk')}
+  copyLabel={t('copyLabel', 'Kopier')}
+  copiedLabel={t('copiedLabel', 'Kopiert')}
+  requests={GRID_AREA_REQUESTS}
+/>
+`

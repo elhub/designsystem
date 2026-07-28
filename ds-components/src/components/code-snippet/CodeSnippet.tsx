@@ -61,6 +61,16 @@ export interface CodeSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "dark"
    */
   variant?: 'light' | 'dark'
+  /**
+   * Placeholder for the "Request for" selector. Only used with `requests`.
+   * @default "Select request"
+   */
+  requestPlaceholder?: string
+  /**
+   * Placeholder for the language selector. Only used with `requests`.
+   * @default "Select language"
+   */
+  languagePlaceholder?: string
 }
 
 interface CodeSnippetComponent extends React.ForwardRefExoticComponent<
@@ -85,6 +95,8 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
       copyLabel = 'Copy',
       copiedLabel = 'Copied',
       variant = 'dark',
+      requestPlaceholder = 'Select request',
+      languagePlaceholder = 'Select language',
       ...rest
     },
     ref
@@ -123,7 +135,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
                 <Select
                   value={String(selectedIndex)}
                   onValueChange={(v) => setSelectedIndex(Number(v))}
-                  placeholder='Select request'
+                  placeholder={requestPlaceholder} // FIXME: since we set the default value to the first item, this placeholder will never be shown
                 >
                   <SelectContent>
                     {requests.map(({ label }, i) => (
@@ -141,7 +153,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
                 <Select
                   value={language}
                   onValueChange={(v) => setLanguage(v as Language)}
-                  placeholder='Select language'
+                  placeholder={languagePlaceholder} // FIXME: since we set the default value to the first item, this placeholder will never be shown
                 >
                   <SelectContent>
                     {LANGUAGES.map(({ value, label }) => (
