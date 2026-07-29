@@ -71,6 +71,17 @@ export interface CodeSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "Select language"
    */
   languagePlaceholder?: string
+  /**
+   * Custom renderer for the code block. Enables app-level syntax highlighting
+   * while keeping this component renderer-agnostic.
+   */
+  renderCode?: (props: CodeSnippetRenderCodeProps) => React.ReactNode
+}
+
+export interface CodeSnippetRenderCodeProps {
+  resolvedCode: string
+  language?: Language
+  variant: 'light' | 'dark'
 }
 
 interface CodeSnippetComponent extends React.ForwardRefExoticComponent<
@@ -97,6 +108,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
       variant = 'dark',
       requestPlaceholder = 'Select request',
       languagePlaceholder = 'Select language',
+      renderCode,
       ...rest
     },
     ref
@@ -120,7 +132,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
 
     return (
       <CodeSnippetContext.Provider
-        value={{ resolvedCode, variant, copied, copyLabel, copiedLabel, handleCopy }}
+        value={{ resolvedCode, variant, copied, copyLabel, copiedLabel, handleCopy, language }}
       >
         <div
           {...rest}
@@ -166,7 +178,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
               </FormItem>
             )}
           </CodeSnippetToolbar>
-          <CodeSnippetCode />
+          {renderCode ? renderCode({ resolvedCode, language, variant }) : <CodeSnippetCode />}
         </div>
       </CodeSnippetContext.Provider>
     )

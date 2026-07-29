@@ -65,3 +65,35 @@ const { t } = useTranslation()
   requests={GRID_AREA_REQUESTS}
 />
 `
+
+export const highlightedDarkCode = `// import
+import { CodeSnippet } from '@elhub/ds-components'
+import { useEffect, useState } from 'react'
+import { createHighlighterCore } from 'shiki/core'
+
+// app-owned syntax highlighting renderer
+const renderHighlightedCode = ({ resolvedCode, language }) => {
+  // resolve shiki language from CodeSnippet language and render highlighted html
+}
+
+<CodeSnippet
+  variant="dark"
+  requests={GRID_AREA_REQUESTS}
+  renderCode={renderHighlightedCode}
+/>`
+
+export const highlightedLightCode = `// import
+import { CodeSnippet } from '@elhub/ds-components'
+import { useEffect, useState } from 'react'
+import { createHighlighterCore } from 'shiki/core'
+
+// app-owned syntax highlighting renderer
+const renderHighlightedCode = ({ resolvedCode, language }) => {
+  // resolve shiki language from CodeSnippet language and render highlighted html
+}
+
+<CodeSnippet
+  variant="light"
+  requests={GRID_AREA_REQUESTS}
+  renderCode={renderHighlightedCode}
+/>`

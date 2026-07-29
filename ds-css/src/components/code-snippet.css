@@ -2,7 +2,7 @@
     --eds-code-snippet-border: var(--eds-semantic-border);
     --eds-code-snippet-border-radius: var(--eds-border-radius-medium);
     --eds-code-snippet-toolbar-background: var(--eds-semantic-background);
-    --eds-code-snippet-code-background-dark: #000000;
+    --eds-code-snippet-code-background-dark: var(--eds-semantic-background-inverted);
     --eds-code-snippet-code-color-dark: var(--eds-global-color-white);
     --eds-code-snippet-code-background-light: var(--eds-global-color-grey-200);
     --eds-code-snippet-code-color-light: var(--eds-global-color-grey-900);

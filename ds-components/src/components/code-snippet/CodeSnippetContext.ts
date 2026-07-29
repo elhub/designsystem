@@ -1,4 +1,5 @@
 ﻿import { createContext, useContext } from 'react'
+import { type Language } from './generateSnippet'
 
 interface CodeSnippetContextType {
   resolvedCode: string
@@ -7,6 +8,7 @@ interface CodeSnippetContextType {
   copyLabel: string
   copiedLabel: string
   handleCopy: () => void
+  language?: Language
 }
 
 export const CodeSnippetContext = createContext<CodeSnippetContextType | null>(null)

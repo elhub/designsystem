@@ -7,7 +7,7 @@ const CodeSnippetCode = forwardRef<HTMLPreElement, React.HTMLAttributes<HTMLPreE
   ({ ...rest }, ref) => {
     const { resolvedCode } = useCodeSnippetContext()
     return (
-      <pre ref={ref} className='eds-code-snippet__code' {...rest}>
+      <pre ref={ref} className={`eds-code-snippet__code`} {...rest}>
         <code>{resolvedCode}</code>
       </pre>
     )

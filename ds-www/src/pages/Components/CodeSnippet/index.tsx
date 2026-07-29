@@ -1,12 +1,21 @@
 import { BodyText, Heading, Table, VerticalSpace } from '@elhub/ds-components'
 import { DarkVariant } from './examples/Dark'
+import { HighlightedDarkVariant, HighlightedLightVariant } from './examples/Highlighted'
 import { LightVariant } from './examples/Light'
 import { WithHeaders } from './examples/Headers'
 import { TranslatedVariant } from './examples/Translated'
 import { SingleRequest } from './examples/Single'
 import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
 import React from 'react'
-import { darkCode, lightCode, headersCode, singleRequestCode, translatedCode } from './utils/codeStrings'
+import {
+  darkCode,
+  highlightedDarkCode,
+  highlightedLightCode,
+  lightCode,
+  headersCode,
+  singleRequestCode,
+  translatedCode
+} from './utils/codeStrings'
 
 const ComponentsCodeSnippet: React.FC = () => {
   return (
@@ -88,6 +97,30 @@ const ComponentsCodeSnippet: React.FC = () => {
       <VerticalSpace />
       <DemoableDiv alignContent='left' code={translatedCode}>
         <TranslatedVariant />
+      </DemoableDiv>
+      <VerticalSpace size='3' />
+
+      {/* ------------------------------------------------------------------ */}
+      <Heading className='toc' size='medium' id='code-snippet-highlighted' level='2' spacing>
+        Highlighting
+      </Heading>
+      <BodyText>
+        Use <code>renderCode</code> to plug in app-owned highlighting. This keeps the design system free of
+        highlighting dependencies while letting consumers style output per language and theme. This
+        documentation page uses Shiki to highlight code blocks, but you can use any renderer you like.
+      </BodyText>
+      <VerticalSpace />
+      <Heading size='small' id='code-snippet-highlighted-dark' level='3' spacing>
+        Dark variant
+      </Heading>
+      <DemoableDiv alignContent='left' code={highlightedDarkCode}>
+        <HighlightedDarkVariant />
+      </DemoableDiv>
+      <Heading size='small' id='code-snippet-highlighted-light' level='3' spacing>
+        Light variant
+      </Heading>
+      <DemoableDiv alignContent='left' code={highlightedLightCode}>
+        <HighlightedLightVariant />
       </DemoableDiv>
       <VerticalSpace size='3' />
 
@@ -236,6 +269,21 @@ const ComponentsCodeSnippet: React.FC = () => {
             </Table.DataCell>
             <Table.DataCell>
               Called on copy. Falls back to <code>navigator.clipboard</code>.
+            </Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>renderCode</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>{'(props: { resolvedCode, language, variant }) => ReactNode'}</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              Custom code renderer. Use this to add app-level syntax highlighting (for example Shiki).
             </Table.DataCell>
             <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>

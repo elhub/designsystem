@@ -22,7 +22,11 @@ export {
 } from './components/card'
 
 export { CodeSnippet } from './components/code-snippet'
-export type { CodeSnippetProps, CodeSnippetRequest } from './components/code-snippet'
+export type {
+  CodeSnippetProps,
+  CodeSnippetRequest,
+  CodeSnippetRenderCodeProps
+} from './components/code-snippet'
 
 export { Chips, Chip } from './components/chips'
 export type { ChipsProps, ChipProps } from './components/chips'
