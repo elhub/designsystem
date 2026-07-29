@@ -1,6 +1,7 @@
 /* ------------------------------------------------------------------ */
 /*  Code strings for DemoableDiv                                        */
 /* ------------------------------------------------------------------ */
+import { GRID_AREA_REQUESTS } from './data'
 
 export const darkCode = `// import
 import { CodeSnippet } from '@elhub/ds-components'
@@ -97,3 +98,26 @@ const renderHighlightedCode = ({ resolvedCode, language }) => {
   requests={GRID_AREA_REQUESTS}
   renderCode={renderHighlightedCode}
 />`
+
+export const GRID_AREA_CODE: string = `
+from requests import get
+
+response = get("${GRID_AREA_REQUESTS[0].url}")
+if response.status_code == 200:
+    data = response.json()
+    print(data)
+else:
+    print(f'Error: {response.status_code}')
+`
+export const highlightedCustomCode = `// import
+import { CodeSnippet } from '@elhub/ds-components'
+import { useEffect, useState } from 'react'
+import { createHighlighterCore } from 'shiki/core'
+
+// app-owned syntax highlighting renderer
+const renderHighlightedCode = ({ resolvedCode, language }) => {
+  // resolve shiki language from CodeSnippet language and render highlighted html
+}
+
+<CodeSnippet variant='dark' code={\`${GRID_AREA_CODE}\`} renderCode={(props) => <HighlightedCode {...props} />} />
+`

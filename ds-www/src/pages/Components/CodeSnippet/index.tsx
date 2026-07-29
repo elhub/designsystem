@@ -1,6 +1,10 @@
 import { BodyText, Heading, Table, VerticalSpace } from '@elhub/ds-components'
 import { DarkVariant } from './examples/Dark'
-import { HighlightedDarkVariant, HighlightedLightVariant } from './examples/Highlighted'
+import {
+  HighlightedCustomCodeVariant,
+  HighlightedDarkVariant,
+  HighlightedLightVariant
+} from './examples/Highlighted'
 import { LightVariant } from './examples/Light'
 import { WithHeaders } from './examples/Headers'
 import { TranslatedVariant } from './examples/Translated'
@@ -11,6 +15,7 @@ import {
   darkCode,
   highlightedDarkCode,
   highlightedLightCode,
+  highlightedCustomCode,
   lightCode,
   headersCode,
   singleRequestCode,
@@ -121,6 +126,12 @@ const ComponentsCodeSnippet: React.FC = () => {
       </Heading>
       <DemoableDiv alignContent='left' code={highlightedLightCode}>
         <HighlightedLightVariant />
+      </DemoableDiv>
+      <Heading size='small' id='code-snippet-highlighted-custom-code' level='3' spacing>
+        Custom code block variant
+      </Heading>
+      <DemoableDiv alignContent='left' code={highlightedCustomCode}>
+        <HighlightedCustomCodeVariant />
       </DemoableDiv>
       <VerticalSpace size='3' />
 

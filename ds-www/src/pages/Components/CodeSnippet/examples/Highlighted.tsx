@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CodeSnippet, type CodeSnippetRenderCodeProps } from '@elhub/ds-components'
 import { GRID_AREA_REQUESTS } from '../utils/data'
-
+import { GRID_AREA_CODE } from '../utils/codeStrings'
 type ShikiLanguage = 'bash' | 'http' | 'java' | 'javascript' | 'python'
 
 const shikiLanguageMap: Record<NonNullable<CodeSnippetRenderCodeProps['language']>, ShikiLanguage> = {
@@ -112,4 +112,8 @@ export const HighlightedLightVariant: React.FC = () => (
     requests={GRID_AREA_REQUESTS}
     renderCode={(props) => <HighlightedCode {...props} />}
   />
+)
+
+export const HighlightedCustomCodeVariant: React.FC = () => (
+  <CodeSnippet variant='dark' code={GRID_AREA_CODE} renderCode={(props) => <HighlightedCode {...props} />} />
 )
