@@ -135,7 +135,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
                 <Select
                   value={String(selectedIndex)}
                   onValueChange={(v) => setSelectedIndex(Number(v))}
-                  placeholder={requestPlaceholder} // FIXME: since we set the default value to the first item, this placeholder will never be shown
+                  placeholder={requestPlaceholder}
                 >
                   <SelectContent>
                     {requests.map(({ label }, i) => (
@@ -153,7 +153,7 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
                 <Select
                   value={language}
                   onValueChange={(v) => setLanguage(v as Language)}
-                  placeholder={languagePlaceholder} // FIXME: since we set the default value to the first item, this placeholder will never be shown
+                  placeholder={languagePlaceholder}
                 >
                   <SelectContent>
                     {LANGUAGES.map(({ value, label }) => (
