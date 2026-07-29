@@ -17,10 +17,7 @@ export interface CodeSnippetRequest {
 
 export interface CodeSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * List of request options. Each item has a `label` (shown in the selector) and a `url`.
-   * - 1 item: language selector only.
-   * - 2+ items: adds a "Request for" selector so users can switch between endpoints.
-   * Either `requests` or `code` must be provided.
+   * @requires Either `requests` or `code` must be provided.
    */
   requests?: CodeSnippetRequest[]
   /**
@@ -39,7 +36,7 @@ export interface CodeSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
   languageLabel?: string
   /**
    * Direct code string to display — no selectors are shown.
-   * Either `requests` or `code` must be provided.
+   * @requires Either `requests` or `code` must be provided.
    */
   code?: string
   /**
