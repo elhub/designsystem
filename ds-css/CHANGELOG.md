@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.5.0
+
+### Minor Changes
+
+- a12a03a: feat: add codesnippet component
+
 ## 6.4.0
 
 ### Minor Changes
