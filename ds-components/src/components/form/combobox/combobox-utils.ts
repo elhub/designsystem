@@ -23,4 +23,4 @@ const mapToComboboxOptionArray = (options?: string[] | ComboboxOption[]) => {
   )
 }
 
-export { isInList, mapToComboboxOptionArray, toComboboxOption }
+export { isInList, mapToComboboxOptionArray }

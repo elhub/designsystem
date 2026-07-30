@@ -3,7 +3,6 @@ import React, { createContext, type SetStateAction, useCallback, useContext, use
 import { useClientLayoutEffect, usePrevious } from '../../../../util'
 import { useInputContext } from '../Input/inputContext'
 import { useSelectedOptionsContext } from '../SelectedOptions/SelectedOptionsContext'
-import { toComboboxOption } from '../combobox-utils'
 import { useCustomOptionsContext } from '../customOptionsContext'
 import { type ComboboxOption, type ComboboxProps } from '../types'
 import filteredOptionsUtils from './filtered-options-util'
@@ -21,7 +20,6 @@ interface FilteredOptionsContextType {
   activeDecendantId?: string
   allowNewValues?: boolean
   ariaDescribedBy?: string
-  setFilteredOptionsRef: React.Dispatch<React.SetStateAction<HTMLUListElement | null>>
   isListOpen: boolean
   isLoading?: boolean
   filteredOptions: ComboboxOption[]
@@ -46,8 +44,6 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     isLoading,
     options
   } = props
-  const [filteredOptionsRef, setFilteredOptionsRef] = useState<HTMLUListElement | null>(null)
-  const virtualFocus = useVirtualFocus(filteredOptionsRef)
   const {
     inputProps: { 'aria-describedby': partialAriaDescribedBy },
     id,
@@ -57,7 +53,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     setSearchTerm,
     shouldAutocomplete
   } = useInputContext()
-  const { maxSelected } = useSelectedOptionsContext()
+  const { maxSelected, selectedOptions } = useSelectedOptionsContext()
 
   const [isInternalListOpen, setInternalListOpen] = useState(false)
   const { customOptions } = useCustomOptionsContext()
@@ -70,23 +66,28 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     return filteredOptionsUtils.getMatchingValuesFromList(searchTerm, opts)
   }, [customOptions, externalFilteredOptions, options, searchTerm])
 
+  const optionIds = useMemo(
+    () => filteredOptions.map((_, index) => filteredOptionsUtils.getOptionId(id, index)),
+    [filteredOptions, id]
+  )
+  const disabledIds = useMemo(
+    () =>
+      new Set(
+        maxSelected?.isLimitReached
+          ? filteredOptions.flatMap((option, index) =>
+              selectedOptions.some((selectedOption) => selectedOption.value === option.value)
+                ? []
+                : [filteredOptionsUtils.getOptionId(id, index)]
+            )
+          : []
+      ),
+    [filteredOptions, id, maxSelected?.isLimitReached, selectedOptions]
+  )
+  const virtualFocus = useVirtualFocus(optionIds, disabledIds)
+
   const previousSearchTerm = usePrevious(searchTerm)
 
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] = useState(false)
-
-  const filteredOptionsMap = useMemo(
-    () =>
-      options.reduce(
-        (map, _option) => ({
-          ...map,
-          [filteredOptionsUtils.getOptionId(id, _option.label)]: _option
-        }),
-        {
-          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues ? toComboboxOption(value) : undefined
-        }
-      ),
-    [allowNewValues, id, options, value]
-  )
 
   useClientLayoutEffect(() => {
     if (
@@ -113,8 +114,12 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
   )
 
   const isValueNew = useMemo(
-    () => Boolean(value) && !filteredOptionsMap[filteredOptionsUtils.getOptionId(id, value)],
-    [filteredOptionsMap, id, value]
+    () =>
+      Boolean(value) &&
+      ![...customOptions, ...options].some(
+        (option) => option.label.toLocaleLowerCase() === value.toLocaleLowerCase()
+      ),
+    [customOptions, options, value]
   )
 
   const ariaDescribedBy = useMemo(() => {
@@ -123,7 +128,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
       activeOption = filteredOptionsUtils.getNoHitsId(id)
     } else if ((value && value !== '') || isLoading) {
       if (shouldAutocomplete && filteredOptions[0]) {
-        activeOption = filteredOptionsUtils.getOptionId(id, filteredOptions[0].label)
+        activeOption = filteredOptionsUtils.getOptionId(id, 0)
       } else if (isListOpen && isLoading) {
         activeOption = filteredOptionsUtils.getIsLoadingId(id)
       }
@@ -142,20 +147,12 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     id
   ])
 
-  const currentOption = useMemo(
-    () => filteredOptionsMap[virtualFocus.activeElement?.getAttribute('id') || -1],
-    [filteredOptionsMap, virtualFocus]
-  )
-
-  const activeDecendantId = useMemo(
-    () => virtualFocus.activeElement?.getAttribute('id') || undefined,
-    [virtualFocus.activeElement]
-  )
+  const activeDecendantId = virtualFocus.activeId
+  const currentOption = activeDecendantId ? filteredOptions[optionIds.indexOf(activeDecendantId)] : undefined
 
   const filteredOptionsState = {
     activeDecendantId,
     allowNewValues,
-    setFilteredOptionsRef,
     shouldAutocomplete,
     isListOpen,
     isLoading,

@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export interface VirtualFocusType {
-  activeElement: HTMLElement | undefined
-  getElementById: (id: string) => HTMLElement | undefined
+  activeId?: string
   isFocusOnTheTop: () => boolean
   isFocusOnTheBottom: () => boolean
   moveFocusUp: () => void
@@ -12,73 +11,53 @@ export interface VirtualFocusType {
   moveFocusToBottom: () => void
 }
 
-const useVirtualFocus = (containerRef: HTMLElement | null): VirtualFocusType => {
-  const [activeElement, setActiveElement] = useState<HTMLElement | undefined>(undefined)
+const useVirtualFocus = (optionIds: string[], disabledIds: Set<string>): VirtualFocusType => {
+  const [activeId, setActiveId] = useState<string>()
+  const focusableIds = useMemo(() => optionIds.filter((id) => !disabledIds.has(id)), [disabledIds, optionIds])
 
-  const getListOfAllChildren = (): HTMLElement[] => Array.from(containerRef?.children ?? []) as HTMLElement[]
-  const getElementsAbleToReceiveFocus = () =>
-    getListOfAllChildren().filter((child) => child.getAttribute('data-no-focus') !== 'true')
+  useEffect(() => {
+    if (activeId && !focusableIds.includes(activeId)) {
+      setActiveId(undefined)
+    }
+  }, [activeId, focusableIds])
 
-  const getElementById = (id: string) => getListOfAllChildren().find((element) => element.id === id)
-  const isFocusOnTheTop = () =>
-    activeElement ? getElementsAbleToReceiveFocus().indexOf(activeElement) === 0 : false
-  const isFocusOnTheBottom = () => {
-    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus()
-    return activeElement
-      ? elementsAbleToReceiveFocus.indexOf(activeElement) === elementsAbleToReceiveFocus.length - 1
-      : false
-  }
-
-  const _moveFocusAndScrollTo = (_element?: HTMLElement) => {
-    setActiveElement(_element)
-    _element?.scrollIntoView?.({ block: 'nearest' })
-  }
+  const activeIndex = activeId ? focusableIds.indexOf(activeId) : -1
+  const isFocusOnTheTop = () => activeIndex === 0
+  const isFocusOnTheBottom = () => Boolean(activeId) && activeIndex === focusableIds.length - 1
 
   const moveFocusUp = () => {
-    if (!activeElement) {
+    if (!activeId) {
       return
     }
-    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus()
-    const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement)
-    const elementAbove = elementsAbleToReceiveFocus[_currentIndex - 1]
-    if (_currentIndex === 0) {
-      setActiveElement(undefined)
+    if (activeIndex === 0) {
+      setActiveId(undefined)
     } else {
-      _moveFocusAndScrollTo(elementAbove)
+      setActiveId(focusableIds[activeIndex - 1])
     }
   }
 
   const moveFocusDown = () => {
-    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus()
-    if (!activeElement) {
-      _moveFocusAndScrollTo(elementsAbleToReceiveFocus[0])
+    if (!activeId) {
+      setActiveId(focusableIds[0])
       return
     }
-    const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement)
-    if (_currentIndex !== elementsAbleToReceiveFocus.length - 1) {
-      _moveFocusAndScrollTo(elementsAbleToReceiveFocus[_currentIndex + 1])
+    if (activeIndex !== focusableIds.length - 1) {
+      setActiveId(focusableIds[activeIndex + 1])
     }
   }
 
-  const moveFocusToTop = () => {
-    _moveFocusAndScrollTo(undefined)
-  }
+  const moveFocusToTop = useCallback(() => setActiveId(undefined), [])
   const moveFocusToBottom = () => {
-    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus()
-    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[elementsAbleToReceiveFocus.length - 1])
+    setActiveId(focusableIds[focusableIds.length - 1])
   }
   const moveFocusToElement = (id: string) => {
-    const _element = getElementsAbleToReceiveFocus().find(
-      (_focusableElement) => _focusableElement.getAttribute('id') === id
-    )
-    if (_element) {
-      setActiveElement(_element)
+    if (focusableIds.includes(id)) {
+      setActiveId(id)
     }
   }
 
   return {
-    activeElement,
-    getElementById,
+    activeId,
     isFocusOnTheTop,
     isFocusOnTheBottom,
     moveFocusUp,

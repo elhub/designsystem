@@ -8,6 +8,8 @@ import { ComboboxLimitsExample } from './examples/Limits'
 import comboboxLimitsSource from './examples/Limits.tsx?raw'
 import { ComboboxTypesAndSizesExample } from './examples/TypesAndSizes'
 import comboboxTypesAndSizesSource from './examples/TypesAndSizes.tsx?raw'
+import { ComboboxVirtualizationExample } from './examples/Virtualization'
+import comboboxVirtualizationSource from './examples/Virtualization.tsx?raw'
 import { ComboboxWidthLimitExample } from './examples/WidthLimit'
 import comboboxWidthLimitSource from './examples/WidthLimit.tsx?raw'
 
@@ -21,7 +23,7 @@ const ComponentsCombobox = () => {
 
       <BodyText>
         The Combobox component is a dropdown list for selecting options. It can be used for both single and
-        multiple selection.
+        multiple selection. Long option lists are virtualized so only visible options are rendered.
       </BodyText>
       <VerticalSpace />
       <BodyText>
@@ -93,6 +95,19 @@ const ComponentsCombobox = () => {
 
       <DemoableDiv alignContent='center' code={comboboxDisabledSource} codeHighlighter='shiki'>
         <ComboboxDisabledExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+      <Heading className='toc' size='medium' id='Combobox-virtualization' level='2' spacing>
+        Virtualization
+      </Heading>
+
+      <BodyText>
+        This Combobox contains 10,000 options, but only the options around the visible viewport are rendered.
+      </BodyText>
+
+      <DemoableDiv alignContent='center' code={comboboxVirtualizationSource} codeHighlighter='shiki'>
+        <ComboboxVirtualizationExample />
       </DemoableDiv>
 
       <VerticalSpace size='3' />
