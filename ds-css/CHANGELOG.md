@@ -1,5 +1,16 @@
 # @elhub/ds-css
 
+## 6.4.0
+
+### Minor Changes
+
+- 01820cf: Virtualize Combobox options and give duplicate options unique focus identities.
+
+### Patch Changes
+
+- 01820cf: No transparent border when using Expandable Table
+- 01820cf: Remove unused runtime and build dependencies.
+
 ## 6.3.0
 
 ### Minor Changes

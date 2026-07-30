@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.16.0
+
+### Minor Changes
+
+- 01820cf: Virtualize Combobox options and give duplicate options unique focus identities.
+
 ## 4.15.0
 
 ### Minor Changes
