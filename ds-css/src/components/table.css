@@ -217,10 +217,6 @@
     flex-shrink: 0;
 }
 
-.eds-table__expandable-row--open .eds-table__toggle-expand-cell--open {
-    border-color: transparent;
-}
-
 .eds-table__toggle-expand-cell {
     padding: 0;
 }
