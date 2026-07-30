@@ -1,4 +1,4 @@
-import Home from './Home'
+﻿import Home from './Home'
 import Accordion from './Accordion'
 import Alert from './Alert'
 import Badge from './Badge'
@@ -9,6 +9,7 @@ import CheckboxGroup from './CheckboxGroup'
 import Chips from './Chips'
 import Combobox from './Combobox'
 import CookieBanner from './CookieBanner'
+import CodeSnippet from './CodeSnippet'
 import Datepicker from './Datepicker'
 import Divider from './Divider'
 import Dropdown from './Dropdown'
@@ -54,6 +55,7 @@ export {
   Chips,
   Combobox,
   CookieBanner,
+  CodeSnippet,
   Datepicker,
   Divider,
   Dropdown,

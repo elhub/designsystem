@@ -1,4 +1,4 @@
-import { Accordion, BodyText, Button, PileDiv, VerticalSpace } from '@elhub/ds-components'
+﻿import { Accordion, BodyText, Button, PileDiv, VerticalSpace } from '@elhub/ds-components'
 import { NavDiv } from 'components/styled'
 import ToC from 'components/ToC/ToC'
 import { IconChevronLeft as KeyboardArrowLeft } from '@elhub/ds-icons'
@@ -32,6 +32,7 @@ const Route: React.FC = () => {
     { label: 'CheckboxGroup', value: 'checkboxgroup' },
     { label: 'Chips', value: 'chips' },
     { label: 'Combobox', value: 'combobox' },
+    { label: 'CodeSnippet', value: 'code-snippet' },
     { label: 'CookieBanner', value: 'cookie-banner' },
     { label: 'Datepicker', value: 'datepicker' },
     { label: 'Divider', value: 'divider' },

@@ -1,4 +1,4 @@
-import TopContainer from 'components/TopContainer/TopContainer'
+﻿import TopContainer from 'components/TopContainer/TopContainer'
 import React, { Suspense, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
@@ -51,6 +51,7 @@ root.render(
             <Route path='checkboxgroup' element={<Pages.Components.CheckboxGroup />} />
             <Route path='chips' element={<Pages.Components.Chips />} />
             <Route path='combobox' element={<Pages.Components.Combobox />} />
+            <Route path='code-snippet' element={<Pages.Components.CodeSnippet />} />
             <Route path='cookie-banner' element={<Pages.Components.CookieBanner />} />
             <Route path='datepicker' element={<Pages.Components.Datepicker />} />
             <Route path='divider' element={<Pages.Components.Divider />} />
