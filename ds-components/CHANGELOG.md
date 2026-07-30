@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.17.0
+
+### Minor Changes
+
+- a12a03a: feat: add codesnippet component
+
 ## 4.16.0
 
 ### Minor Changes
