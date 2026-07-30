@@ -15,30 +15,49 @@ export interface CodeSnippetRequest {
   url: string
 }
 
+export interface CodeSnippetCodeOption {
+  /** Display label shown in the "Request for" selector */
+  label: string
+  /**
+   * Code content for this option per language.
+   *
+   * For a single-language snippet, provide a single entry.
+   */
+  code: Partial<Record<Language, string>>
+}
+
 export interface CodeSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * http-requests urls to generate code snippets for.
+   * @description Takes precedence over `code` if both are provided.
    * @requires Either `requests` or `code` must be provided.
    */
   requests?: CodeSnippetRequest[]
   /**
    * HTTP headers included in every generated snippet. Only used with `requests`.
+   * @requires {@link requests} must be provided.
+   *
    */
   headers?: Record<string, string>
   /**
-   * Label for the "Request for" selector. Only shown when `requests` has 2+ items.
-   * @default "Request for"
+   * Label for the snippet selector. Only shown when there are 2+ snippets.
+   * @default "Snippet"
    */
-  requestLabel?: string
+  snippetLabel?: string
   /**
-   * Label for the language selector. Only used with `requests`.
+   * Label for the language selector.
    * @default "Language"
    */
   languageLabel?: string
   /**
-   * Direct code string to display — no selectors are shown.
-   * @requires Either `requests` or `code` must be provided.
+   * Labeled code options.
+   *
+   * - 1 snippet + 1 language: no selectors
+   * - 1 snippet + multiple languages: language selector
+   * - 2+ snippets: snippet selector
+   * @requires Either {@link requests} or `code` must be provided.
    */
-  code?: string
+  code?: CodeSnippetCodeOption[]
   /**
    * Called when the code is copied. Falls back to navigator.clipboard.
    */
@@ -59,12 +78,12 @@ export interface CodeSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   variant?: 'light' | 'dark'
   /**
-   * Placeholder for the "Request for" selector. Only used with `requests`.
-   * @default "Select request"
+   * Placeholder for the snippet selector.
+   * @default "Select snippet"
    */
-  requestPlaceholder?: string
+  snippetPlaceholder?: string
   /**
-   * Placeholder for the language selector. Only used with `requests`.
+   * Placeholder for the language selector.
    * @default "Select language"
    */
   languagePlaceholder?: string
@@ -89,6 +108,38 @@ interface CodeSnippetComponent extends React.ForwardRefExoticComponent<
   CopyButton: CodeSnippetCopyButtonType
 }
 
+type InternalSnippetOption = CodeSnippetRequest | CodeSnippetCodeOption
+
+/**
+ * Resolve code from generated request snippets first, then explicit options, then plain code.
+ *
+ * @param param0 - Object containing the active URL, headers, active code, and selected language.
+ * @returns The resolved code string based on the active snippet and selected language.
+ *
+ */
+const getActiveCodeSnippetBody = ({
+  activeUrl,
+  headers,
+  activeCode,
+  selectedLanguage
+}: {
+  activeUrl: string
+  headers: Record<string, string>
+  activeCode?: Partial<Record<Language, string>>
+  selectedLanguage: Language
+}): string => {
+  if (activeUrl) {
+    return generateSnippet(activeUrl, headers, selectedLanguage)
+  }
+
+  // Resolve the code for the selected language, fallback to first available language entry.
+  if (activeCode) {
+    return activeCode[selectedLanguage] ?? Object.values(activeCode)[0] ?? ''
+  }
+  // If no code or no requests are available, return an empty string.
+  return ''
+}
+
 const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippetProps>(
   (
     {
@@ -96,26 +147,62 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
       children,
       requests,
       headers = {},
-      requestLabel = 'Request for',
+      snippetLabel = 'Snippet',
       languageLabel = 'Language',
       code,
       onCopy,
       copyLabel = 'Copy',
       copiedLabel = 'Copied',
       variant = 'dark',
-      requestPlaceholder = 'Select request',
+      snippetPlaceholder = 'Select snippet',
       languagePlaceholder = 'Select language',
       renderCode,
       ...rest
     },
     ref
   ) => {
+    const defaultLanguage = 'curl'
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const [language, setLanguage] = useState<Language>('curl')
+    const [language, setLanguage] = useState<Language>(defaultLanguage)
     const [copied, setCopied] = useState(false)
 
-    const activeUrl = requests?.[selectedIndex]?.url
-    const resolvedCode = activeUrl ? generateSnippet(activeUrl, headers, language) : (code ?? '')
+    const codeOptions = code ?? []
+    const requestOptions = requests ?? []
+    const hasRequests = Boolean(requestOptions.length)
+    const hasCodeOptions = Boolean(codeOptions.length)
+    const snippetOptions: InternalSnippetOption[] = hasRequests ? requestOptions : codeOptions
+    const hasSnippetSelector = snippetOptions.length > 1
+
+    const activeSnippet = snippetOptions[selectedIndex]
+    const activeUrl = activeSnippet && 'url' in activeSnippet ? activeSnippet.url : undefined
+    const activeCode = activeSnippet && 'code' in activeSnippet ? activeSnippet.code : undefined
+
+    // For requests, all generator languages are available.
+    // For explicit code options, only include languages that actually have code content.
+    let availableLanguages: { value: Language; label: string }[] = []
+    if (hasRequests) {
+      availableLanguages = LANGUAGES
+    } else if (hasCodeOptions) {
+      availableLanguages = LANGUAGES.filter(({ value }) =>
+        codeOptions.some((option) => Boolean(option.code[value]))
+      )
+    }
+
+    // Keep user-selected language if valid, otherwise fall back to the first available language.
+    let selectedLanguage = language
+    const isSelectedLanguageAvailable = availableLanguages.some(({ value }) => value === language)
+    if (!hasRequests && !isSelectedLanguageAvailable) {
+      selectedLanguage = availableLanguages[0]?.value ?? defaultLanguage
+    }
+
+    const resolvedLanguage = availableLanguages.length > 0 ? selectedLanguage : undefined
+
+    const resolvedCode = getActiveCodeSnippetBody({
+      activeUrl: activeUrl ?? '',
+      headers,
+      activeCode,
+      selectedLanguage
+    })
 
     const handleCopy = useCallback(() => {
       if (onCopy) {
@@ -129,7 +216,15 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
 
     return (
       <CodeSnippetContext.Provider
-        value={{ resolvedCode, variant, copied, copyLabel, copiedLabel, handleCopy, language }}
+        value={{
+          resolvedCode,
+          variant,
+          copied,
+          copyLabel,
+          copiedLabel,
+          handleCopy,
+          language: resolvedLanguage
+        }}
       >
         <div
           {...rest}
@@ -138,16 +233,16 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
         >
           <CodeSnippetToolbar>
             {children}
-            {requests && requests.length > 1 && (
+            {hasSnippetSelector && (
               <FormItem>
-                <FormItemLabel>{requestLabel}</FormItemLabel>
+                <FormItemLabel>{snippetLabel}</FormItemLabel>
                 <Select
                   value={String(selectedIndex)}
                   onValueChange={(v) => setSelectedIndex(Number(v))}
-                  placeholder={requestPlaceholder}
+                  placeholder={snippetPlaceholder}
                 >
                   <SelectContent>
-                    {requests.map(({ label }, i) => (
+                    {snippetOptions.map(({ label }, i) => (
                       <SelectItem key={i} value={String(i)}>
                         {label}
                       </SelectItem>
@@ -156,16 +251,16 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
                 </Select>
               </FormItem>
             )}
-            {requests && (
+            {availableLanguages.length > 1 && (
               <FormItem>
                 <FormItemLabel>{languageLabel}</FormItemLabel>
                 <Select
-                  value={language}
+                  value={selectedLanguage}
                   onValueChange={(v) => setLanguage(v as Language)}
                   placeholder={languagePlaceholder}
                 >
                   <SelectContent>
-                    {LANGUAGES.map(({ value, label }) => (
+                    {availableLanguages.map(({ value, label }) => (
                       <SelectItem key={value} value={value}>
                         {label}
                       </SelectItem>
@@ -175,7 +270,11 @@ const CodeSnippet: CodeSnippetComponent = forwardRef<HTMLDivElement, CodeSnippet
               </FormItem>
             )}
           </CodeSnippetToolbar>
-          {renderCode ? renderCode({ resolvedCode, language, variant }) : <CodeSnippetCode />}
+          {renderCode ? (
+            renderCode({ resolvedCode, language: resolvedLanguage, variant })
+          ) : (
+            <CodeSnippetCode />
+          )}
         </div>
       </CodeSnippetContext.Provider>
     )

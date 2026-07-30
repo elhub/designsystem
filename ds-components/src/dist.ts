@@ -25,6 +25,7 @@ export { CodeSnippet } from './components/code-snippet'
 export type {
   CodeSnippetProps,
   CodeSnippetRequest,
+  CodeSnippetCodeOption,
   CodeSnippetRenderCodeProps
 } from './components/code-snippet'
 

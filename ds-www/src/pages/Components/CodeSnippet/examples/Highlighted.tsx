@@ -101,6 +101,8 @@ const HighlightedCode: React.FC<CodeSnippetRenderCodeProps> = ({
 
 export const HighlightedDarkVariant: React.FC = () => (
   <CodeSnippet
+    snippetLabel='Request for'
+    languageLabel='Language'
     variant='dark'
     requests={GRID_AREA_REQUESTS}
     renderCode={(props) => <HighlightedCode {...props} />}
@@ -108,6 +110,8 @@ export const HighlightedDarkVariant: React.FC = () => (
 )
 export const HighlightedLightVariant: React.FC = () => (
   <CodeSnippet
+    snippetLabel='Request for'
+    languageLabel='Language'
     variant='light'
     requests={GRID_AREA_REQUESTS}
     renderCode={(props) => <HighlightedCode {...props} />}
@@ -115,5 +119,18 @@ export const HighlightedLightVariant: React.FC = () => (
 )
 
 export const HighlightedCustomCodeVariant: React.FC = () => (
-  <CodeSnippet variant='dark' code={GRID_AREA_CODE} renderCode={(props) => <HighlightedCode {...props} />} />
+  <CodeSnippet
+    snippetLabel='Request for'
+    languageLabel='Language'
+    variant='dark'
+    code={[
+      {
+        label: 'Python example',
+        code: {
+          python: GRID_AREA_CODE
+        }
+      }
+    ]}
+    renderCode={(props) => <HighlightedCode {...props} />}
+  />
 )

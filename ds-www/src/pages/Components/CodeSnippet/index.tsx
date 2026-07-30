@@ -5,6 +5,11 @@ import {
   HighlightedDarkVariant,
   HighlightedLightVariant
 } from './examples/Highlighted'
+import {
+  SingleCodeSnippetVariant,
+  SingleSnippetMultipleLanguagesVariant,
+  MultipleSnippetsAndLanguagesVariant
+} from './examples/Snippet'
 import { LightVariant } from './examples/Light'
 import { WithHeaders } from './examples/Headers'
 import { TranslatedVariant } from './examples/Translated'
@@ -19,7 +24,10 @@ import {
   lightCode,
   headersCode,
   singleRequestCode,
-  translatedCode
+  translatedCode,
+  singleCode,
+  multipleLanguagesCode,
+  multipleVariantAndLanguagesCode
 } from './utils/codeStrings'
 
 const ComponentsCodeSnippet: React.FC = () => {
@@ -33,18 +41,61 @@ const ComponentsCodeSnippet: React.FC = () => {
       <BodyText>
         CodeSnippet renders a block of code with a copy-to-clipboard button. Pass a <code>requests</code>{' '}
         array to generate language-specific snippets (cURL, HTTP, Java, JavaScript, Python). When the array
-        has 2 or more items a "Request for" selector is shown automatically so users can switch between
-        endpoints.
+        has 2 or more items a snippet selector is shown automatically so users can switch between endpoints.
       </BodyText>
       <VerticalSpace size='2' />
 
       {/* ------------------------------------------------------------------ */}
-      <Heading className='toc' size='medium' id='code-snippet-dark' level='2' spacing>
+      <Heading className='toc' size='medium' id='code-snippet-code-blocks' level='2' spacing>
+        Code Blocks
+      </Heading>
+      <BodyText>Code blocks for single and multiple code snippets.</BodyText>
+      <VerticalSpace />
+
+      {/* ------------------------------------------------------------------ */}
+      <Heading className='toc' size='medium' id='code-snippet-code-blocks-single' level='3' spacing>
+        Single snippet
+      </Heading>
+      <DemoableDiv alignContent='left' code={singleCode}>
+        <SingleCodeSnippetVariant />
+      </DemoableDiv>
+      <VerticalSpace />
+
+      {/* ------------------------------------------------------------------ */}
+      <Heading className='toc' size='medium' id='code-snippet-code-blocks-multiple' level='3' spacing>
+        Single Snippet, Multiple Languages
+      </Heading>
+      <DemoableDiv alignContent='left' code={multipleLanguagesCode}>
+        <SingleSnippetMultipleLanguagesVariant />
+      </DemoableDiv>
+      <VerticalSpace size='3' />
+
+      {/* ------------------------------------------------------------------ */}
+      <Heading
+        className='toc'
+        size='medium'
+        id='code-snippet-code-blocks-multiple-variants'
+        level='3'
+        spacing
+      >
+        Multiple Snippets and Languages
+      </Heading>
+      <DemoableDiv alignContent='left' code={multipleVariantAndLanguagesCode}>
+        <MultipleSnippetsAndLanguagesVariant />
+      </DemoableDiv>
+      <VerticalSpace size='3' />
+
+      {/* ------------------------------------------------------------------ */}
+      <Heading className='toc' size='medium' id='code-snippet-api-requests' level='2' spacing>
+        API Requests
+      </Heading>
+
+      <Heading className='toc' size='medium' id='code-snippet-dark' level='3' spacing>
         Dark variant
       </Heading>
       <BodyText>
-        The default <code>variant="dark"</code> with two request options shows both the "Request for" and
-        "Language" selectors.
+        The default <code>variant="dark"</code> with two request options shows both the snippet and language
+        selectors.
       </BodyText>
       <VerticalSpace />
       <DemoableDiv alignContent='left' code={darkCode}>
@@ -53,7 +104,7 @@ const ComponentsCodeSnippet: React.FC = () => {
       <VerticalSpace size='3' />
 
       {/* ------------------------------------------------------------------ */}
-      <Heading className='toc' size='medium' id='code-snippet-light' level='2' spacing>
+      <Heading className='toc' size='medium' id='code-snippet-light' level='3' spacing>
         Light variant
       </Heading>
       <BodyText>
@@ -67,7 +118,7 @@ const ComponentsCodeSnippet: React.FC = () => {
       <VerticalSpace size='3' />
 
       {/* ------------------------------------------------------------------ */}
-      <Heading className='toc' size='medium' id='code-snippet-headers' level='2' spacing>
+      <Heading className='toc' size='medium' id='code-snippet-headers' level='3' spacing>
         With request headers
       </Heading>
       <BodyText>
@@ -81,11 +132,11 @@ const ComponentsCodeSnippet: React.FC = () => {
       <VerticalSpace size='3' />
 
       {/* ------------------------------------------------------------------ */}
-      <Heading className='toc' size='medium' id='code-snippet-single' level='2' spacing>
-        Single request (no request selector)
+      <Heading className='toc' size='medium' id='code-snippet-single' level='3' spacing>
+        Single request (no snippet selector)
       </Heading>
       <BodyText>
-        When <code>requests</code> has only one item the "Request for" selector is hidden — only the language
+        When <code>requests</code> has only one item the snippet selector is hidden; only the language
         selector is shown.
       </BodyText>
       <VerticalSpace />
@@ -95,7 +146,7 @@ const ComponentsCodeSnippet: React.FC = () => {
       <VerticalSpace size='3' />
 
       {/* ------------------------------------------------------------------ */}
-      <Heading className='toc' size='medium' id='code-snippet-translated' level='2' spacing>
+      <Heading className='toc' size='medium' id='code-snippet-translated' level='3' spacing>
         Language translation
       </Heading>
       <BodyText>Translated labels for the different text fields.</BodyText>
@@ -106,7 +157,7 @@ const ComponentsCodeSnippet: React.FC = () => {
       <VerticalSpace size='3' />
 
       {/* ------------------------------------------------------------------ */}
-      <Heading className='toc' size='medium' id='code-snippet-highlighted' level='2' spacing>
+      <Heading className='toc' size='medium' id='code-snippet-highlighted' level='3' spacing>
         Highlighting
       </Heading>
       <BodyText>
@@ -115,19 +166,19 @@ const ComponentsCodeSnippet: React.FC = () => {
         documentation page uses Shiki to highlight code blocks, but you can use any renderer you like.
       </BodyText>
       <VerticalSpace />
-      <Heading size='small' id='code-snippet-highlighted-dark' level='3' spacing>
+      <Heading size='small' id='code-snippet-highlighted-dark' level='4' spacing>
         Dark variant
       </Heading>
       <DemoableDiv alignContent='left' code={highlightedDarkCode}>
         <HighlightedDarkVariant />
       </DemoableDiv>
-      <Heading size='small' id='code-snippet-highlighted-light' level='3' spacing>
+      <Heading size='small' id='code-snippet-highlighted-light' level='4' spacing>
         Light variant
       </Heading>
       <DemoableDiv alignContent='left' code={highlightedLightCode}>
         <HighlightedLightVariant />
       </DemoableDiv>
-      <Heading size='small' id='code-snippet-highlighted-custom-code' level='3' spacing>
+      <Heading size='small' id='code-snippet-highlighted-custom-code' level='4' spacing>
         Custom code block variant
       </Heading>
       <DemoableDiv alignContent='left' code={highlightedCustomCode}>
@@ -160,7 +211,7 @@ const ComponentsCodeSnippet: React.FC = () => {
             </Table.DataCell>
             <Table.DataCell>
               Array of <code>{'{ label, url }'}</code> items. 1 item = language selector only. 2+ items = adds
-              a "Request for" selector.
+              a snippet selector.
             </Table.DataCell>
             <Table.DataCell>One of requests / code</Table.DataCell>
             <Table.DataCell>
@@ -172,9 +223,9 @@ const ComponentsCodeSnippet: React.FC = () => {
               <code>code</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>string</code>
+              <code>{'CodeSnippetCodeOption[]'}</code>
             </Table.DataCell>
-            <Table.DataCell>Direct code string — no selectors shown.</Table.DataCell>
+            <Table.DataCell>Labeled snippet options with per-language code blocks.</Table.DataCell>
             <Table.DataCell>One of requests / code</Table.DataCell>
             <Table.DataCell>
               <code>-</code>
@@ -195,15 +246,15 @@ const ComponentsCodeSnippet: React.FC = () => {
           </Table.Row>
           <Table.Row>
             <Table.DataCell>
-              <code>requestLabel</code>
+              <code>snippetLabel</code>
             </Table.DataCell>
             <Table.DataCell>
               <code>string</code>
             </Table.DataCell>
-            <Table.DataCell>Label for the "Request for" selector.</Table.DataCell>
+            <Table.DataCell>Label for the snippet selector.</Table.DataCell>
             <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>
-              <code>"Request for"</code>
+              <code>"Snippet"</code>
             </Table.DataCell>
           </Table.Row>
           <Table.Row>
@@ -303,15 +354,15 @@ const ComponentsCodeSnippet: React.FC = () => {
           </Table.Row>
           <Table.Row>
             <Table.DataCell>
-              <code>requestPlaceholder</code>
+              <code>snippetPlaceholder</code>
             </Table.DataCell>
             <Table.DataCell>
               <code>string</code>
             </Table.DataCell>
-            <Table.DataCell>Placeholder for the request selector.</Table.DataCell>
+            <Table.DataCell>Placeholder for the snippet selector.</Table.DataCell>
             <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>
-              <code>"Select request"</code>
+              <code>"Select snippet"</code>
             </Table.DataCell>
           </Table.Row>
           <Table.Row>

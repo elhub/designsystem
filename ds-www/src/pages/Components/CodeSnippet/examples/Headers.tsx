@@ -3,6 +3,8 @@ import { CodeSnippet } from '@elhub/ds-components'
 
 export const WithHeaders: React.FC = () => (
   <CodeSnippet
+    snippetLabel='Request for'
+    languageLabel='Language'
     requests={[
       { label: 'Default', url: 'https://api.elhub.no/energy-data/v0/metering-points' },
       { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v0/metering-points/%7BYOUR_ID%7D' }

@@ -4,14 +4,21 @@ import { GRID_AREA_REQUESTS } from '../utils/data'
 
 type SupportedTranslations = Pick<
   CodeSnippetProps,
-  'requestPlaceholder' | 'languagePlaceholder' | 'copyLabel' | 'copiedLabel'
+  | 'snippetPlaceholder'
+  | 'languagePlaceholder'
+  | 'copyLabel'
+  | 'copiedLabel'
+  | 'snippetLabel'
+  | 'languageLabel'
 >
 
 const norwegianTranslation: SupportedTranslations = {
-  requestPlaceholder: 'Velg forespørsel',
+  snippetPlaceholder: 'Velg kodeeksempel',
   languagePlaceholder: 'Velg språk',
   copyLabel: 'Kopier',
-  copiedLabel: 'Kopiert'
+  copiedLabel: 'Kopiert',
+  snippetLabel: 'Forespørsel for',
+  languageLabel: 'Språk'
 }
 
 const selectedLanguage = 'norwegian'
@@ -29,9 +36,11 @@ const translatedLabels = getTranslatedLabels(selectedLanguage)
 
 export const TranslatedVariant: React.FC = () => (
   <CodeSnippet
+    snippetLabel={translatedLabels.snippetLabel}
+    languageLabel={translatedLabels.languageLabel}
     copyLabel={translatedLabels.copyLabel}
     copiedLabel={translatedLabels.copiedLabel}
-    requestPlaceholder={translatedLabels.requestPlaceholder}
+    snippetPlaceholder={translatedLabels.snippetPlaceholder}
     languagePlaceholder={translatedLabels.languagePlaceholder}
     requests={[GRID_AREA_REQUESTS[0]]}
   />

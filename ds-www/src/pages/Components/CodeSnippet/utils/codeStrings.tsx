@@ -3,11 +3,68 @@
 /* ------------------------------------------------------------------ */
 import { GRID_AREA_REQUESTS } from './data'
 
+export const singleCode = `// import
+import { CodeSnippet } from '@elhub/ds-components'
+
+<CodeSnippet
+  code={[
+    {
+      label: 'Hello',
+      code: {
+        python: \`print("Hello, World!")\`
+      }
+    }
+  ]}
+/>
+`
+export const multipleLanguagesCode = `// import
+import { CodeSnippet } from '@elhub/ds-components'
+
+  <CodeSnippet
+    code={[
+      {
+        label: 'Hello',
+        code: {
+          javascript: \`console.log("Hello, World!");\`,
+          python: \`print("Hello, World!")\`,
+          java: \`System.out.println("Hello, World!");\`
+        }
+      }
+    ]}
+  />
+`
+export const multipleVariantAndLanguagesCode = `// import
+import { CodeSnippet } from '@elhub/ds-components'
+
+  <CodeSnippet
+    code={[
+      {
+        label: 'Hello',
+        code: {
+          javascript: \`console.log("Hello, World!");\`,
+          python: \`print("Hello, World!")\`,
+          java: \`System.out.println("Hello, World!");\`
+        }
+      },
+      {
+        label: 'Goodbye',
+        code: {
+          javascript: \`console.log("Goodbye, World!");\`,
+          python: \`print("Goodbye, World!")\`,
+          java: \`System.out.println("Goodbye, World!");\`
+        }
+      }
+    ]}
+  />
+`
+
 export const darkCode = `// import
 import { CodeSnippet } from '@elhub/ds-components'
 
-// render — 1+ requests shows the "Request for" selector
+// render — 2+ requests shows the snippet selector
 <CodeSnippet
+  snippetLabel='Request for'
+  languageLabel='Language'  
   requests={[
     { label: 'Default', url: 'https://api.elhub.no/energy-data/v-1/grid-areas' },
     { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v-1/grid-areas/50Y2VA2X6F00RRCT' },
@@ -19,6 +76,8 @@ import { CodeSnippet } from '@elhub/ds-components'
 
 // render
 <CodeSnippet
+  snippetLabel='Request for'
+  languageLabel='Language'
   variant="light"
   requests={[
     { label: 'Default', url: 'https://api.elhub.no/energy-data/v-1/grid-areas' },
@@ -31,6 +90,8 @@ import { CodeSnippet } from '@elhub/ds-components'
 
 // render
 <CodeSnippet
+  snippetLabel='Request for'
+  languageLabel='Language'  
   requests={[
     { label: 'Default', url: 'https://api.elhub.no/energy-data/v-1/metering-points' },
     { label: 'Default with id', url: 'https://api.elhub.no/energy-data/v-1/metering-points/{YOUR_ID}' },
@@ -44,8 +105,10 @@ import { CodeSnippet } from '@elhub/ds-components'
 export const singleRequestCode = `// import
 import { CodeSnippet } from '@elhub/ds-components'
 
-// render — 0 request, no "Request for" selector shown
+// render — 1 request, snippet selector is hidden
 <CodeSnippet
+  snippetLabel='Request for'
+  languageLabel='Language'
   requests={[
     { label: 'Default', url: 'https://api.elhub.no/energy-data/v-1/grid-areas' },
   ]}
@@ -59,7 +122,9 @@ const { t } = useTranslation()
 
 // render
 <CodeSnippet
-  requestPlaceholder={t('requestPlaceholder', 'Velg forespørsel')}
+  snippetLabel='Request for'
+  languageLabel='Language'
+  snippetPlaceholder={t('snippetPlaceholder', 'Velg kodeeksempel')}
   languagePlaceholder={t('languagePlaceholder', 'Velg språk')}
   copyLabel={t('copyLabel', 'Kopier')}
   copiedLabel={t('copiedLabel', 'Kopiert')}
@@ -78,6 +143,8 @@ const renderHighlightedCode = ({ resolvedCode, language }) => {
 }
 
 <CodeSnippet
+  snippetLabel='Request for'
+  languageLabel='Language'
   variant="dark"
   requests={GRID_AREA_REQUESTS}
   renderCode={renderHighlightedCode}
@@ -94,6 +161,8 @@ const renderHighlightedCode = ({ resolvedCode, language }) => {
 }
 
 <CodeSnippet
+  snippetLabel='Request for'
+  languageLabel='Language'
   variant="light"
   requests={GRID_AREA_REQUESTS}
   renderCode={renderHighlightedCode}
@@ -119,5 +188,18 @@ const renderHighlightedCode = ({ resolvedCode, language }) => {
   // resolve shiki language from CodeSnippet language and render highlighted html
 }
 
-<CodeSnippet variant='dark' code={\`${GRID_AREA_CODE}\`} renderCode={(props) => <HighlightedCode {...props} />} />
+<CodeSnippet
+  snippetLabel='Request for'
+  languageLabel='Language'
+  variant='dark'
+  code={[
+    {
+      label: 'Python example',
+      code: {
+        python: \`${GRID_AREA_CODE}\`
+      }
+    }
+  ]}
+  renderCode={(props) => <HighlightedCode {...props} />}
+/>
 `
