@@ -25,6 +25,10 @@ const ComponentsCombobox = () => {
         The Combobox component is a dropdown list for selecting options. It can be used for both single and
         multiple selection. Long option lists are virtualized so only visible options are rendered.
       </BodyText>
+      <BodyText>
+        Options can be simple strings, or objects with <code>label</code>, <code>value</code> and optional{' '}
+        <code>description</code> (shown as secondary text under the label).
+      </BodyText>
       <VerticalSpace />
       <BodyText>
         There are several features that make this component preferrable over the standard select component:

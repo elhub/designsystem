@@ -33,6 +33,7 @@ const FilteredOptions: React.FC = () => {
   const optionsRef = useRef<HTMLUListElement>(null)
   const [scrollTop, setScrollTop] = useState(0)
   const [optionsOffset, setOptionsOffset] = useState(0)
+  const hasOptionDescriptions = filteredOptions.some((option) => !!option.description)
   const optionHeight = size === 'small' ? 32 : 44
   const activeIndex = activeDecendantId
     ? filteredOptions.findIndex(
@@ -57,28 +58,24 @@ const FilteredOptions: React.FC = () => {
         option: filteredOptions[index]
       }))
   }, [activeIndex, endIndex, filteredOptions, startIndex])
+  const optionEntries = hasOptionDescriptions
+    ? filteredOptions.map((option, index) => ({ index, option }))
+    : visibleOptionEntries
 
   useEffect(() => {
     setOptionsOffset(optionsRef.current?.offsetTop ?? 0)
   }, [filteredOptions.length, isLoading, maxSelected?.isLimitReached])
 
   useEffect(() => {
-    const element = listRef.current
-    if (!element || activeIndex < 0) {
+    if (!activeDecendantId) {
       return
     }
-    const optionTop = (optionsRef.current?.offsetTop ?? 0) + activeIndex * optionHeight
-    const optionBottom = optionTop + optionHeight
-    const viewportHeight = element.clientHeight || LIST_HEIGHT
-    if (optionTop < element.scrollTop) {
-      element.scrollTop = optionTop
-      setScrollTop(optionTop)
-    } else if (optionBottom > element.scrollTop + viewportHeight) {
-      const nextScrollTop = optionBottom - viewportHeight
-      element.scrollTop = nextScrollTop
-      setScrollTop(nextScrollTop)
+    const activeOptionElement = document.getElementById(activeDecendantId)
+    const listElement = listRef.current
+    if (activeOptionElement && listElement?.contains(activeOptionElement)) {
+      activeOptionElement.scrollIntoView({ block: 'nearest' })
     }
-  }, [activeIndex, optionHeight])
+  }, [activeDecendantId, filteredOptions.length])
 
   const isDisabled = (option: ComboboxOption): boolean =>
     !!maxSelected?.isLimitReached && !isInList(option.value, selectedOptions)
@@ -130,22 +127,30 @@ const FilteredOptions: React.FC = () => {
         <ul
           ref={optionsRef}
           role='listbox'
-          className='eds-combobox__list-options eds-combobox__list-options--virtual'
-          style={{ height: filteredOptions.length * optionHeight }}
+          className={cl('eds-combobox__list-options', {
+            'eds-combobox__list-options--virtual': !hasOptionDescriptions,
+            'eds-combobox__list-options--with-description': hasOptionDescriptions
+          })}
+          style={hasOptionDescriptions ? undefined : { height: filteredOptions.length * optionHeight }}
         >
-          {visibleOptionEntries.map(({ index, option }) => {
+          {optionEntries.map(({ index, option }) => {
             const optionId = filteredOptionsUtil.getOptionId(id, index)
             return (
               <li
                 className={cl('eds-combobox__list-item', {
                   'eds-combobox__list-item--focus': activeDecendantId === optionId,
                   'eds-combobox__list-item--selected': isInList(option.value, selectedOptions),
+                  'eds-combobox__list-item--with-description': !!option.description,
                   'eds-combobox__list-item--last': index === filteredOptions.length - 1
                 })}
                 data-no-focus={isDisabled(option) || undefined}
                 id={optionId}
                 key={`${option.label}-${index}`}
-                style={{ height: optionHeight, transform: `translateY(${index * optionHeight}px)` }}
+                style={
+                  hasOptionDescriptions
+                    ? undefined
+                    : { height: optionHeight, transform: `translateY(${index * optionHeight}px)` }
+                }
                 tabIndex={-1}
                 onMouseMove={() => {
                   if (activeDecendantId !== optionId) {
@@ -168,12 +173,17 @@ const FilteredOptions: React.FC = () => {
                 aria-posinset={index + 1}
                 aria-setsize={filteredOptions.length}
               >
-                <>
+                <div className='eds-combobox__list-item-content'>
                   <BodyText size={size}>{option.label}</BodyText>
-                  {isInList(option.value, selectedOptions) && (
-                    <IconValidationCheck size='small' color='var(--eds-semantic-text-inverted)' />
+                  {option.description && (
+                    <BodyText size='small' className='eds-combobox__list-item-description'>
+                      {option.description}
+                    </BodyText>
                   )}
-                </>
+                </div>
+                {isInList(option.value, selectedOptions) && (
+                  <IconValidationCheck size='small' color='var(--eds-semantic-text-inverted)' />
+                )}
               </li>
             )
           })}

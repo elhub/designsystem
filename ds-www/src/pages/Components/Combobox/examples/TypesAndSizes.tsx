@@ -2,7 +2,7 @@ import { Combobox, type ComboboxOption, FormItem, FormItemLabel, VerticalSpace }
 import { Fragment, useState } from 'react'
 
 const options: ComboboxOption[] = [
-  { label: 'Bicycle', value: 'bicycle' },
+  { label: 'Bicycle', value: 'bicycle', description: 'A bike you can chose' },
   { label: 'Car', value: 'car' },
   { label: 'Motorcycle', value: 'motorcycle' },
   { label: 'Truck', value: 'truck' },
