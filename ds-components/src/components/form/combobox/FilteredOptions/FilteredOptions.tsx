@@ -67,15 +67,22 @@ const FilteredOptions: React.FC = () => {
   }, [filteredOptions.length, isLoading, maxSelected?.isLimitReached])
 
   useEffect(() => {
-    if (!activeDecendantId) {
+    const element = listRef.current
+    if (!element || activeIndex < 0) {
       return
     }
-    const activeOptionElement = document.getElementById(activeDecendantId)
-    const listElement = listRef.current
-    if (activeOptionElement && listElement?.contains(activeOptionElement)) {
-      activeOptionElement.scrollIntoView({ block: 'nearest' })
+    const optionTop = (optionsRef.current?.offsetTop ?? 0) + activeIndex * optionHeight
+    const optionBottom = optionTop + optionHeight
+    const viewportHeight = element.clientHeight || LIST_HEIGHT
+    if (optionTop < element.scrollTop) {
+      element.scrollTop = optionTop
+      setScrollTop(optionTop)
+    } else if (optionBottom > element.scrollTop + viewportHeight) {
+      const nextScrollTop = optionBottom - viewportHeight
+      element.scrollTop = nextScrollTop
+      setScrollTop(nextScrollTop)
     }
-  }, [activeDecendantId, filteredOptions.length])
+  }, [activeIndex, optionHeight])
 
   const isDisabled = (option: ComboboxOption): boolean =>
     !!maxSelected?.isLimitReached && !isInList(option.value, selectedOptions)
