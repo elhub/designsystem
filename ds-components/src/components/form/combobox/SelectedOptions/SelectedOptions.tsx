@@ -56,7 +56,7 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
 
   // When typing in single-select, remove the selected option from the chips and just render the Input
   if (!isMultiSelect) {
-    return <Chips>{children}</Chips>
+    return <Chips className='eds-combobox__selected-options'>{children}</Chips>
   }
 
   return (
