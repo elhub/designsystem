@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.17.1
+
+### Patch Changes
+
+- e558d4a: Fix single-select combobox input width to prevent selected labels from being truncated.
+
 ## 4.17.0
 
 ### Minor Changes
