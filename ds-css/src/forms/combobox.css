@@ -353,6 +353,31 @@
     white-space: nowrap;
 }
 
+.eds-combobox__list-item-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.eds-combobox__list-options--virtual > .eds-combobox__list-item > .eds-combobox__list-item-content > .eds-body-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.eds-combobox__list-item-description {
+    color: var(--eds-semantic-text-subtle);
+}
+
+.eds-combobox__list-item--with-description .eds-combobox__list-item-description {
+    margin-bottom: var(--eds-size-0-5);
+}
+
+.eds-combobox__list-item--selected .eds-combobox__list-item-description {
+    color: var(--eds-semantic-text-inverted);
+}
+
 .eds-combobox__list-item--focus,
 .eds-combobox__list--with-hover
 .eds-combobox__list-item:where(:not([data-no-focus="true"], .eds-combobox__list-item--new-option)):hover {

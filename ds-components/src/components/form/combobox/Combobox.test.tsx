@@ -61,4 +61,27 @@ describe('Combobox', () => {
     expect(input.getAttribute('aria-activedescendant')).toContain('option-999')
     expect(document.body.contains(screen.getByText('Option 999'))).toBe(true)
   })
+
+  it('renders description text only for options that have a description', () => {
+    render(
+      <FormItem>
+        <Combobox
+          options={[
+            { label: 'Bicycle', value: 'bicycle', description: 'Secondary text' },
+            { label: 'Car', value: 'car' }
+          ]}
+          noResultsLabel='No results'
+        />
+      </FormItem>
+    )
+
+    fireEvent.focus(screen.getByRole('combobox'))
+
+    const bicycleOption = screen.getByText('Bicycle').closest('[role="option"]')
+    const carOption = screen.getByText('Car').closest('[role="option"]')
+
+    expect(document.body.contains(screen.getByText('Secondary text'))).toBe(true)
+    expect(bicycleOption?.classList.contains('eds-combobox__list-item--with-description')).toBe(true)
+    expect(carOption?.classList.contains('eds-combobox__list-item--with-description')).toBe(false)
+  })
 })

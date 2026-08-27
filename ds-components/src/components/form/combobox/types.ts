@@ -15,6 +15,11 @@ export interface ComboboxOption {
    * The programmatic value of the option, for use internally. Will be returned from onToggleSelected.
    */
   value: string
+
+  /**
+   * Optional secondary text shown under the option label in the dropdown list.
+   */
+  description?: string
 }
 
 export interface MaxSelected {
