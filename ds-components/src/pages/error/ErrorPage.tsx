@@ -117,7 +117,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
           <>
             <Header />
             <div className='eds-error-page__container'>
-              <ErrorText title='Page Not Found' description='The page you are looking for does not exist.' />
+              <ErrorText title={page.title} description={page.description} />
             </div>
           </>
         )
