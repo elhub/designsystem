@@ -170,3 +170,5 @@ export {
 } from './layout/grid'
 
 export { HorizontalSpace, VerticalSpace } from './layout/spacing'
+
+export { ErrorPage } from './pages/error'
