@@ -3,7 +3,6 @@ import { Heading, Header } from '../../dist'
 import React, { useEffect } from 'react'
 import { useRouteError, isRouteErrorResponse, useLocation } from 'react-router-dom'
 
-import styles from './error.module.css'
 import { ErrorIllustration } from './ErrorIllustration'
 
 type ErrorPageTextProps = {
@@ -13,7 +12,7 @@ type ErrorPageTextProps = {
 
 const ErrorText: React.FC<ErrorPageTextProps> = ({ title, description }) => {
   return (
-    <div className={styles['error-page__text-container']}>
+    <div className='eds-error-page__text-container'>
       <Heading
         size='xlarge'
         style={{
@@ -100,7 +99,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
     return (
       <>
         <Header />
-        <div className={styles['error-page__container']}>
+        <div className='eds-error-page__container'>
           <ErrorText title={page.title} description={page.description} />
           <ErrorIllustration title={page.illustrationTitle} />
         </div>
@@ -117,7 +116,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
         return (
           <>
             <Header />
-            <div className={styles['error-page__container']}>
+            <div className='eds-error-page__container'>
               <ErrorText title='Page Not Found' description='The page you are looking for does not exist.' />
             </div>
           </>
@@ -128,7 +127,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
       return (
         <>
           <Header />
-          <div className={styles['error-page__container']}>
+          <div className='eds-error-page__container'>
             <ErrorText title={page.title} description={page.description} />
             <ErrorIllustration title={page.illustrationTitle} />
           </div>

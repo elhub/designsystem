@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './error.module.css'
 
 export const ErrorIllustration = ({ title }: { title: string }) => {
   return (
@@ -7,7 +6,7 @@ export const ErrorIllustration = ({ title }: { title: string }) => {
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
       viewBox='0 0 815 721'
-      className={styles.error_page__illustration}
+      className='eds-error-page__illustration'
     >
       <title>{title}</title>;
       <path

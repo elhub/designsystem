@@ -1,0 +1,27 @@
+.eds-error-page__container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: 0 var(--eds-size-8);
+    margin-top: var(--eds-size-16);
+
+    @media (width < 768px) {
+        gap: var(--eds-size-8);
+    }
+}
+
+.eds-error-page__text-container {
+    display: grid;
+    justify-content: center;
+    gap: var(--eds-size-2);
+    text-align: center;
+}
+
+.eds-error-page__illustration {
+    width: 50rem;
+    height: 100%;
+
+    @media (width < 768px) {
+        width: 100%;
+    }
+}
