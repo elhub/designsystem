@@ -12,22 +12,10 @@ type ErrorPageTextProps = {
 const ErrorText: React.FC<ErrorPageTextProps> = ({ title, description }) => {
   return (
     <div className='eds-error-page__text-container'>
-      <Heading
-        size='xlarge'
-        style={{
-          color: 'var(--eds-global-color-green-105)'
-        }}
-      >
+      <Heading className='eds-error-page__text-container--title' size='xlarge'>
         {title}
       </Heading>
-      <Heading
-        level='2'
-        size='large'
-        style={{
-          fontWeight: 'normal',
-          maxWidth: '18rem'
-        }}
-      >
+      <Heading className='eds-error-page__text-container--description' level='2' size='large'>
         {description}
       </Heading>
     </div>
