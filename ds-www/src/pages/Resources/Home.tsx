@@ -29,6 +29,11 @@ const data = [
     link: '/resources/graphs',
     title: 'Graphs',
     description: 'Add charts to your application with no effort'
+  },
+  {
+    link: '/resources/microfrontends',
+    title: 'Micro frontends',
+    description: "Common and shared pages's layout and design for microfrontends"
   }
 ]
 

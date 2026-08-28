@@ -25,7 +25,8 @@ const Route: React.ReactNode = () => {
     { label: 'Tokens', value: 'tokens' },
     { label: 'Fonts/Typography', value: 'typography' },
     { label: 'Spacing/grids', value: 'spacing' },
-    { label: 'Graphs', value: 'graphs' }
+    { label: 'Graphs', value: 'graphs' },
+    { label: 'Micro frontend', value: 'microfrontends' }
   ]
 
   return (
