@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.18.0
+
+### Minor Changes
+
+- e391648: add common error page for microfrontends
+
 ## 4.17.1
 
 ### Patch Changes
