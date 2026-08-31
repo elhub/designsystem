@@ -38,6 +38,7 @@ root.render(
             <Route path='typography' element={<Pages.Resources.Typography />} />
             <Route path='spacing' element={<Pages.Resources.Spacing />} />
             <Route path='graphs' element={<Pages.Resources.Graphs />} />
+            <Route path='microfrontends' element={<Pages.Resources.Microfrontends />} />
           </Route>
           <Route path='/changelog' element={<Pages.Changelog.Changelog />} />
           <Route path='/components' element={<Pages.Components.Route />}>
