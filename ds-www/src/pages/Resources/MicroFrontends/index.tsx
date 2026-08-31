@@ -15,7 +15,7 @@ const ResourcesMicroFrontends: React.FC = () => {
       <VerticalSpace />
       <BodyText>
         To allow for a shared and equal feeling across microfrontends, the design system distributes a few of
-        the common pages, such as the error page and the not found page.
+        the common pages, such as the error page.
       </BodyText>
 
       <VerticalSpace size='2' />
