@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.6.0
+
+### Minor Changes
+
+- e391648: add common error page for microfrontends
+
 ## 6.5.0
 
 ### Minor Changes
