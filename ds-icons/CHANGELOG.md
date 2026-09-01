@@ -1,5 +1,11 @@
 # @elhub/ds-icons
 
+## 4.10.0
+
+### Minor Changes
+
+- 9873973: Add IconDots and IconPhone
+
 ## 4.9.0
 
 ### Minor Changes
