@@ -46,7 +46,8 @@ const ComponentsButton: React.FC = () => {
 
       <BodyText>
         You can still style links as buttons, if you prefer. See the{' '}
-        <Link href='/components/link'>Link component page</Link> to learn how to do that.
+        <Link href={`${import.meta.env.BASE_URL}components/link`}>Link component page</Link> to learn how to
+        do that.
       </BodyText>
 
       <VerticalSpace size='3' />
