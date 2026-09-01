@@ -24,9 +24,12 @@ const ComponentsContainers: React.FC = () => {
       <BodyText>Containers is a collection of styled components meant for building page layouts.</BodyText>
 
       <BodyText>
-        The <Link href='/resources/spacing'>spacing section of the Resources page</Link> has a better overview
-        on how you can combine grid components to create page layouts. This page centers more on code examples
-        and property details
+        The{' '}
+        <Link href={`${import.meta.env.BASE_URL}resources/spacing`}>
+          spacing section of the Resources page
+        </Link>{' '}
+        has a better overview on how you can combine grid components to create page layouts. This page centers
+        more on code examples and property details
       </BodyText>
 
       <VerticalSpace size='2' />
@@ -75,7 +78,7 @@ const ComponentsContainers: React.FC = () => {
 
       <BodyText>
         You should add navigation elements inside a <code>Nav</code> component, like the
-        <Link href='/components/navbar'>NavBar</Link> component.
+        <Link href={`${import.meta.env.BASE_URL}components/navbar`}>NavBar</Link> component.
       </BodyText>
 
       <DemoableDiv alignContent='center' code={containersNavSource} codeHighlighter='shiki'>

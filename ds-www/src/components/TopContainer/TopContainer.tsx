@@ -7,7 +7,7 @@ import useHeadings, { type HeadingElement } from 'hooks/useHeadings'
 import useScrollSpy from 'hooks/useScrollSpy'
 import { isEmpty } from 'lodash'
 import React, { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 type TopContainerProps = React.PropsWithChildren & {
@@ -43,11 +43,11 @@ const DsNavBar = styled(NavBar)`
 
 const TopContainer: React.FC<TopContainerProps> = ({ children }: TopContainerProps) => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const contentRef = useRef<HTMLDivElement | null>(null)
 
-  // passing window.location.pathname triggers refresh on headings when page changes
-  const headings: HeadingElement[] = useHeadings(contentRef, window.location.pathname)
+  const headings: HeadingElement[] = useHeadings(contentRef, pathname)
   const activeId: string[] = useScrollSpy(
     headings.map(({ id }) => id),
     {
@@ -57,7 +57,7 @@ const TopContainer: React.FC<TopContainerProps> = ({ children }: TopContainerPro
     }
   )
 
-  const [_, currentPage] = window.location.pathname.split('/')
+  const currentPage = pathname.split('/')[1] ?? ''
   const navBarActive = ['', 'start-here', 'changes', 'resources', 'components'].indexOf(currentPage)
 
   const showToc = !isEmpty(headings) && !['resources', 'components'].includes(currentPage)

@@ -23,10 +23,10 @@ const ComponentsSwitch = (): React.JSX.Element => {
 
       <VerticalSpace />
       <BodyText spacing>
-        A <Link href='/components/switch'>Switch</Link> provides a straightforward way for users to enable or
-        disable options, akin to flipping a light switch. Using a toggle involves two actions: selection and
-        execution, while a checkbox typically requires an extra step (such as submitting) to complete the
-        action.
+        A <Link href={`${import.meta.env.BASE_URL}components/switch`}>Switch</Link> provides a straightforward
+        way for users to enable or disable options, akin to flipping a light switch. Using a toggle involves
+        two actions: selection and execution, while a checkbox typically requires an extra step (such as
+        submitting) to complete the action.
       </BodyText>
       <BodyText>
         When deciding between a checkbox and a switch, consider the context of use rather than the function

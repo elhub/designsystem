@@ -27,13 +27,14 @@ const ComponentsCheckbox: React.FC = () => {
       <VerticalSpace />
       <BodyText>
         Checkboxes are best suited when it is clear that the user is opting in / opting out of a setting with
-        a clear default value. <Link href='/components/switch'>Switches</Link> are better suited for settings
-        that are not so clear default value, as toggles.
+        a clear default value. <Link href={`${import.meta.env.BASE_URL}components/switch`}>Switches</Link> are
+        better suited for settings that are not so clear default value, as toggles.
       </BodyText>
 
       <BodyText>
-        Checkboxes can be grouped with a <Link href='/components/checkboxgroup'>CheckboxGroup</Link>{' '}
-        component, for more options.
+        Checkboxes can be grouped with a{' '}
+        <Link href={`${import.meta.env.BASE_URL}components/checkboxgroup`}>CheckboxGroup</Link> component, for
+        more options.
       </BodyText>
 
       <VerticalSpace size='2' />

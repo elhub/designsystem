@@ -26,7 +26,7 @@ const ScrollToTop: React.FC = (): React.ReactNode => {
 
 root.render(
   <Suspense fallback={<span>...</span>}>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <TopContainer>
         <ScrollToTop />
         <Routes>

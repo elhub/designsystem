@@ -48,6 +48,7 @@ jobs:
         run: |
           export PATH="$GITHUB_WORKSPACE/node_modules/.bin:$PATH"
           npm run build --ws --if-present
+          cp ds-www/build/index.html ds-www/build/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
