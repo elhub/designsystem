@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.19.0
+
+### Minor Changes
+
+- c1256a7: Add a `listClassName` prop to Combobox for customizing the dropdown list.
+
 ## 4.18.0
 
 ### Minor Changes
