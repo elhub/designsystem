@@ -4,6 +4,14 @@ import styled from 'styled-components'
 
 const StyledCombobox = styled(Combobox)`
   max-width: 400px;
+
+  .wide-options {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: min(600px, calc(100vw - var(--eds-size-8)));
+    min-width: 100%;
+  }
 `
 
 const options: ComboboxOption[] = [
@@ -22,10 +30,11 @@ export const ComboboxWidthLimitExample = () => {
 
   return (
     <FormItem>
-      <FormItemLabel>Limit on 400px</FormItemLabel>
+      <FormItemLabel>400px combobox with a wider dropdown list</FormItemLabel>
       <StyledCombobox
         size='medium'
         options={options}
+        listClassName='wide-options'
         isMultiSelect
         placeholder='Select an option'
         noResultsLabel='No results'

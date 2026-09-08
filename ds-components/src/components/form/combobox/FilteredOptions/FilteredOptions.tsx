@@ -13,7 +13,11 @@ import { useFilteredOptionsContext } from './filteredOptionsContext'
 const LIST_HEIGHT = 290
 const OVERSCAN = 3
 
-const FilteredOptions: React.FC = () => {
+interface FilteredOptionsProps {
+  className?: string
+}
+
+const FilteredOptions: React.FC<FilteredOptionsProps> = ({ className }) => {
   const { id, size } = useInputContext()
   const {
     allowNewValues,
@@ -94,10 +98,14 @@ const FilteredOptions: React.FC = () => {
 
   return (
     <div
-      className={cl('eds-combobox__list', {
-        'eds-combobox__list--closed': !isListOpen,
-        'eds-combobox__list--with-hover': isMouseLastUsedInputDevice
-      })}
+      className={cl(
+        'eds-combobox__list',
+        {
+          'eds-combobox__list--closed': !isListOpen,
+          'eds-combobox__list--with-hover': isMouseLastUsedInputDevice
+        },
+        className
+      )}
       ref={listRef}
       id={filteredOptionsUtil.getFilteredOptionsId(id)}
       tabIndex={-1}

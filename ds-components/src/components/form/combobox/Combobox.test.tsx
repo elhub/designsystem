@@ -5,6 +5,18 @@ import { FormItem } from '../form-item'
 import Combobox from './ComboboxProvider'
 
 describe('Combobox', () => {
+  it('applies a custom class name to the dropdown list', () => {
+    render(
+      <FormItem>
+        <Combobox options={['Option']} listClassName='custom-list' />
+      </FormItem>
+    )
+
+    const list = document.querySelector('.eds-combobox__list')
+
+    expect(list?.classList.contains('custom-list')).toBe(true)
+  })
+
   it('only renders options near the visible viewport', () => {
     render(
       <FormItem>
