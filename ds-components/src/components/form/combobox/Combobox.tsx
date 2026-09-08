@@ -21,6 +21,7 @@ const Combobox = forwardRef<
     toggleListButton = true,
     toggleListButtonLabel,
     inputClassName,
+    listClassName,
     shouldShowSelectedOptions = true,
     ...rest
   } = props
@@ -87,7 +88,7 @@ const Combobox = forwardRef<
             )}
           </div>
         </div>
-        <FilteredOptions />
+        <FilteredOptions className={listClassName} />
       </div>
     </ComboboxWrapper>
   )

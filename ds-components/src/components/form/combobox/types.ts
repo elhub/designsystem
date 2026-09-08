@@ -68,6 +68,12 @@ export interface ComboboxProps
    */
   inputClassName?: string | undefined
   /**
+   * Custom class name for the dropdown list.
+   *
+   * If used for styling, please consider using tokens instead.
+   */
+  listClassName?: string | undefined
+  /**
    * Controlled open/closed state for the dropdown list
    */
   isListOpen?: boolean
