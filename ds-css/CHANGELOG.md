@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.6.1
+
+### Patch Changes
+
+- 333d407: Keep small multi-select comboboxes at the intended height when options are selected.
+
 ## 6.6.0
 
 ### Minor Changes
