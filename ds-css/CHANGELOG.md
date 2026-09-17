@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.6.2
+
+### Patch Changes
+
+- 54d64dc: fixed medium-size combobox's total padding to include chip-elements padding for 32px
+
 ## 6.6.1
 
 ### Patch Changes
