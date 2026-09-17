@@ -75,7 +75,8 @@
     min-height: var(--eds-size-7);
 }
 
-.eds-combobox__wrapper-inner--small.eds-combobox__wrapper-inner--multiple {
+.eds-combobox__wrapper-inner--small.eds-combobox__wrapper-inner--multiple,
+.eds-combobox__wrapper-inner--medium.eds-combobox__wrapper-inner--multiple {
     padding-block: var(--eds-size-0-5);
 }
 
