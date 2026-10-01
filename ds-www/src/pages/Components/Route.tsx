@@ -24,6 +24,7 @@ const Route: React.FC = () => {
   const paths = location.pathname.split('/')
   const components = [
     { label: 'Accordion', value: 'accordion' },
+    { label: 'AdvancedTabs', value: 'advancedTabs' },
     { label: 'Alert', value: 'alert' },
     { label: 'Badge', value: 'badge' },
     { label: 'Button', value: 'button' },

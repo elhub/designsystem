@@ -30,6 +30,7 @@ import Stepper from './Stepper'
 import Switch from './Switch'
 import Table from './Table'
 import Tabs from './Tabs'
+import AdvancedTabs from './AdvancedTabs'
 import Tag from './Tag'
 import TextArea from './TextArea'
 import TextField from './TextField'
@@ -46,6 +47,7 @@ import Route from './Route'
 export {
   Home,
   Accordion,
+  AdvancedTabs,
   Alert,
   Badge,
   Button,
