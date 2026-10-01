@@ -7,14 +7,15 @@
 .eds-advanced-tabs__tab {
     background: var(--eds-advanced-tabs-header-background);
     padding: var(--eds-size-3);
+    border: var(--eds-advanced-tabs-border-width) solid transparent;
+    border-bottom: none;
   }
 
 .eds-advanced-tabs__tab[data-state='active'] {
     background: var(--eds-advanced-tabs-background);
-    border-left: var(--eds-advanced-tabs-border-width) solid;
-    border-right: var(--eds-advanced-tabs-border-width) solid;
-    border-top: var(--eds-advanced-tabs-border-width) solid;
+    border: var(--eds-advanced-tabs-border-width) solid;
     border-color: var(--eds-semantic-border);
+    border-bottom: none;
     position: relative;
     z-index: 1;
     margin-bottom: calc(-1 * var(--eds-advanced-tabs-border-width));

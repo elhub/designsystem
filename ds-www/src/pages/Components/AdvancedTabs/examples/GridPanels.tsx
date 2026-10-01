@@ -13,9 +13,9 @@ const Table1 = () => {
     <Table>
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeader scope='col'>Recipe</Table.ColumnHeader>
-          <Table.ColumnHeader scope='col'>Difficulty</Table.ColumnHeader>
-          <Table.ColumnHeader scope='col'>Time</Table.ColumnHeader>
+          <Table.ColumnHeader scope='col'>Measurment Id</Table.ColumnHeader>
+          <Table.ColumnHeader scope='col'>GridArea</Table.ColumnHeader>
+          <Table.ColumnHeader scope='col'>GridOwner</Table.ColumnHeader>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -43,9 +43,9 @@ const Table2 = () => {
     <Table>
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeader scope='col'>Recipe</Table.ColumnHeader>
-          <Table.ColumnHeader scope='col'>Difficulty</Table.ColumnHeader>
-          <Table.ColumnHeader scope='col'>Time</Table.ColumnHeader>
+          <Table.ColumnHeader scope='col'>Measurment Id</Table.ColumnHeader>
+          <Table.ColumnHeader scope='col'>Direction</Table.ColumnHeader>
+          <Table.ColumnHeader scope='col'>Missing Intervals</Table.ColumnHeader>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -83,7 +83,7 @@ export const AdvancedTabsGridPanelsExample = () => {
               99,9923%
             </BodyText>
             <BodyText as='span' size='small' className='eds-tabs__tab-inner'>
-              Målerverdier motatt
+              Målererdier motatt
             </BodyText>
             <VerticalSpace />
             <BodyText
@@ -112,7 +112,7 @@ export const AdvancedTabsGridPanelsExample = () => {
               98,2268%
             </BodyText>
             <BodyText as='span' size='small' className='eds-tabs__tab-inner'>
-              Målerverdier motatt
+              Måleverdier motatt
             </BodyText>
             <VerticalSpace />
             <BodyText

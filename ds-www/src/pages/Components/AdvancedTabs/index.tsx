@@ -8,6 +8,8 @@ import disabledTabsExampleSource from './examples/DisabledTabs.tsx?raw'
 import tabsGridPanelSource from './examples/GridPanels.tsx?raw'
 import { TabsSelectionFollowsFocusExample } from './examples/SelectionFollowsFocus'
 import tabsSelectionFollowsFocusSource from './examples/SelectionFollowsFocus.tsx?raw'
+import advancedTabsControlledExampleSource from './examples/Controlled.tsx?raw'
+import { AdvancedTabsControlledExample } from './examples/Controlled'
 
 const ComponentsAdvancedTabs = () => {
   return (
@@ -21,6 +23,7 @@ const ComponentsAdvancedTabs = () => {
         component.
       </BodyText>
       <VerticalSpace size='2' />
+
       <Heading className='toc' size='medium' id='Tabs-default' level='2'>
         Default component
       </Heading>
@@ -33,7 +36,6 @@ const ComponentsAdvancedTabs = () => {
       <DemoableDiv alignContent='center' code={advancedTabsDefaultSource} codeHighlighter='shiki'>
         <AdvancedTabsDefaultExample />
       </DemoableDiv>
-
       <VerticalSpace size='2' />
 
       <Heading className='toc' size='medium' id='Tabs-controlled' level='2'>
@@ -44,10 +46,12 @@ const ComponentsAdvancedTabs = () => {
       <BodyText>
         Control the tab values with <code>onChange</code> and <code>value</code> props
       </BodyText>
-
+      <DemoableDiv alignContent='center' code={advancedTabsControlledExampleSource} codeHighlighter='shiki'>
+        <AdvancedTabsControlledExample />
+      </DemoableDiv>
       <VerticalSpace size='2' />
 
-      <Heading className='toc' size='medium' id='Tabs-icons' level='2'>
+      <Heading className='toc' size='medium' id='Tabs-with-grid-body' level='2'>
         Using with grids in panel
       </Heading>
       <VerticalSpace size='2' />
@@ -55,32 +59,33 @@ const ComponentsAdvancedTabs = () => {
       <DemoableDiv alignContent='center' code={tabsGridPanelSource} codeHighlighter='shiki'>
         <AdvancedTabsGridPanelsExample />
       </DemoableDiv>
-
       <VerticalSpace size='2' />
 
-      <Heading className='toc' size='medium' id='Tabs-icons' level='2'>
-        Disable tabs
+      <Heading className='toc' size='medium' id='Tabs-disabled' level='2'>
+        Disabled tabs
       </Heading>
       <VerticalSpace size='2' />
 
+      <BodyText>
+        Use the <code>disabled</code> prop on the tabs you want to be uninteractable.
+      </BodyText>
       <DemoableDiv alignContent='center' code={disabledTabsExampleSource} codeHighlighter='shiki'>
         <DisabledTabsExample />
       </DemoableDiv>
-
       <VerticalSpace size='2' />
+
       <Heading className='toc' size='medium' id='Tabs-selectionFollowsFocus' level='2'>
         Selection follows focus
       </Heading>
       <VerticalSpace size='2' />
 
       <BodyText>
-        Set <code>defaultValue</code> prop if you want the selection to follow focus, or in other words, if
-        you change active tab with keyboard arrow keys, the panels also change accordingly.
+        Set <code>selectionFollowsFocus</code> prop if you want the selection to follow focus, or in other
+        words, if you change active tab with keyboard arrow keys, the panels also change accordingly.
       </BodyText>
       <DemoableDiv alignContent='center' code={tabsSelectionFollowsFocusSource} codeHighlighter='shiki'>
         <TabsSelectionFollowsFocusExample />
       </DemoableDiv>
-
       <Table>
         <Table.Header>
           <Table.Row>
@@ -100,7 +105,7 @@ const ComponentsAdvancedTabs = () => {
               <code>string</code>
             </Table.DataCell>
             <Table.DataCell>Sets tab value</Table.DataCell>
-            <Table.DataCell>Yes</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>
               <code>-</code>
             </Table.DataCell>
@@ -160,7 +165,8 @@ const ComponentsAdvancedTabs = () => {
         </Table.Body>
       </Table>
       <VerticalSpace size='2' />
-      <Heading className='toc' size='medium' id='properties-tabs-list' level='2'>
+
+      <Heading className='toc' size='medium' id='properties-advanced-tabs-list' level='2'>
         Tabs.List
       </Heading>
       <VerticalSpace size='2' />
@@ -191,8 +197,8 @@ const ComponentsAdvancedTabs = () => {
           </Table.Row>
         </Table.Body>
       </Table>
-
       <VerticalSpace size='2' />
+
       <Heading className='toc' size='medium' id='properties-tabs-panel' level='2'>
         Tabs.Panel
       </Heading>
@@ -224,7 +230,6 @@ const ComponentsAdvancedTabs = () => {
           </Table.Row>
         </Table.Body>
       </Table>
-
       <VerticalSpace size='3' />
     </>
   )
