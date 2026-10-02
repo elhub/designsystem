@@ -40,7 +40,7 @@ const AdvancedTabs = forwardRef<HTMLDivElement, AdvancedTabsProps>(
       <RadixTabs.Root
         {...rest}
         ref={ref}
-        className={cl('eds-tabs', className)}
+        className={cl('eds-advanced-tabs', className)}
         activationMode={selectionFollowsFocus ? 'automatic' : 'manual'}
         onValueChange={onChange}
       >

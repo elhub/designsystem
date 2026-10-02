@@ -24,5 +24,5 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(({ className, childre
   </TabsContent>
 )) as TabPanelType
 
-TabPanel.displayName = 'Tab.Panel'
+TabPanel.displayName = 'AdvancedTabs.TabPanel'
 export default TabPanel

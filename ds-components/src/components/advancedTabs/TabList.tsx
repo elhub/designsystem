@@ -19,5 +19,5 @@ const TabList = forwardRef<HTMLDivElement, TabListProps>(({ className, ...rest }
   return <TabsList {...rest} ref={ref} className={cl('eds-advanced-tabs__tablist', className)} />
 }) as TabListType
 
-TabList.displayName = 'Tab.List'
+TabList.displayName = 'AdvancedTabs.TabPanel'
 export default TabList

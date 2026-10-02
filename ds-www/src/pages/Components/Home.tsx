@@ -117,7 +117,7 @@ const ComponentsHome: React.FC = () => {
       navigate: '/components/advancedTabs',
       label: 'AdvancedTabs',
       description:
-        'Arbitrary component tab menu for switching between different panel contents, showing one at a time.',
+        'Tab menu that takes components as tabs, for switching between different panel contents, showing one at a time.',
       el: <AdvancedTabsDefaultExample />
     },
     {
