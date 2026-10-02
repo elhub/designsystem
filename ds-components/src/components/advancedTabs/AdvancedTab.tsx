@@ -33,5 +33,5 @@ const AdvancedTab: AdvancedTabType = forwardRef(
   }
 )
 
-AdvancedTab.displayName = 'AdvancedTab.AdvancedTab'
+AdvancedTab.displayName = 'AdvancedTabs.AdvancedTab'
 export default AdvancedTab
