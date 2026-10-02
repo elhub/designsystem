@@ -86,6 +86,18 @@ const ComponentsAdvancedTabs = () => {
       <DemoableDiv alignContent='center' code={tabsSelectionFollowsFocusSource} codeHighlighter='shiki'>
         <TabsSelectionFollowsFocusExample />
       </DemoableDiv>
+
+      <VerticalSpace size='2' />
+      <Heading className='toc' size='large' id='properties' level='2'>
+        Props table
+      </Heading>
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='medium' id='properties-tabs' level='2'>
+        AdvancedTabs
+      </Heading>
+      <VerticalSpace size='2' />
+
       <Table>
         <Table.Header>
           <Table.Row>
@@ -149,25 +161,12 @@ const ComponentsAdvancedTabs = () => {
               <code>false</code>
             </Table.DataCell>
           </Table.Row>
-          <Table.Row>
-            <Table.DataCell>
-              <code>disabled</code>
-            </Table.DataCell>
-            <Table.DataCell>
-              <code>boolean</code>
-            </Table.DataCell>
-            <Table.DataCell>Disables the tab</Table.DataCell>
-            <Table.DataCell>No</Table.DataCell>
-            <Table.DataCell>
-              <code>false</code>
-            </Table.DataCell>
-          </Table.Row>
         </Table.Body>
       </Table>
       <VerticalSpace size='2' />
 
       <Heading className='toc' size='medium' id='properties-advanced-tabs-list' level='2'>
-        Tabs.List
+        AdvancedTab.List
       </Heading>
       <VerticalSpace size='2' />
 
@@ -200,7 +199,7 @@ const ComponentsAdvancedTabs = () => {
       <VerticalSpace size='2' />
 
       <Heading className='toc' size='medium' id='properties-tabs-panel' level='2'>
-        Tabs.Panel
+        AdvancedTab.Panel
       </Heading>
       <VerticalSpace size='2' />
 
@@ -226,6 +225,39 @@ const ComponentsAdvancedTabs = () => {
             <Table.DataCell>Yes</Table.DataCell>
             <Table.DataCell>
               <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+      <VerticalSpace size='3' />
+
+      <Heading className='toc' size='medium' level='2'>
+        AdvancedTabs.AdvancedTabs
+      </Heading>
+      <VerticalSpace size='2' />
+
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeader>Name</Table.ColumnHeader>
+            <Table.ColumnHeader>Type</Table.ColumnHeader>
+            <Table.ColumnHeader>Description</Table.ColumnHeader>
+            <Table.ColumnHeader>Required</Table.ColumnHeader>
+            <Table.ColumnHeader>Default</Table.ColumnHeader>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          <Table.Row>
+            <Table.DataCell>
+              <code>disabled</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>boolean</code>
+            </Table.DataCell>
+            <Table.DataCell>Disables the tab</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>false</code>
             </Table.DataCell>
           </Table.Row>
         </Table.Body>
