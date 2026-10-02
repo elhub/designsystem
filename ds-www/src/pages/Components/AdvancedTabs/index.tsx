@@ -219,7 +219,7 @@ const ComponentsAdvancedTabs = () => {
       <VerticalSpace size='3' />
 
       <Heading className='toc' size='medium' level='2'>
-        AdvancedTabs.AdvancedTabs
+        AdvancedTabs.AdvancedTab
       </Heading>
       <VerticalSpace size='2' />
 
