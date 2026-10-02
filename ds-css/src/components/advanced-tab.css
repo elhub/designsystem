@@ -1,0 +1,53 @@
+:root {
+    --eds-advanced-tabs-background: var(--eds-semantic-background);
+    --eds-advanced-tabs-header-background: var(--eds-semantic-background-alternative);
+    --eds-advanced-tabs-border-width: var(--eds-size-1-5);
+}
+
+.eds-advanced-tabs__tab {
+    background: var(--eds-advanced-tabs-header-background);
+    padding: var(--eds-size-3);
+    border: var(--eds-advanced-tabs-border-width) solid transparent;
+    border-bottom: none;
+  }
+
+.eds-advanced-tabs__tab[data-state='active'] {
+    background: var(--eds-advanced-tabs-background);
+    border: var(--eds-advanced-tabs-border-width) solid;
+    border-color: var(--eds-semantic-border);
+    border-bottom: none;
+    position: relative;
+    z-index: 1;
+    margin-bottom: calc(-1 * var(--eds-advanced-tabs-border-width));
+
+    /* certain zoom levels makes the tab border go into the panel because margins and border can be zoomed differently by some browsers.
+     Small rounding of the "border-legs" makes this less visible */
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+}
+
+.eds-advanced-tabs__panel {
+    background: var(--eds-advanced-tabs-background);
+    border: var(--eds-advanced-tabs-border-width) solid var(--eds-semantic-border);
+    padding: var(--eds-size-4);
+
+}
+
+.eds-advanced-tabs__panel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.eds-advanced-tabs__tablist{
+    display: flex;
+    max-width: 100%;
+    gap: var(--eds-size-0-5);
+}
+
+.eds-advanced-tabs__tab:not([data-disabled]):hover,
+.eds-advanced-tabs__tab:not([data-disabled]):active {
+    background: var(--eds-advanced-tabs-background);
+}

@@ -44,6 +44,7 @@ root.render(
           <Route path='/components' element={<Pages.Components.Route />}>
             <Route index element={<Pages.Components.Home />} />
             <Route path='accordion' element={<Pages.Components.Accordion />} />
+            <Route path='advancedTabs' element={<Pages.Components.AdvancedTabs />} />
             <Route path='alert' element={<Pages.Components.Alert />} />
             <Route path='badge' element={<Pages.Components.Badge />} />
             <Route path='button' element={<Pages.Components.Button />} />

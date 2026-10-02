@@ -60,6 +60,7 @@ import { IconCheckCircle, IconQualitiesCircle } from '@elhub/ds-icons'
 import ComponentPanel from 'components/ComponentPanel/ComponentPanel'
 
 import React, { useRef, useState } from 'react'
+import { AdvancedTabsDefaultExample } from './AdvancedTabs/examples/Default'
 
 type FeedbackActiveState = 'idle' | 'collecting' | 'isPending' | 'submitted' | 'error'
 type FeedbackType = 'happy' | 'neutral' | 'sad'
@@ -111,6 +112,13 @@ const ComponentsHome: React.FC = () => {
           </Accordion.Item>
         </Accordion>
       )
+    },
+    {
+      navigate: '/components/advancedTabs',
+      label: 'AdvancedTabs',
+      description:
+        'Tab menu that takes components as tabs, for switching between different panel contents, showing one at a time.',
+      el: <AdvancedTabsDefaultExample />
     },
     {
       navigate: '/components/alert',
@@ -668,7 +676,8 @@ const ComponentsHome: React.FC = () => {
     {
       navigate: '/components/tabs',
       label: 'Tabs',
-      description: 'Tab-style menu for switching between different panel contents, showing one at a time.',
+      description:
+        'Label based Tab-style menu for switching between different panel contents, showing one at a time.',
       el: (
         <Tabs defaultValue='soups' size='small'>
           <Tabs.List>

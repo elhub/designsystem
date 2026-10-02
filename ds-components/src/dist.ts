@@ -124,6 +124,9 @@ export type {
 export { Tabs } from './components/tabs'
 export type { TabsProps } from './components/tabs'
 
+export { AdvancedTabs } from './components/advancedTabs'
+export type { AdvancedTabsProps } from './components/advancedTabs'
+
 export { Tag } from './components/tag'
 export type { TagProps, TagVariant, TagSize } from './components/tag'
 
