@@ -28,6 +28,7 @@
 
 /* components */
 @import url("components/accordion.css");
+@import url("components/advanced-tab.css");
 @import url("components/alert.css");
 @import url("components/badge.css");
 @import url("components/button.css");
@@ -50,7 +51,6 @@
 @import url("components/stepper.css");
 @import url("components/table.css");
 @import url("components/tabs.css");
-@import url("components/advanced-tab.css");
 @import url("components/tag.css");
 @import url("components/tooltip.css");
 @import url("components/toggle-group.css");

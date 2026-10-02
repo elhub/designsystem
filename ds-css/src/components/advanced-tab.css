@@ -46,3 +46,8 @@
     max-width: 100%;
     gap: var(--eds-size-0-5);
 }
+
+.eds-advanced-tabs__tab:not([data-disabled]):hover,
+.eds-advanced-tabs__tab:not([data-disabled]):active {
+    background: var(--eds-advanced-tabs-background);
+}
