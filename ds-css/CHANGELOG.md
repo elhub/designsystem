@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.7.0
+
+### Minor Changes
+
+- 8b55066: Added advanced tabs that takes in a component as a tab, and gives a bordered frame to the panel. More flexibility than Tab, since that one is designed to only use a label as tab.
+
 ## 6.6.2
 
 ### Patch Changes
