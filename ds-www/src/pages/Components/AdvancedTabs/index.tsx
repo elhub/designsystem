@@ -111,19 +111,6 @@ const ComponentsAdvancedTabs = () => {
         <Table.Body>
           <Table.Row>
             <Table.DataCell>
-              <code>value</code>
-            </Table.DataCell>
-            <Table.DataCell>
-              <code>string</code>
-            </Table.DataCell>
-            <Table.DataCell>Sets tab value</Table.DataCell>
-            <Table.DataCell>No</Table.DataCell>
-            <Table.DataCell>
-              <code>-</code>
-            </Table.DataCell>
-          </Table.Row>
-          <Table.Row>
-            <Table.DataCell>
               <code>defaultValue</code>
             </Table.DataCell>
             <Table.DataCell>
@@ -247,6 +234,19 @@ const ComponentsAdvancedTabs = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
+          <Table.Row>
+            <Table.DataCell>
+              <code>value</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>string</code>
+            </Table.DataCell>
+            <Table.DataCell>Sets tab panel value</Table.DataCell>
+            <Table.DataCell>Yes</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
           <Table.Row>
             <Table.DataCell>
               <code>disabled</code>
