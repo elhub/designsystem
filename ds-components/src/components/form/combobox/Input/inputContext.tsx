@@ -64,16 +64,23 @@ export const InputContextProvider = ({ children, value: props }: InputContextPro
 
   const [searchTerm, setSearchTerm] = useState(value)
 
+  // Keep the filter in sync when a controlled value is changed from outside, not only when typing
+  useClientLayoutEffect(() => {
+    if (externalValue !== undefined) {
+      setSearchTerm(String(externalValue))
+    }
+  }, [externalValue])
+
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newValue = event.currentTarget.value
-      if (!externalValue) {
+      if (externalValue === undefined) {
         setInternalValue(newValue)
       }
       externalOnChange?.(event)
       setSearchTerm(newValue)
     },
-    [externalOnChange]
+    [externalOnChange, externalValue]
   )
 
   const setValue = useCallback(

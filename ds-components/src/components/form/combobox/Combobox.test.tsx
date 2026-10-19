@@ -56,6 +56,25 @@ describe('Combobox', () => {
     expect(options[0].id).not.toBe(options[1].id)
   })
 
+  it('filters options by a controlled value that changes from outside', () => {
+    const options = [
+      { label: 'Acme AS', value: '123' },
+      { label: 'Beta AS', value: '456' }
+    ]
+    const renderCombobox = (value: string) => (
+      <FormItem>
+        <Combobox options={options} value={value} onChange={() => {}} noResultsLabel='No results' />
+      </FormItem>
+    )
+    const { rerender } = render(renderCombobox('123'))
+
+    rerender(renderCombobox('Acme AS'))
+    fireEvent.focus(screen.getByRole('combobox'))
+
+    expect(screen.getAllByRole('option')).toHaveLength(1)
+    expect(screen.getByRole('option', { name: 'Acme AS' })).toBeTruthy()
+  })
+
   it('supports keyboard navigation to virtualized options', () => {
     render(
       <FormItem>
