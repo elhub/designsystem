@@ -53,7 +53,9 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     setSearchTerm,
     shouldAutocomplete
   } = useInputContext()
-  const { maxSelected, selectedOptions } = useSelectedOptionsContext()
+  const { maxSelected, selectedOptions, isMultiSelect } = useSelectedOptionsContext()
+  const selectedLabel = !isMultiSelect ? selectedOptions[0]?.label : undefined
+  const filterTerm = searchTerm === selectedLabel && value === selectedLabel ? '' : searchTerm
 
   const [isInternalListOpen, setInternalListOpen] = useState(false)
   const { customOptions } = useCustomOptionsContext()
@@ -63,8 +65,8 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
       return externalFilteredOptions
     }
     const opts = [...customOptions, ...options]
-    return filteredOptionsUtils.getMatchingValuesFromList(searchTerm, opts)
-  }, [customOptions, externalFilteredOptions, options, searchTerm])
+    return filteredOptionsUtils.getMatchingValuesFromList(filterTerm, opts)
+  }, [customOptions, externalFilteredOptions, options, filterTerm])
 
   const optionIds = useMemo(
     () => filteredOptions.map((_, index) => filteredOptionsUtils.getOptionId(id, index)),
@@ -92,14 +94,22 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
   useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
-      filteredOptionsUtils.normalizeText(searchTerm) !== '' &&
+      filteredOptionsUtils.normalizeText(filterTerm) !== '' &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
       filteredOptions.length > 0
     ) {
       setValue(`${searchTerm}${filteredOptions[0].label.substring(searchTerm.length)}`)
       setSearchTerm(searchTerm)
     }
-  }, [filteredOptions, previousSearchTerm, searchTerm, setSearchTerm, setValue, shouldAutocomplete])
+  }, [
+    filteredOptions,
+    filterTerm,
+    previousSearchTerm,
+    searchTerm,
+    setSearchTerm,
+    setValue,
+    shouldAutocomplete
+  ])
 
   const isListOpen = useMemo(() => {
     return isExternalListOpen ?? isInternalListOpen
