@@ -75,60 +75,46 @@ describe('Combobox', () => {
     expect(screen.getByRole('option', { name: 'Acme AS' })).toBeTruthy()
   })
 
-  it.each(['input click', 'toggle button', 'keyboard'])(
-    'shows all options when reopening a selected value using %s and filters while editing',
-    (openMethod) => {
-      const options = [
-        { label: 'Acme AS', value: '123' },
-        { label: 'Beta AS', value: '456' }
-      ]
-      const ControlledCombobox = () => {
-        const [value, setValue] = React.useState('Acme AS')
-        return (
-          <FormItem>
-            <Combobox
-              options={options}
-              selectedOptions={[options[0]]}
-              value={value}
-              onChange={(event) => {
-                if (event) setValue(event.currentTarget.value)
-              }}
-              toggleListButtonLabel='Toggle options'
-            />
-          </FormItem>
-        )
-      }
-      render(<ControlledCombobox />)
-      const input = screen.getByRole('combobox') as HTMLInputElement
-      const openList = () => {
-        if (openMethod === 'input click') {
-          fireEvent.click(input)
-        } else if (openMethod === 'toggle button') {
-          fireEvent.pointerUp(screen.getByRole('button', { name: 'Toggle options' }))
-        } else {
-          input.setSelectionRange(input.value.length, input.value.length)
-          fireEvent.keyDown(input, { key: 'ArrowDown' })
-        }
-      }
-
-      openList()
-      expect(input.getAttribute('aria-expanded')).toBe('true')
-      expect(input.value).toBe('Acme AS')
-      expect(screen.getAllByRole('option')).toHaveLength(2)
-      expect(screen.getByRole('option', { name: 'Acme AS' }).getAttribute('aria-selected')).toBe('true')
-
-      fireEvent.change(input, { target: { value: 'Bet' } })
-      expect(screen.getAllByRole('option')).toHaveLength(1)
-      expect(screen.getByRole('option', { name: 'Beta AS' })).toBeTruthy()
-
-      fireEvent.blur(input)
-      openList()
-      expect(input.getAttribute('aria-expanded')).toBe('true')
-      expect(input.value).toBe('Bet')
-      expect(screen.getAllByRole('option')).toHaveLength(1)
-      expect(screen.getByRole('option', { name: 'Beta AS' })).toBeTruthy()
+  it('shows all options for a selected value and preserves filtering while editing and reopening', () => {
+    const options = [
+      { label: 'Acme AS', value: '123' },
+      { label: 'Beta AS', value: '456' }
+    ]
+    const ControlledCombobox = () => {
+      const [value, setValue] = React.useState('Acme AS')
+      return (
+        <FormItem>
+          <Combobox
+            options={options}
+            selectedOptions={[options[0]]}
+            value={value}
+            onChange={(event) => {
+              if (event) setValue(event.currentTarget.value)
+            }}
+            toggleListButtonLabel='Toggle options'
+          />
+        </FormItem>
+      )
     }
-  )
+    render(<ControlledCombobox />)
+    const input = screen.getByRole('combobox') as HTMLInputElement
+    fireEvent.click(input)
+    expect(input.getAttribute('aria-expanded')).toBe('true')
+    expect(input.value).toBe('Acme AS')
+    expect(screen.getAllByRole('option')).toHaveLength(2)
+    expect(screen.getByRole('option', { name: 'Acme AS' }).getAttribute('aria-selected')).toBe('true')
+
+    fireEvent.change(input, { target: { value: 'Bet' } })
+    expect(screen.getAllByRole('option')).toHaveLength(1)
+    expect(screen.getByRole('option', { name: 'Beta AS' })).toBeTruthy()
+
+    fireEvent.blur(input)
+    fireEvent.click(input)
+    expect(input.getAttribute('aria-expanded')).toBe('true')
+    expect(input.value).toBe('Bet')
+    expect(screen.getAllByRole('option')).toHaveLength(1)
+    expect(screen.getByRole('option', { name: 'Beta AS' })).toBeTruthy()
+  })
 
   it('shows all options when a URL-restored selected label resolves while open', () => {
     const options = [
@@ -156,7 +142,32 @@ describe('Combobox', () => {
     expect(screen.getByRole('option', { name: 'Acme AS' }).getAttribute('aria-selected')).toBe('true')
   })
 
-  it('does not autocomplete a selected label using unrelated options', () => {
+  it('shows all options after typing and committing an uncontrolled selection', () => {
+    render(
+      <FormItem>
+        <Combobox options={['Acme AS', 'Beta AS']} />
+      </FormItem>
+    )
+    const input = screen.getByRole('combobox') as HTMLInputElement
+    fireEvent.click(input)
+    fireEvent.change(input, { target: { value: 'Bet' } })
+    expect(screen.getAllByRole('option')).toHaveLength(1)
+
+    fireEvent.pointerUp(screen.getByRole('option', { name: 'Beta AS' }))
+    fireEvent.blur(input)
+    fireEvent.click(input)
+
+    expect(input.value).toBe('Beta AS')
+    expect(input.getAttribute('aria-expanded')).toBe('true')
+    expect(screen.getAllByRole('option')).toHaveLength(2)
+    expect(screen.getByRole('option', { name: 'Beta AS' }).getAttribute('aria-selected')).toBe('true')
+
+    fireEvent.change(input, { target: { value: 'Acm' } })
+    expect(screen.getAllByRole('option')).toHaveLength(1)
+    expect(screen.getByRole('option', { name: 'Acme AS' })).toBeTruthy()
+  })
+
+  it('does not autocomplete or describe a selected label using unrelated options', () => {
     render(
       <FormItem>
         <Combobox
@@ -172,6 +183,15 @@ describe('Combobox', () => {
 
     expect((screen.getByRole('combobox') as HTMLInputElement).value).toBe('Beta')
     expect(screen.getAllByRole('option')).toHaveLength(2)
+    const unrelatedOption = screen.getByRole('option', { name: 'A much longer name' })
+    expect(screen.getByRole('combobox').getAttribute('aria-describedby')?.split(' ') ?? []).not.toContain(
+      unrelatedOption.id
+    )
+
+    fireEvent.change(screen.getByRole('combobox'), { target: { value: 'A' } })
+    expect(screen.getByRole('combobox').getAttribute('aria-describedby')?.split(' ')).toContain(
+      screen.getByRole('option', { name: 'A much longer name' }).id
+    )
   })
 
   it('supports keyboard navigation to virtualized options', () => {

@@ -35,7 +35,7 @@ export const SelectedOptionsProvider = ({
     selectedOptions?: ComboboxOption[]
   }
 }) => {
-  const { clearInput, focusInput, setValue } = useInputContext()
+  const { clearInput, focusInput, setValue, setSearchTerm } = useInputContext()
   const { customOptions, removeCustomOption, addCustomOption, setCustomOptions } = useCustomOptionsContext()
   const {
     allowNewValues,
@@ -99,6 +99,7 @@ export const SelectedOptionsProvider = ({
         if (!isMultiSelect) {
           // in single-select we set the value to the selected option
           setValue(option.label)
+          setSearchTerm(option.label)
         }
       }
 
@@ -107,7 +108,16 @@ export const SelectedOptionsProvider = ({
       }
       focusInput()
     },
-    [addSelectedOption, clearInput, focusInput, removeSelectedOption, selectedOptions]
+    [
+      addSelectedOption,
+      clearInput,
+      focusInput,
+      isMultiSelect,
+      removeSelectedOption,
+      selectedOptions,
+      setSearchTerm,
+      setValue
+    ]
   )
 
   const prevSelectedOptions = usePrevious<ComboboxOption[]>(selectedOptions)

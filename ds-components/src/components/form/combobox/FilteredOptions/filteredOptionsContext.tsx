@@ -55,7 +55,9 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
   } = useInputContext()
   const { maxSelected, selectedOptions, isMultiSelect } = useSelectedOptionsContext()
   const selectedLabel = !isMultiSelect ? selectedOptions[0]?.label : undefined
-  const filterTerm = searchTerm === selectedLabel && value === selectedLabel ? '' : searchTerm
+  const isShowingSelection = value === selectedLabel && searchTerm === selectedLabel
+  const filterTerm = isShowingSelection ? '' : searchTerm
+  const hasSearchTerm = filteredOptionsUtils.normalizeText(filterTerm) !== ''
 
   const [isInternalListOpen, setInternalListOpen] = useState(false)
   const { customOptions } = useCustomOptionsContext()
@@ -94,7 +96,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
   useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
-      filteredOptionsUtils.normalizeText(filterTerm) !== '' &&
+      hasSearchTerm &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
       filteredOptions.length > 0
     ) {
@@ -103,7 +105,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     }
   }, [
     filteredOptions,
-    filterTerm,
+    hasSearchTerm,
     previousSearchTerm,
     searchTerm,
     setSearchTerm,
@@ -137,7 +139,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     if (!isLoading && filteredOptions.length === 0) {
       activeOption = filteredOptionsUtils.getNoHitsId(id)
     } else if ((value && value !== '') || isLoading) {
-      if (shouldAutocomplete && filteredOptions[0]) {
+      if (shouldAutocomplete && hasSearchTerm && filteredOptions[0]) {
         activeOption = filteredOptionsUtils.getOptionId(id, 0)
       } else if (isListOpen && isLoading) {
         activeOption = filteredOptionsUtils.getIsLoadingId(id)
@@ -153,6 +155,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     value,
     partialAriaDescribedBy,
     shouldAutocomplete,
+    hasSearchTerm,
     filteredOptions,
     id
   ])
