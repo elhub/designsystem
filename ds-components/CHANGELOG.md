@@ -1,5 +1,11 @@
 # @elhub/ds-components
 
+## 4.20.1
+
+### Patch Changes
+
+- 8f36d09: fix: sync Combobox filtering when the controlled value changes
+
 ## 4.20.0
 
 ### Minor Changes
