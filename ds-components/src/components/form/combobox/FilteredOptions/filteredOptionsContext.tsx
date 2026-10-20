@@ -53,11 +53,8 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     setSearchTerm,
     shouldAutocomplete
   } = useInputContext()
-  const { maxSelected, selectedOptions, isMultiSelect } = useSelectedOptionsContext()
-  const selectedLabel = !isMultiSelect ? selectedOptions[0]?.label : undefined
-  const isShowingSelection = value === selectedLabel && searchTerm === selectedLabel
-  const filterTerm = isShowingSelection ? '' : searchTerm
-  const hasSearchTerm = filteredOptionsUtils.normalizeText(filterTerm) !== ''
+  const { maxSelected, selectedOptions } = useSelectedOptionsContext()
+  const hasSearchTerm = filteredOptionsUtils.normalizeText(searchTerm) !== ''
 
   const [isInternalListOpen, setInternalListOpen] = useState(false)
   const { customOptions } = useCustomOptionsContext()
@@ -67,8 +64,8 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
       return externalFilteredOptions
     }
     const opts = [...customOptions, ...options]
-    return filteredOptionsUtils.getMatchingValuesFromList(filterTerm, opts)
-  }, [customOptions, externalFilteredOptions, options, filterTerm])
+    return filteredOptionsUtils.getMatchingValuesFromList(searchTerm, opts)
+  }, [customOptions, externalFilteredOptions, options, searchTerm])
 
   const optionIds = useMemo(
     () => filteredOptions.map((_, index) => filteredOptionsUtils.getOptionId(id, index)),

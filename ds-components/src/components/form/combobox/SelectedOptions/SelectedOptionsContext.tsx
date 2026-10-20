@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePrevious } from '../../../../util'
 import { useInputContext } from '../Input/inputContext'
 import { isInList } from '../combobox-utils'
@@ -35,7 +35,7 @@ export const SelectedOptionsProvider = ({
     selectedOptions?: ComboboxOption[]
   }
 }) => {
-  const { clearInput, focusInput, setValue, setSearchTerm } = useInputContext()
+  const { clearInput, focusInput, setValue, inputRef } = useInputContext()
   const { customOptions, removeCustomOption, addCustomOption, setCustomOptions } = useCustomOptionsContext()
   const {
     allowNewValues,
@@ -51,6 +51,22 @@ export const SelectedOptionsProvider = ({
     () => externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
     [customOptions, externalSelectedOptions, internalSelectedOptions]
   )
+
+  const hasExternalSelection = externalSelectedOptions !== undefined
+  useEffect(() => {
+    if (hasExternalSelection) return
+    const form = inputRef.current?.form
+    const onReset = (event: Event) => {
+      queueMicrotask(() => {
+        if (!event.defaultPrevented) {
+          setSelectedOptions([])
+          setCustomOptions([])
+        }
+      })
+    }
+    form?.addEventListener('reset', onReset)
+    return () => form?.removeEventListener('reset', onReset)
+  }, [hasExternalSelection, inputRef, setCustomOptions])
 
   const addSelectedOption = useCallback(
     (option: ComboboxOption) => {
@@ -92,14 +108,12 @@ export const SelectedOptionsProvider = ({
     (option: ComboboxOption, event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
       if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option)
-        console.log('removeSelectedOption')
         clearInput(event)
       } else {
         addSelectedOption(option)
         if (!isMultiSelect) {
           // in single-select we set the value to the selected option
           setValue(option.label)
-          setSearchTerm(option.label)
         }
       }
 
@@ -115,7 +129,6 @@ export const SelectedOptionsProvider = ({
       isMultiSelect,
       removeSelectedOption,
       selectedOptions,
-      setSearchTerm,
       setValue
     ]
   )
