@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePrevious } from '../../../../util'
 import { useInputContext } from '../Input/inputContext'
 import { isInList } from '../combobox-utils'
@@ -35,7 +35,7 @@ export const SelectedOptionsProvider = ({
     selectedOptions?: ComboboxOption[]
   }
 }) => {
-  const { clearInput, focusInput, setValue } = useInputContext()
+  const { clearInput, focusInput, setValue, inputRef } = useInputContext()
   const { customOptions, removeCustomOption, addCustomOption, setCustomOptions } = useCustomOptionsContext()
   const {
     allowNewValues,
@@ -51,6 +51,22 @@ export const SelectedOptionsProvider = ({
     () => externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
     [customOptions, externalSelectedOptions, internalSelectedOptions]
   )
+
+  const hasExternalSelection = externalSelectedOptions !== undefined
+  useEffect(() => {
+    if (hasExternalSelection) return
+    const form = inputRef.current?.form
+    const onReset = (event: Event) => {
+      queueMicrotask(() => {
+        if (!event.defaultPrevented) {
+          setSelectedOptions([])
+          setCustomOptions([])
+        }
+      })
+    }
+    form?.addEventListener('reset', onReset)
+    return () => form?.removeEventListener('reset', onReset)
+  }, [hasExternalSelection, inputRef, setCustomOptions])
 
   const addSelectedOption = useCallback(
     (option: ComboboxOption) => {
@@ -92,7 +108,6 @@ export const SelectedOptionsProvider = ({
     (option: ComboboxOption, event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
       if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option)
-        console.log('removeSelectedOption')
         clearInput(event)
       } else {
         addSelectedOption(option)
@@ -107,7 +122,15 @@ export const SelectedOptionsProvider = ({
       }
       focusInput()
     },
-    [addSelectedOption, clearInput, focusInput, removeSelectedOption, selectedOptions]
+    [
+      addSelectedOption,
+      clearInput,
+      focusInput,
+      isMultiSelect,
+      removeSelectedOption,
+      selectedOptions,
+      setValue
+    ]
   )
 
   const prevSelectedOptions = usePrevious<ComboboxOption[]>(selectedOptions)
