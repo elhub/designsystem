@@ -392,6 +392,50 @@ describe('Combobox', () => {
     expect(input.getAttribute('aria-expanded')).toBe('false')
   })
 
+  it.each([false, true])(
+    'clears stale keyboard focus after an external selection update (controlled input: %s)',
+    (controlledInput) => {
+      const onToggleSelected = vi.fn()
+      const Example = ({ selected }: { selected: boolean }) => {
+        const [value, setValue] = React.useState('')
+        const displayedValue = selected ? 'Beta' : value
+        return (
+          <FormItem>
+            <Combobox
+              options={['Acme', 'Beta']}
+              selectedOptions={selected ? ['Beta'] : []}
+              shouldAutocomplete
+              value={controlledInput ? displayedValue : undefined}
+              onChange={(event) => {
+                if (event) setValue(event.currentTarget.value)
+              }}
+              onToggleSelected={onToggleSelected}
+            />
+          </FormItem>
+        )
+      }
+      const { rerender } = render(<Example selected={false} />)
+      const input = screen.getByRole('combobox') as HTMLInputElement
+      fireEvent.click(input)
+      fireEvent.change(input, { target: { value: 'Bet' } })
+      input.setSelectionRange(input.value.length, input.value.length)
+      fireEvent.keyDown(input, { key: 'ArrowDown' })
+      expect(input.getAttribute('aria-activedescendant')).toBe(
+        screen.getByRole('option', { name: 'Beta' }).id
+      )
+
+      rerender(<Example selected />)
+
+      expect(input.value).toBe('Beta')
+      expect(screen.getAllByRole('option')).toHaveLength(2)
+      expect(input.getAttribute('aria-activedescendant')).toBeNull()
+      fireEvent.keyUp(input, { key: 'Enter' })
+      expect(onToggleSelected).not.toHaveBeenCalled()
+      expect(input.value).toBe('Beta')
+      expect(input.getAttribute('aria-expanded')).toBe('false')
+    }
+  )
+
   it('resolves Enter by the displayed label rather than the first unfiltered option', () => {
     const onToggleSelected = vi.fn()
     render(

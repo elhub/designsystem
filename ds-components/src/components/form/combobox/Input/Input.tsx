@@ -184,6 +184,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const selectedSingleInputValue = !isMultiSelect ? selectedOptions[0]?.label : null
     const selectedSingleOptionValue = !isMultiSelect ? selectedOptions[0]?.value : undefined
     const previousSelection = useRef({ value: selectedSingleOptionValue, label: selectedSingleInputValue })
+    const resetVirtualFocus = virtualFocus.moveFocusToTop
 
     // Synchronize selection changes without treating selected labels as search queries.
     // Depend on selection values, not array identity, so rerenders preserve typed edits.
@@ -199,9 +200,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       // A controlled value is search text unless it represents the single selection.
       if (externalValue !== undefined) {
         if (selectionChanged || !isTypingEcho) {
+          resetVirtualFocus()
           setSearchTerm(externalValue === selectedSingleInputValue ? '' : externalValue)
         }
       } else if (!isMultiSelect && (selectedSingleOptionValue !== undefined || hadSelection)) {
+        resetVirtualFocus()
         setValue(selectedSingleInputValue ?? '')
         setSearchTerm('')
       }
@@ -211,6 +214,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       selectedSingleInputValue,
       selectedSingleOptionValue,
       lastTypedValue,
+      resetVirtualFocus,
       setSearchTerm,
       setValue
     ])
