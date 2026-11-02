@@ -125,6 +125,11 @@
     color: var(--eds-semantic-text-action-selected);
 }
 
+.eds-advanced-tabs__tab[data-disabled] .eds-advanced-tabs__summary-status {
+    background-color: transparent;
+    border-color: var(--eds-semantic-border-disabled);
+}
+
 .eds-advanced-tabs__panel {
     background: var(--eds-advanced-tabs-background);
     border: var(--eds-advanced-tabs-border-width) solid var(--eds-semantic-border);
