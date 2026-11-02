@@ -1,4 +1,4 @@
-import { BodyText, Heading, Link, Table, VerticalSpace } from '@elhub/ds-components'
+import { Alert, BodyText, Heading, Link, Table, VerticalSpace } from '@elhub/ds-components'
 import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
 import advancedTabsDefaultSource from './examples/Default.tsx?raw'
 import { AdvancedTabsDefaultExample } from './examples/Default'
@@ -17,8 +17,9 @@ const ComponentsAdvancedTabs = () => {
         Advanced Tabs
       </Heading>
       <BodyText>
-        <code>AdvancedTabs</code> make it easy to switch between different views, with an arbitrary tab
-        component.
+        <code>AdvancedTabs</code> let users switch between related views, where each tab summarises its own
+        content, for example a key figure and a status. Use them when the tabs themselves carry information,
+        such as categories in a dashboard.
       </BodyText>
       <VerticalSpace size='2' />
 
@@ -28,24 +29,23 @@ const ComponentsAdvancedTabs = () => {
       <VerticalSpace size='2' />
 
       <BodyText>
-        Pass <code>label</code>, <code>status</code>, <code>statusLabel</code>, <code>heading</code>,{' '}
-        <code>subheading</code> and <code>detail</code> to <code>AdvancedTabs.Tab</code> to get the standard
-        layout from the design. Add <code>disabled</code> to a tab to disable it, and use{' '}
-        <code>fit='container'</code> on a table to make it fill the panel. See{' '}
-        <Link href='#Tabs-customizable-content'>Customizable tab content</Link> for other layouts.
-      </BodyText>
-      <VerticalSpace />
-      <BodyText>
-        If you are not controlling the tabs, at least pass a <code>defaultValue</code> prop, otherwise no
-        panel will be rendered.
+        Each tab shows a label, a main value with a short description and an optional status, so users can
+        compare the categories at a glance before opening one. The active tab merges with the panel below it.
       </BodyText>
       <DemoableDiv alignContent='center' code={advancedTabsDefaultSource} codeHighlighter='shiki'>
         <AdvancedTabsDefaultExample />
       </DemoableDiv>
+      <Alert>
+        Pass <code>label</code>, <code>status</code>, <code>statusLabel</code>, <code>heading</code>,{' '}
+        <code>subheading</code> and <code>detail</code> to <code>AdvancedTabs.Tab</code> for the standard
+        layout, and set <code>defaultValue</code> on <code>AdvancedTabs</code> when the tabs are not
+        controlled, otherwise no panel is rendered. Use <code>fit='container'</code> on a table to make it
+        fill the panel. See <Link href='#Tabs-flexible-content'>Flexible tab content</Link> for other layouts.
+      </Alert>
       <VerticalSpace size='2' />
 
-      <Heading className='toc' size='medium' id='Tabs-customizable-content' level='2'>
-        Customizable tab content
+      <Heading className='toc' size='medium' id='Tabs-flexible-content' level='2'>
+        Flexible tab content
       </Heading>
       <VerticalSpace size='2' />
 
@@ -278,7 +278,7 @@ const ComponentsAdvancedTabs = () => {
               <code>label</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>ReactNode</code>
+              <code>string</code>
             </Table.DataCell>
             <Table.DataCell>Small text above the heading, e.g. the category name</Table.DataCell>
             <Table.DataCell>No</Table.DataCell>
@@ -306,7 +306,7 @@ const ComponentsAdvancedTabs = () => {
               <code>statusLabel</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>ReactNode</code>
+              <code>string</code>
             </Table.DataCell>
             <Table.DataCell>Text in the status tag. Required when status is set</Table.DataCell>
             <Table.DataCell>No</Table.DataCell>
@@ -319,7 +319,7 @@ const ComponentsAdvancedTabs = () => {
               <code>heading</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>ReactNode</code>
+              <code>string</code>
             </Table.DataCell>
             <Table.DataCell>
               Main value of the tab, highlighted when the tab is hovered, pressed or active
@@ -334,7 +334,7 @@ const ComponentsAdvancedTabs = () => {
               <code>subheading</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>ReactNode</code>
+              <code>string</code>
             </Table.DataCell>
             <Table.DataCell>Text directly below the heading</Table.DataCell>
             <Table.DataCell>No</Table.DataCell>
@@ -347,7 +347,7 @@ const ComponentsAdvancedTabs = () => {
               <code>detail</code>
             </Table.DataCell>
             <Table.DataCell>
-              <code>ReactNode</code>
+              <code>string</code>
             </Table.DataCell>
             <Table.DataCell>Small text at the bottom, e.g. a count or date</Table.DataCell>
             <Table.DataCell>No</Table.DataCell>

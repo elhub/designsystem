@@ -8,7 +8,7 @@ export interface TabSummaryProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * Small text above the heading, e.g. the category name
    */
-  label?: React.ReactNode
+  label?: string
   /**
    * Status shown as a colour-coded tag next to the label. The tag is hidden when not set
    */
@@ -16,19 +16,19 @@ export interface TabSummaryProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * Text shown in the status tag. Required when status is set
    */
-  statusLabel?: React.ReactNode
+  statusLabel?: string
   /**
    * Main value of the tab, highlighted when the tab is hovered, pressed or active
    */
-  heading?: React.ReactNode
+  heading?: string
   /**
    * Text directly below the heading
    */
-  subheading?: React.ReactNode
+  subheading?: string
   /**
-   * Small text at the bottom, e.g. a count, status or date
+   * Small text at the bottom, e.g. a count or date
    */
-  detail?: React.ReactNode
+  detail?: string
 }
 
 type TabSummaryType = React.ForwardRefExoticComponent<TabSummaryProps & React.RefAttributes<HTMLSpanElement>>
