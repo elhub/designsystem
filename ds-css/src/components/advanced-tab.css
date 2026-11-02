@@ -1,53 +1,138 @@
 :root {
     --eds-advanced-tabs-background: var(--eds-semantic-background);
     --eds-advanced-tabs-header-background: var(--eds-semantic-background-alternative);
-    --eds-advanced-tabs-border-width: var(--eds-size-1-5);
+    --eds-advanced-tabs-border-width: var(--eds-size-1);
+}
+
+.eds-advanced-tabs__tablist {
+    display: flex;
+    max-width: 100%;
+
+    /* The panel's top border is drawn here as a background line instead of a border.
+       Borders are rounded to whole screen pixels in some browsers, but backgrounds and margins are not,
+       so this keeps the active tab's sides ending exactly on the line at every zoom level. */
+    padding-bottom: var(--eds-advanced-tabs-border-width);
+    background: linear-gradient(var(--eds-semantic-border), var(--eds-semantic-border))
+    bottom / 100% var(--eds-advanced-tabs-border-width) no-repeat;
 }
 
 .eds-advanced-tabs__tab {
-    background: var(--eds-advanced-tabs-header-background);
-    padding: var(--eds-size-3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--eds-size-3); /* space between the summary and custom children */
+    text-align: start;
+    font-family: var(--eds-font-body-family);
+    color: var(--eds-semantic-text);
+    background-color: var(--eds-advanced-tabs-header-background);
+    background-clip: padding-box;
+    padding: var(--eds-size-6);
     border: var(--eds-advanced-tabs-border-width) solid transparent;
-    border-bottom: none;
-  }
+}
 
 .eds-advanced-tabs__tab[data-state='active'] {
-    background: var(--eds-advanced-tabs-background);
-    border: var(--eds-advanced-tabs-border-width) solid;
+    background-color: var(--eds-advanced-tabs-background);
     border-color: var(--eds-semantic-border);
     border-bottom: none;
-    position: relative;
     z-index: 1;
-    margin-bottom: calc(-1 * var(--eds-advanced-tabs-border-width));
 
-    /* certain zoom levels makes the tab border go into the panel because margins and border can be zoomed differently by some browsers.
-     Small rounding of the "border-legs" makes this less visible */
-    border-bottom-left-radius: 0.3rem;
-    border-bottom-right-radius: 0.3rem;
+    /* Extends the active tab down over the line, so it merges with the panel */
+    margin-bottom: calc(-1 * var(--eds-advanced-tabs-border-width));
+}
+
+/* Focus ring is drawn on a pseudo-element covering the tab's outer edge,
+   so active and inactive tabs get a ring of the same size and position */
+.eds-advanced-tabs__tab:focus-visible {
+    outline: none;
+}
+
+.eds-advanced-tabs__tab:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--eds-advanced-tabs-border-width));
+    box-shadow: inset var(--eds-semantic-focus);
+    pointer-events: none;
+}
+
+/* Exclude the part of the active tab that overlaps the line */
+.eds-advanced-tabs__tab[data-state='active']:focus-visible::after {
+    bottom: var(--eds-advanced-tabs-border-width);
+}
+
+.eds-advanced-tabs__tab:not([data-disabled]):hover,
+.eds-advanced-tabs__tab:not([data-disabled]):active {
+    background-color: var(--eds-advanced-tabs-background);
+}
+
+.eds-advanced-tabs__tab[data-disabled] {
+    background-color: var(--eds-semantic-background-disabled);
+    color: var(--eds-semantic-text-disabled);
+    cursor: not-allowed;
+}
+
+/* Predefined tab content: label, status, heading, subheading and detail props on AdvancedTabs.Tab */
+.eds-advanced-tabs__summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-size-3);
+}
+
+.eds-advanced-tabs__summary-top {
+    display: flex;
+    align-items: baseline;
+    gap: var(--eds-size-3);
+}
+
+/* Always top right, next to the label on the same line */
+.eds-advanced-tabs__summary-status {
+    flex: none;
+    margin-inline-start: auto;
+    white-space: nowrap;
+}
+
+.eds-advanced-tabs__summary-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.eds-advanced-tabs__summary-label,
+.eds-advanced-tabs__summary-subheading,
+.eds-advanced-tabs__summary-detail {
+    font-size: var(--eds-font-body-size-small);
+    line-height: var(--eds-font-body-line-height-small);
+}
+
+.eds-advanced-tabs__summary-label {
+    white-space: nowrap;
+}
+
+.eds-advanced-tabs__summary-heading {
+    font-size: var(--eds-font-body-size-medium);
+    line-height: var(--eds-font-body-line-height-medium);
+    font-weight: var(--eds-font-body-weight-bold);
+}
+
+.eds-advanced-tabs__tab[data-state='active'] .eds-advanced-tabs__summary-heading {
+    color: var(--eds-semantic-text-action);
+}
+
+.eds-advanced-tabs__tab:not([data-disabled], [data-state='active']):hover .eds-advanced-tabs__summary-heading {
+    color: var(--eds-semantic-text-action-hover);
+}
+
+.eds-advanced-tabs__tab:not([data-disabled], [data-state='active']):active .eds-advanced-tabs__summary-heading {
+    color: var(--eds-semantic-text-action-selected);
 }
 
 .eds-advanced-tabs__panel {
     background: var(--eds-advanced-tabs-background);
     border: var(--eds-advanced-tabs-border-width) solid var(--eds-semantic-border);
+    border-top: none; /* drawn by the tablist, see above */
     padding: var(--eds-size-4);
-
 }
 
-.eds-advanced-tabs__panel-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.eds-advanced-tabs__tablist{
-    display: flex;
-    max-width: 100%;
-    gap: var(--eds-size-0-5);
-}
-
-.eds-advanced-tabs__tab:not([data-disabled]):hover,
-.eds-advanced-tabs__tab:not([data-disabled]):active {
-    background: var(--eds-advanced-tabs-background);
+.eds-advanced-tabs__panel:focus-visible {
+    outline: none;
+    box-shadow: inset var(--eds-semantic-focus);
 }

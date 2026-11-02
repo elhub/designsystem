@@ -1,5 +1,6 @@
 import {
   Accordion,
+  AdvancedTabs,
   Alert,
   Badge,
   BodyText,
@@ -60,7 +61,6 @@ import { IconCheckCircle, IconQualitiesCircle } from '@elhub/ds-icons'
 import ComponentPanel from 'components/ComponentPanel/ComponentPanel'
 
 import React, { useRef, useState } from 'react'
-import { AdvancedTabsDefaultExample } from './AdvancedTabs/examples/Default'
 
 type FeedbackActiveState = 'idle' | 'collecting' | 'isPending' | 'submitted' | 'error'
 type FeedbackType = 'happy' | 'neutral' | 'sad'
@@ -118,7 +118,28 @@ const ComponentsHome: React.FC = () => {
       label: 'AdvancedTabs',
       description:
         'Tab menu that takes components as tabs, for switching between different panel contents, showing one at a time.',
-      el: <AdvancedTabsDefaultExample />
+      el: (
+        <AdvancedTabs defaultValue='first'>
+          <AdvancedTabs.List>
+            <AdvancedTabs.Tab
+              value='first'
+              label='Label'
+              heading='Heading'
+              subheading='Subheading'
+              detail='Detail'
+            />
+            <AdvancedTabs.Tab
+              value='second'
+              label='Label'
+              heading='Heading'
+              subheading='Subheading'
+              detail='Detail'
+            />
+          </AdvancedTabs.List>
+          <AdvancedTabs.Panel value='first'>First tabs content here</AdvancedTabs.Panel>
+          <AdvancedTabs.Panel value='second'>Second tabs content here</AdvancedTabs.Panel>
+        </AdvancedTabs>
+      )
     },
     {
       navigate: '/components/alert',

@@ -1,11 +1,9 @@
-import { BodyText, Heading, Table, VerticalSpace } from '@elhub/ds-components'
+import { BodyText, Heading, Link, Table, VerticalSpace } from '@elhub/ds-components'
 import DemoableDiv from 'components/DemoableDiv/DemoableDiv'
 import advancedTabsDefaultSource from './examples/Default.tsx?raw'
 import { AdvancedTabsDefaultExample } from './examples/Default'
-import { AdvancedTabsGridPanelsExample } from './examples/GridPanels'
-import { DisabledTabsExample } from './examples/DisabledTabs'
-import disabledTabsExampleSource from './examples/DisabledTabs.tsx?raw'
-import tabsGridPanelSource from './examples/GridPanels.tsx?raw'
+import advancedTabsCustomizableSource from './examples/Customizable.tsx?raw'
+import { AdvancedTabsCustomizableExample } from './examples/Customizable'
 import { TabsSelectionFollowsFocusExample } from './examples/SelectionFollowsFocus'
 import tabsSelectionFollowsFocusSource from './examples/SelectionFollowsFocus.tsx?raw'
 import advancedTabsControlledExampleSource from './examples/Controlled.tsx?raw'
@@ -30,11 +28,34 @@ const ComponentsAdvancedTabs = () => {
       <VerticalSpace size='2' />
 
       <BodyText>
+        Pass <code>label</code>, <code>status</code>, <code>statusLabel</code>, <code>heading</code>,{' '}
+        <code>subheading</code> and <code>detail</code> to <code>AdvancedTabs.Tab</code> to get the standard
+        layout from the design. Add <code>disabled</code> to a tab to disable it, and use{' '}
+        <code>fit='container'</code> on a table to make it fill the panel. See{' '}
+        <Link href='#Tabs-customizable-content'>Customizable tab content</Link> for other layouts.
+      </BodyText>
+      <VerticalSpace />
+      <BodyText>
         If you are not controlling the tabs, at least pass a <code>defaultValue</code> prop, otherwise no
         panel will be rendered.
       </BodyText>
       <DemoableDiv alignContent='center' code={advancedTabsDefaultSource} codeHighlighter='shiki'>
         <AdvancedTabsDefaultExample />
+      </DemoableDiv>
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='medium' id='Tabs-customizable-content' level='2'>
+        Customizable tab content
+      </Heading>
+      <VerticalSpace size='2' />
+
+      <BodyText>
+        All summary props are optional, so use only the ones you need. For other layouts, pass your own
+        content as children instead, or combine both to add content below the summary. Tabs in the same list
+        usually look best with the same layout.
+      </BodyText>
+      <DemoableDiv alignContent='center' code={advancedTabsCustomizableSource} codeHighlighter='shiki'>
+        <AdvancedTabsCustomizableExample />
       </DemoableDiv>
       <VerticalSpace size='2' />
 
@@ -44,33 +65,12 @@ const ComponentsAdvancedTabs = () => {
       <VerticalSpace size='2' />
 
       <BodyText>
-        Control the tab values with <code>onChange</code> and <code>value</code> props
+        Control the active tab with the <code>value</code> and <code>onChange</code> props when your code
+        needs to know or change which tab is open, for example to sync it with the URL or switch tabs from
+        elsewhere on the page. The buttons below change the tab from outside the component.
       </BodyText>
       <DemoableDiv alignContent='center' code={advancedTabsControlledExampleSource} codeHighlighter='shiki'>
         <AdvancedTabsControlledExample />
-      </DemoableDiv>
-      <VerticalSpace size='2' />
-
-      <Heading className='toc' size='medium' id='Tabs-with-grid-body' level='2'>
-        Using with grids in panel
-      </Heading>
-      <VerticalSpace size='2' />
-
-      <DemoableDiv alignContent='center' code={tabsGridPanelSource} codeHighlighter='shiki'>
-        <AdvancedTabsGridPanelsExample />
-      </DemoableDiv>
-      <VerticalSpace size='2' />
-
-      <Heading className='toc' size='medium' id='Tabs-disabled' level='2'>
-        Disabled tabs
-      </Heading>
-      <VerticalSpace size='2' />
-
-      <BodyText>
-        Use the <code>disabled</code> prop on the tabs you want to be uninteractable.
-      </BodyText>
-      <DemoableDiv alignContent='center' code={disabledTabsExampleSource} codeHighlighter='shiki'>
-        <DisabledTabsExample />
       </DemoableDiv>
       <VerticalSpace size='2' />
 
@@ -137,6 +137,19 @@ const ComponentsAdvancedTabs = () => {
           </Table.Row>
           <Table.Row>
             <Table.DataCell>
+              <code>value</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>string</code>
+            </Table.DataCell>
+            <Table.DataCell>Controlled selected tab value. Use together with onChange</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
               <code>selectionFollowsFocus</code>
             </Table.DataCell>
             <Table.DataCell>
@@ -153,7 +166,7 @@ const ComponentsAdvancedTabs = () => {
       <VerticalSpace size='2' />
 
       <Heading className='toc' size='medium' id='properties-advanced-tabs-list' level='2'>
-        AdvancedTab.List
+        AdvancedTabs.List
       </Heading>
       <VerticalSpace size='2' />
 
@@ -186,7 +199,7 @@ const ComponentsAdvancedTabs = () => {
       <VerticalSpace size='2' />
 
       <Heading className='toc' size='medium' id='properties-tabs-panel' level='2'>
-        AdvancedTab.Panel
+        AdvancedTabs.Panel
       </Heading>
       <VerticalSpace size='2' />
 
@@ -218,8 +231,8 @@ const ComponentsAdvancedTabs = () => {
       </Table>
       <VerticalSpace size='3' />
 
-      <Heading className='toc' size='medium' level='2'>
-        AdvancedTabs.AdvancedTab
+      <Heading className='toc' size='medium' id='properties-tabs-tab' level='2'>
+        AdvancedTabs.Tab
       </Heading>
       <VerticalSpace size='2' />
 
@@ -258,6 +271,103 @@ const ComponentsAdvancedTabs = () => {
             <Table.DataCell>No</Table.DataCell>
             <Table.DataCell>
               <code>false</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>label</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>ReactNode</code>
+            </Table.DataCell>
+            <Table.DataCell>Small text above the heading, e.g. the category name</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>status</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>'success' | 'warning' | 'error'</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              Shows a colour-coded status tag next to the label. Hidden when not set
+            </Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>statusLabel</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>ReactNode</code>
+            </Table.DataCell>
+            <Table.DataCell>Text in the status tag. Required when status is set</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>heading</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>ReactNode</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              Main value of the tab, highlighted when the tab is hovered, pressed or active
+            </Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>subheading</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>ReactNode</code>
+            </Table.DataCell>
+            <Table.DataCell>Text directly below the heading</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>detail</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>ReactNode</code>
+            </Table.DataCell>
+            <Table.DataCell>Small text at the bottom, e.g. a count or date</Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>
+              <code>children</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              <code>ReactNode</code>
+            </Table.DataCell>
+            <Table.DataCell>
+              Custom tab content. Rendered after the summary when summary props are also set
+            </Table.DataCell>
+            <Table.DataCell>No</Table.DataCell>
+            <Table.DataCell>
+              <code>-</code>
             </Table.DataCell>
           </Table.Row>
         </Table.Body>
