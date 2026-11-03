@@ -37,14 +37,17 @@
     border-bottom: none;
     z-index: 1;
 
-    /* Extends the active tab down over the line, so it merges with the panel */
+    /* Extends the active tab down over the line, so it merges with the panel.
+       The extra bottom padding replaces the bottom border and the overlap,
+       so the active tab takes up the same height as inactive tabs and the tab list never changes height */
     margin-bottom: calc(-1 * var(--eds-advanced-tabs-border-width));
+    padding-bottom: calc(var(--eds-size-6) + 2 * var(--eds-advanced-tabs-border-width));
 }
 
-/* Focus ring is drawn on a pseudo-element covering the tab's outer edge,
-   so active and inactive tabs get a ring of the same size and position */
 .eds-advanced-tabs__tab:focus-visible {
-    outline: none;
+    /* Invisible normally, but shown in forced-colors mode (e.g. Windows High Contrast), where box-shadows are removed */
+    outline: var(--eds-size-0-5) solid transparent;
+    outline-offset: calc(-1 * var(--eds-size-0-5));
 }
 
 .eds-advanced-tabs__tab:focus-visible::after {
@@ -80,7 +83,7 @@
 
 .eds-advanced-tabs__summary-top {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: var(--eds-size-3);
 }
 
@@ -125,6 +128,7 @@
     color: var(--eds-semantic-text-action-selected);
 }
 
+/* Disabled tabs fade everything, including the status tag */
 .eds-advanced-tabs__tab[data-disabled] .eds-advanced-tabs__summary-status {
     background-color: transparent;
     border-color: var(--eds-semantic-border-disabled);
@@ -138,6 +142,16 @@
 }
 
 .eds-advanced-tabs__panel:focus-visible {
-    outline: none;
+    outline: var(--eds-size-0-5) solid transparent;
+    outline-offset: calc(-1 * var(--eds-size-0-5));
     box-shadow: inset var(--eds-semantic-focus);
+}
+
+/* Forced-colors mode (e.g. Windows High Contrast) removes background images, so draw the line as a border there */
+@media (forced-colors: active) {
+    .eds-advanced-tabs__tablist {
+        padding-bottom: 0;
+        background: none;
+        border-bottom: var(--eds-advanced-tabs-border-width) solid CanvasText;
+    }
 }
