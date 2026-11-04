@@ -18,9 +18,8 @@ export type TabPanelType = React.ForwardRefExoticComponent<
 >
 
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(({ className, children, ...rest }, ref) => (
-  // Wrapped in a div to center content without impacting the border
-  <TabsContent {...rest} ref={ref} className='eds-advanced-tabs__panel'>
-    <div className={cl('eds-advanced-tabs__panel-content', className)}>{children}</div>
+  <TabsContent {...rest} ref={ref} className={cl('eds-advanced-tabs__panel', className)}>
+    {children}
   </TabsContent>
 )) as TabPanelType
 

@@ -1,16 +1,51 @@
 import { AdvancedTabs } from '@elhub/ds-components'
 
+const tabs = [
+  {
+    value: 'exchange',
+    label: 'Exchange',
+    status: 'success',
+    statusLabel: 'On target',
+    heading: '99.9923%',
+    detail: '23 metering points missing'
+  },
+  {
+    value: 'production',
+    label: 'Production',
+    status: 'warning',
+    statusLabel: 'Below target',
+    heading: '98.2268%',
+    detail: '143 metering points missing'
+  },
+  {
+    value: 'consumption15',
+    label: 'Consumption 15',
+    status: 'error',
+    statusLabel: 'Critical',
+    heading: '95.34%',
+    detail: '59 metering points missing'
+  },
+  {
+    value: 'consumption60',
+    label: 'Consumption 60',
+    heading: '99.9923%',
+    detail: '2 metering points missing'
+  }
+] as const
+
 export const TabsSelectionFollowsFocusExample = () => {
   return (
-    <AdvancedTabs defaultValue='email' selectionFollowsFocus>
+    <AdvancedTabs defaultValue='exchange' selectionFollowsFocus>
       <AdvancedTabs.List>
-        <AdvancedTabs.Tab value='email'>email</AdvancedTabs.Tab>
-        <AdvancedTabs.Tab value='read'>read</AdvancedTabs.Tab>
-        <AdvancedTabs.Tab value='unread'>unread</AdvancedTabs.Tab>
+        {tabs.map((tab) => (
+          <AdvancedTabs.Tab key={tab.value} {...tab} subheading='Metering values received' />
+        ))}
       </AdvancedTabs.List>
-      <AdvancedTabs.Panel value='email'>Panel for Emails</AdvancedTabs.Panel>
-      <AdvancedTabs.Panel value='read'>Panel for Read emails</AdvancedTabs.Panel>
-      <AdvancedTabs.Panel value='unread'>Panel for Unread emails</AdvancedTabs.Panel>
+      {tabs.map((tab) => (
+        <AdvancedTabs.Panel key={tab.value} value={tab.value}>
+          Panel for {tab.label}
+        </AdvancedTabs.Panel>
+      ))}
     </AdvancedTabs>
   )
 }
