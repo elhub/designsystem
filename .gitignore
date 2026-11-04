@@ -12,7 +12,7 @@ node_modules
 dist
 
 
-# build for now 
+# build for now
 ds-www/build
 
 # misc
@@ -38,6 +38,9 @@ yarn-error.log*
 # Owasp dependecy check
 dependency-check-bin/
 dependency-check-reports/
+
+# MegaLinter local reports (gh dxp lint)
+/megalinter-reports/
 
 .idea
 .vscode
