@@ -1,0 +1,12 @@
+---
+# EDS uses its own ESLint, Prettier and stylelint setup (see npm run checktidy).
+# Start from the shared Elhub config, and only turn off the overlapping linters until EDS migrates to Biome.
+EXTENDS: https://raw.githubusercontent.com/elhub/devxp-lint-configuration/main/resources/.mega-linter.yml
+
+# The shared config enables linters with ENABLE_LINTERS, which takes priority over DISABLE_LINTERS,
+# so these linters are turned off by excluding all files instead.
+TSX_BIOME_FILTER_REGEX_EXCLUDE: '.*'
+TYPESCRIPT_BIOME_FILTER_REGEX_EXCLUDE: '.*'
+JAVASCRIPT_BIOME_FILTER_REGEX_EXCLUDE: '.*'
+JSX_BIOME_FILTER_REGEX_EXCLUDE: '.*'
+CSS_STYLELINT_FILTER_REGEX_EXCLUDE: '.*'
