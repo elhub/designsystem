@@ -1,6 +1,6 @@
 import cl from 'clsx'
-import React, { type ChangeEvent, forwardRef, type InputHTMLAttributes, useCallback, useEffect } from 'react'
-import { omit } from '../../../../util'
+import React, { type ChangeEvent, forwardRef, type InputHTMLAttributes, useCallback, useRef } from 'react'
+import { omit, useClientLayoutEffect } from '../../../../util'
 import filteredOptionsUtil from '../FilteredOptions/filtered-options-util'
 import { useFilteredOptionsContext } from '../FilteredOptions/filteredOptionsContext'
 import { useSelectedOptionsContext } from '../SelectedOptions/SelectedOptionsContext'
@@ -14,7 +14,20 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ inputClassName, disabled, placeholder, ...rest }, ref) => {
-    const { clearInput, inputProps, onChange, size, value, setValue } = useInputContext()
+    const {
+      clearInput,
+      inputProps,
+      onChange,
+      size,
+      value,
+      externalValue,
+      defaultValue,
+      resetVersion,
+      setValue,
+      searchTerm,
+      setSearchTerm,
+      lastTypedValue
+    } = useInputContext()
     const { selectedOptions, removeSelectedOption, toggleOption, isMultiSelect } = useSelectedOptionsContext()
     const {
       activeDecendantId,
@@ -44,17 +57,27 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           }
         } else if (shouldAutocomplete && isTextInSelectedOptions(value)) {
           event.preventDefault()
-          // Trying to set the same value that is already set, so just clearing the input
-          clearInput(event)
+          if (isMultiSelect) {
+            clearInput(event)
+          } else {
+            setSearchTerm('')
+            toggleIsListOpen(false)
+          }
         } else if ((allowNewValues || shouldAutocomplete) && value !== '') {
           event.preventDefault()
           // Autocompleting or adding a new value
-          const newSelectedValue = allowNewValues && isValueNew ? { label: value, value } : filteredOptions[0]
+          const exactMatch = filteredOptions.find(
+            (option) => option.label.toLocaleLowerCase() === value.toLocaleLowerCase()
+          )
+          const autocompleteCandidate =
+            shouldAutocomplete && filteredOptionsUtil.normalizeText(searchTerm) !== ''
+              ? filteredOptions[0]
+              : undefined
+          const newSelectedValue =
+            allowNewValues && isValueNew ? { label: value, value } : (exactMatch ?? autocompleteCandidate)
+          if (!newSelectedValue) return
           toggleOption(newSelectedValue, event)
-          if (
-            !isMultiSelect &&
-            !isTextInSelectedOptions(filteredOptions[0].label || newSelectedValue.label)
-          ) {
+          if (!isMultiSelect && !isTextInSelectedOptions(newSelectedValue.label)) {
             toggleIsListOpen(false)
           }
         }
@@ -66,7 +89,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         filteredOptions,
         isMultiSelect,
         isValueNew,
+        searchTerm,
         selectedOptions,
+        setSearchTerm,
         shouldAutocomplete,
         toggleIsListOpen,
         toggleOption,
@@ -156,16 +181,61 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen]
     )
 
-    // For single select combobox:
-    // Sync external component state (selectedOptions, declared outside of combobox)
-    // with internal component state (value, used by input for displaying current value)
     const selectedSingleInputValue = !isMultiSelect ? selectedOptions[0]?.label : null
+    const selectedSingleOptionValue = !isMultiSelect ? selectedOptions[0]?.value : undefined
+    const previousSelection = useRef({ value: selectedSingleOptionValue, label: selectedSingleInputValue })
+    const resetVirtualFocus = virtualFocus.moveFocusToTop
 
-    useEffect(() => {
-      if (!isMultiSelect && selectedSingleInputValue) {
-        setValue(selectedSingleInputValue)
+    // Synchronize selection changes without treating selected labels as search queries.
+    // Depend on selection values, not array identity, so rerenders preserve typed edits.
+    useClientLayoutEffect(() => {
+      const previous = previousSelection.current
+      const hadSelection = previous.value !== undefined
+      const selectionChanged =
+        previous.value !== selectedSingleOptionValue || previous.label !== selectedSingleInputValue
+      previousSelection.current = { value: selectedSingleOptionValue, label: selectedSingleInputValue }
+      const isTypingEcho = externalValue !== undefined && externalValue === lastTypedValue.current
+      lastTypedValue.current = undefined
+
+      // A controlled value is search text unless it represents the single selection.
+      if (externalValue !== undefined) {
+        if (selectionChanged || !isTypingEcho) {
+          resetVirtualFocus()
+          setSearchTerm(externalValue === selectedSingleInputValue ? '' : externalValue)
+        }
+      } else if (!isMultiSelect && (selectedSingleOptionValue !== undefined || hadSelection)) {
+        resetVirtualFocus()
+        setValue(selectedSingleInputValue ?? '')
+        setSearchTerm('')
       }
-    }, [selectedSingleInputValue])
+    }, [
+      externalValue,
+      isMultiSelect,
+      selectedSingleInputValue,
+      selectedSingleOptionValue,
+      lastTypedValue,
+      resetVirtualFocus,
+      setSearchTerm,
+      setValue
+    ])
+
+    const previousResetVersion = useRef(resetVersion)
+    useClientLayoutEffect(() => {
+      if (previousResetVersion.current === resetVersion) return
+      previousResetVersion.current = resetVersion
+      lastTypedValue.current = undefined
+      setValue(selectedSingleInputValue ?? defaultValue)
+      setSearchTerm('')
+      toggleIsListOpen(false)
+    }, [
+      resetVersion,
+      selectedSingleInputValue,
+      defaultValue,
+      lastTypedValue,
+      setValue,
+      setSearchTerm,
+      toggleIsListOpen
+    ])
 
     return (
       <input

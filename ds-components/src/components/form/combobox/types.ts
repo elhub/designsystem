@@ -91,7 +91,7 @@ export interface ComboboxProps
    */
   isMultiSelect?: boolean
   /**
-   * Callback function triggered whenever the value of the input field is triggered.
+   * Callback when input text changes. Clearing supplies a null event and an empty value.
    *
    * @param event
    */
@@ -115,6 +115,8 @@ export interface ComboboxProps
    *
    * Use this prop when controlling the selected state outside for the component,
    * e.g. for a filter, where options can be toggled elsewhere/programmatically.
+   * Restore controlled selections in the containing form's onReset handler.
+   * Native form reset discards input edits and displays the restored single selection.
    */
   selectedOptions?: string[] | ComboboxOption[]
   /**
@@ -157,7 +159,7 @@ export interface ComboboxProps
    */
   value?: string
   /**
-   * Set this to set the default value of the input field.
+   * Sets the initial input text and the text restored by native form reset when no single option is selected.
    */
   defaultValue?: string
 }
