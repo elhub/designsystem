@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.8.0
+
+### Minor Changes
+
+- 2cefa13: feat: align AdvancedTab component with the design spec
+
 ## 6.7.0
 
 ### Minor Changes
