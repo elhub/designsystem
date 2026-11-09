@@ -108,6 +108,7 @@
 
 .eds-advanced-tabs__summary-label {
     white-space: nowrap;
+    font-weight: var(--eds-font-body-weight-semibold);
 }
 
 .eds-advanced-tabs__summary-heading {
