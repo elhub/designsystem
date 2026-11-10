@@ -1,5 +1,11 @@
 # @elhub/ds-css
 
+## 6.8.1
+
+### Patch Changes
+
+- 9e8a2e3: Make advanced tab label semi-bold
+
 ## 6.8.0
 
 ### Minor Changes
