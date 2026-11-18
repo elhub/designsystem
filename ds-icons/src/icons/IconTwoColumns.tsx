@@ -13,8 +13,8 @@ export const IconTwoColumns = React.forwardRef<SVGSVGElement, SvgProps>(
         {...props}
       >
         <title>{title}</title>
-        <mask id='IconTwoColumns_svg__a' fill='currentColor'>
-          <rect width={7} height={16} rx={1} />
+        <mask id='IconTwoColumns_svg__a' fill='#fff'>
+          <path d='M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1z' />
         </mask>
         <rect
           width={7}
@@ -24,8 +24,8 @@ export const IconTwoColumns = React.forwardRef<SVGSVGElement, SvgProps>(
           mask='url(#IconTwoColumns_svg__a)'
           rx={1}
         />
-        <mask id='IconTwoColumns_svg__b' fill='currentColor'>
-          <rect width={7} height={16} x={9} rx={1} />
+        <mask id='IconTwoColumns_svg__b' fill='#fff'>
+          <path d='M9 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z' />
         </mask>
         <rect
           width={7}

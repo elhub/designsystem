@@ -13,8 +13,8 @@ export const IconThreeColumns = React.forwardRef<SVGSVGElement, SvgProps>(
         {...props}
       >
         <title>{title}</title>
-        <mask id='IconThreeColumns_svg__a' fill='currentColor'>
-          <rect width={4} height={16} rx={1} />
+        <mask id='IconThreeColumns_svg__a' fill='#fff'>
+          <path d='M0 1a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1z' />
         </mask>
         <rect
           width={4}
@@ -24,8 +24,8 @@ export const IconThreeColumns = React.forwardRef<SVGSVGElement, SvgProps>(
           mask='url(#IconThreeColumns_svg__a)'
           rx={1}
         />
-        <mask id='IconThreeColumns_svg__b' fill='currentColor'>
-          <rect width={4} height={16} x={6} rx={1} />
+        <mask id='IconThreeColumns_svg__b' fill='#fff'>
+          <path d='M6 1a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1z' />
         </mask>
         <rect
           width={4}
@@ -36,8 +36,8 @@ export const IconThreeColumns = React.forwardRef<SVGSVGElement, SvgProps>(
           mask='url(#IconThreeColumns_svg__b)'
           rx={1}
         />
-        <mask id='IconThreeColumns_svg__c' fill='currentColor'>
-          <rect width={4} height={16} x={12} rx={1} />
+        <mask id='IconThreeColumns_svg__c' fill='#fff'>
+          <path d='M12 1a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z' />
         </mask>
         <rect
           width={4}
