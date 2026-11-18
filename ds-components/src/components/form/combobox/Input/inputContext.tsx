@@ -4,6 +4,7 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -13,17 +14,22 @@ import React, {
 import { useClientLayoutEffect } from '../../../../util'
 import { type FormItemProps, type FormItemContextType, FormItemSize } from '../../form-item/FormItem'
 import { useFormItemContext } from 'components/form/form-item/useFormItemContext'
+import { type ComboboxProps } from '../types'
 
 interface InputContextType extends FormItemContextType {
   clearInput: (event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void
   focusInput: () => void
   inputRef: React.RefObject<HTMLInputElement | null>
   value: string
+  externalValue?: string
+  defaultValue: string
+  resetVersion: number
   setValue: (text: string) => void
   onChange: ChangeEventHandler<HTMLElement>
   searchTerm: string
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
   shouldAutocomplete?: boolean
+  lastTypedValue: React.RefObject<string | undefined>
 }
 
 const InputContext = createContext<InputContextType | null>(null)
@@ -33,8 +39,8 @@ interface InputContextProviderProps {
   value: {
     value?: string
     defaultValue?: string
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-    onClear?: (event: React.PointerEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void
+    onChange?: ComboboxProps['onChange']
+    onClear?: ComboboxProps['onClear']
     shouldAutocomplete?: boolean
     size?: FormItemSize
   } & FormItemProps
@@ -55,6 +61,20 @@ export const InputContextProvider = ({ children, value: props }: InputContextPro
   const { id, inputProps, ...rest } = useFormItemContext()
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [internalValue, setInternalValue] = useState(defaultValue)
+  const lastTypedValue = useRef<string | undefined>(undefined)
+  const [resetVersion, setResetVersion] = useState(0)
+
+  useEffect(() => {
+    const form = inputRef.current?.form
+    const onReset = (event: Event) => {
+      // Wait for cancellation and the consumer's selection reset before resetting the input.
+      queueMicrotask(() => {
+        if (!event.defaultPrevented) setResetVersion((version) => version + 1)
+      })
+    }
+    form?.addEventListener('reset', onReset)
+    return () => form?.removeEventListener('reset', onReset)
+  }, [])
 
   const value = useMemo(() => String(externalValue ?? internalValue), [externalValue, internalValue])
 
@@ -64,20 +84,14 @@ export const InputContextProvider = ({ children, value: props }: InputContextPro
 
   const [searchTerm, setSearchTerm] = useState(value)
 
-  // Keep the filter in sync when a controlled value is changed from outside, not only when typing
-  useClientLayoutEffect(() => {
-    if (externalValue !== undefined) {
-      setSearchTerm(String(externalValue))
-    }
-  }, [externalValue])
-
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newValue = event.currentTarget.value
       if (externalValue === undefined) {
         setInternalValue(newValue)
       }
-      externalOnChange?.(event)
+      lastTypedValue.current = newValue
+      externalOnChange?.(event, newValue)
       setSearchTerm(newValue)
     },
     [externalOnChange, externalValue]
@@ -92,15 +106,13 @@ export const InputContextProvider = ({ children, value: props }: InputContextPro
 
   const clearInput = useCallback(
     (event: React.KeyboardEvent<HTMLElement> | React.MouseEvent<HTMLElement>) => {
-      // @ts-expect-error - event is not a ChangeEvent
       onClear?.(event)
-      // @ts-expect-error - event is not a ChangeEvent
-      externalOnChange?.(event)
-      setValue('')
+      externalOnChange?.(null, '')
       setInternalValue('')
       setSearchTerm('')
+      lastTypedValue.current = undefined
     },
-    [onClear]
+    [externalOnChange, onClear]
   )
 
   const focusInput = useCallback(() => {
@@ -127,11 +139,15 @@ export const InputContextProvider = ({ children, value: props }: InputContextPro
         focusInput,
         inputRef,
         value,
+        externalValue,
+        defaultValue,
+        resetVersion,
         setValue,
         onChange,
         searchTerm,
         setSearchTerm,
-        shouldAutocomplete
+        shouldAutocomplete,
+        lastTypedValue
       }}
     >
       {children}

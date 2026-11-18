@@ -54,6 +54,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     shouldAutocomplete
   } = useInputContext()
   const { maxSelected, selectedOptions } = useSelectedOptionsContext()
+  const hasSearchTerm = filteredOptionsUtils.normalizeText(searchTerm) !== ''
 
   const [isInternalListOpen, setInternalListOpen] = useState(false)
   const { customOptions } = useCustomOptionsContext()
@@ -92,14 +93,22 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
   useClientLayoutEffect(() => {
     if (
       shouldAutocomplete &&
-      filteredOptionsUtils.normalizeText(searchTerm) !== '' &&
+      hasSearchTerm &&
       (previousSearchTerm?.length || 0) < searchTerm.length &&
       filteredOptions.length > 0
     ) {
       setValue(`${searchTerm}${filteredOptions[0].label.substring(searchTerm.length)}`)
       setSearchTerm(searchTerm)
     }
-  }, [filteredOptions, previousSearchTerm, searchTerm, setSearchTerm, setValue, shouldAutocomplete])
+  }, [
+    filteredOptions,
+    hasSearchTerm,
+    previousSearchTerm,
+    searchTerm,
+    setSearchTerm,
+    setValue,
+    shouldAutocomplete
+  ])
 
   const isListOpen = useMemo(() => {
     return isExternalListOpen ?? isInternalListOpen
@@ -127,7 +136,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     if (!isLoading && filteredOptions.length === 0) {
       activeOption = filteredOptionsUtils.getNoHitsId(id)
     } else if ((value && value !== '') || isLoading) {
-      if (shouldAutocomplete && filteredOptions[0]) {
+      if (shouldAutocomplete && hasSearchTerm && filteredOptions[0]) {
         activeOption = filteredOptionsUtils.getOptionId(id, 0)
       } else if (isListOpen && isLoading) {
         activeOption = filteredOptionsUtils.getIsLoadingId(id)
@@ -143,6 +152,7 @@ export const FilteredOptionsProvider = ({ children, value: props }: FilteredOpti
     value,
     partialAriaDescribedBy,
     shouldAutocomplete,
+    hasSearchTerm,
     filteredOptions,
     id
   ])
