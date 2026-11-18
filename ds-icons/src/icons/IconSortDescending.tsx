@@ -14,7 +14,10 @@ export const IconSortDescending = React.forwardRef<SVGSVGElement, SvgProps>(
       >
         <title>{title}</title>
         <path fill='currentColor' d='m8 0 5 7H3z' />
-        <path stroke='currentColor' strokeWidth={0.5} d='M12.515 9.25h-9.03L8 15.57z' opacity={0.99} />
+        <mask id='IconSortDescending_svg__a' fill='#fff'>
+          <path d='m8 16 5-7H3z' />
+        </mask>
+        <path stroke='currentColor' d='m8 16 5-7H3z' mask='url(#IconSortDescending_svg__a)' opacity={0.99} />
       </svg>
     )
   }

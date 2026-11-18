@@ -20,8 +20,8 @@ export const IconUser = React.forwardRef<SVGSVGElement, SvgProps>(
           strokeWidth={1.1}
           clipPath='url(#IconUser_svg__a)'
         >
-          <path d='M8 9.077a2.692 2.692 0 1 0 0-5.385 2.692 2.692 0 0 0 0 5.385M3.401 13.277a5.385 5.385 0 0 1 9.197 0' />
-          <path d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14' />
+          <path d='M10.692 6.385a2.692 2.692 0 1 1-5.384 0 2.692 2.692 0 0 1 5.384 0M3.401 13.277a5.385 5.385 0 0 1 9.197 0' />
+          <path d='M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0' />
         </g>
         <defs>
           <clipPath id='IconUser_svg__a'>

@@ -15,7 +15,7 @@ export const IconSmileyHappy = React.forwardRef<SVGSVGElement, SvgProps>(
         <title>{title}</title>
         <circle cx={8} cy={8} r={7.5} stroke='currentColor' />
         <ellipse cx={6} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
-        <ellipse cx={1} cy={1.5} fill='currentColor' rx={1} ry={1.5} transform='matrix(-1 0 0 1 11 5)' />
+        <ellipse cx={10} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
         <path
           stroke='currentColor'
           strokeLinecap='round'

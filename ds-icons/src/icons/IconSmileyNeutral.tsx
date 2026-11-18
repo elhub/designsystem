@@ -15,7 +15,7 @@ export const IconSmileyNeutral = React.forwardRef<SVGSVGElement, SvgProps>(
         <title>{title}</title>
         <circle cx={8} cy={8} r={7.5} stroke='currentColor' />
         <path stroke='currentColor' strokeLinecap='round' d='M7 4H4M9 4h3' />
-        <ellipse cx={1} cy={1.5} fill='currentColor' rx={1} ry={1.5} transform='matrix(-1 0 0 1 11 5)' />
+        <ellipse cx={10} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
         <path stroke='currentColor' strokeLinecap='round' d='m5.058 10.415 5.884 1.17' />
         <ellipse cx={6.178} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
       </svg>

@@ -17,17 +17,17 @@ export const IconSmileySad = React.forwardRef<SVGSVGElement, SvgProps>(
         <path
           stroke='currentColor'
           strokeLinecap='round'
-          d='m7 4.5-.375.25M4 6.5l.375-.25M6.25 5l.375-.25M6.25 5l-1.125.75M6.25 5l-.375.25m.75-.5-1.5 1m0 0L4.75 6l-.375.25m.75-.5L5.5 5.5l.375-.25m0 0-1.5 1'
+          d='m7 4.5-.375.25L6.25 5l-.375.25-.375.25-.375.25L4.75 6l-.375.25L4 6.5'
         />
         <ellipse cx={6} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
         <path
           stroke='currentColor'
           strokeLinecap='round'
-          d='m9 4.5.375.25M12 6.5l-.375-.25M9.75 5l-.375-.25M9.75 5l1.125.75M9.75 5l.375.25m-.75-.5 1.5 1m0 0 .375.25.375.25m-.75-.5L10.5 5.5l-.375-.25m0 0 1.5 1'
+          d='m9 4.5.375.25.375.25.375.25.375.25.375.25.375.25.375.25.375.25'
         />
-        <ellipse cx={1} cy={1.5} fill='currentColor' rx={1} ry={1.5} transform='matrix(-1 0 0 1 11 5)' />
+        <ellipse cx={10} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
         <ellipse cx={6} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
-        <ellipse cx={1} cy={1.5} fill='currentColor' rx={1} ry={1.5} transform='matrix(-1 0 0 1 11 5)' />
+        <ellipse cx={10} cy={6.5} fill='currentColor' rx={1} ry={1.5} />
         <path
           stroke='currentColor'
           strokeLinecap='round'
