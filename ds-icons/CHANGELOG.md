@@ -1,5 +1,11 @@
 # @elhub/ds-icons
 
+## 4.11.0
+
+### Minor Changes
+
+- 6086424: Add IconLogIn
+
 ## 4.10.0
 
 ### Minor Changes
