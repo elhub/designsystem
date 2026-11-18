@@ -10,6 +10,8 @@ import { AlertErrorExample } from './examples/Error'
 import alertErrorSource from './examples/Error.tsx?raw'
 import { AlertInfoExample } from './examples/Info'
 import alertInfoSource from './examples/Info.tsx?raw'
+import { AlertMultiLineExample } from './examples/MultiLine'
+import alertMultiLineSource from './examples/MultiLine.tsx?raw'
 import { AlertSizesExample } from './examples/Sizes'
 import alertSizesSource from './examples/Sizes.tsx?raw'
 import { AlertSuccessExample } from './examples/Success'
@@ -161,6 +163,21 @@ const ComponentsAlert: React.FC = () => {
 
       <DemoableDiv alignContent='center' code={alertSizesSource} codeHighlighter='shiki'>
         <AlertSizesExample />
+      </DemoableDiv>
+
+      <VerticalSpace size='2' />
+
+      <Heading className='toc' size='medium' id='alert-multi-line' level='2' spacing>
+        Multi-line content
+      </Heading>
+      <VerticalSpace />
+
+      <BodyText>
+        When the content spans multiple lines, the icon and close button are aligned with the first line.
+      </BodyText>
+
+      <DemoableDiv alignContent='center' code={alertMultiLineSource} codeHighlighter='shiki'>
+        <AlertMultiLineExample />
       </DemoableDiv>
 
       <VerticalSpace size='2' />
