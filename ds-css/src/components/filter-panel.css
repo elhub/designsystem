@@ -31,10 +31,6 @@
   width: 100%;
 }
 
-.eds-filter-panel svg + .eds-filter-panel__chip-text {
-  margin-left: var(--eds-size-2);
-}
-
 .eds-filter-panel :where(li) {
   margin: 0;
   padding: 0;
@@ -48,7 +44,7 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  gap: var(--eds-size-1);
+  gap: var(--eds-size-2);
   margin: 0;
   border-radius: var(--eds-filter-panel-border-radius);
   box-shadow: inset 0 0 0 var(--eds-size-0-25) var(--eds-filter-panel-border-color);
@@ -57,15 +53,15 @@
 }
 
 .eds-filter-panel--large .eds-filter-panel__chip {
-  padding: var(--eds-size-2-5) var(--eds-size-2);
-}
-
-.eds-filter-panel--medium .eds-filter-panel__chip {
   padding: var(--eds-size-2) var(--eds-size-2);
 }
 
+.eds-filter-panel--medium .eds-filter-panel__chip {
+  padding: var(--eds-size-1-5) var(--eds-size-2);
+}
+
 .eds-filter-panel--small .eds-filter-panel__chip {
-  padding: var(--eds-size-2) var(--eds-size-1-5);
+  padding: var(--eds-size-1) var(--eds-size-2);
 }
 
 .eds-filter-panel__chip-readonly {
