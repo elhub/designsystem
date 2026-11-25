@@ -33,7 +33,8 @@ const ComponentsFilterPanel: React.FC = () => {
 
       <BodyText>
         The Filter size prop have one of the following 3 strings: <code>large</code>, <code>medium</code> and{' '}
-        <code>small</code>
+        <code>small</code>. The chips are 40px, 32px and 28px tall respectively, with 8px horizontal padding
+        and an 8px gap between icon and text.
       </BodyText>
       <VerticalSpace />
 
